@@ -19,20 +19,24 @@ public class SpawningEnemies : MonoBehaviour {
         allEnemies = new GameObject[MAXENEMIESONSCENE];
         positionsFromTo = new Vector3[MAXENEMIESONSCENE, 2];
         for (int i = 0; i < 10; ++i) {
-            createEnemy();
+            createEnemy(i);
         }
 	}
 	
 
 	void Update () {
         // Moving enemies
-        float speed = 1.0f * Time.deltaTime;
+        float speed = 5.0f * Time.deltaTime;
         for (int i = 0; i < 10; ++i) {
             allEnemies[i].transform.position = Vector3.MoveTowards(allEnemies[i].transform.position, positionsFromTo[i, 1], speed);
+            if (Mathf.Abs(allEnemies[i].transform.position.x - positionsFromTo[i, 1].x) < 0.1f && Mathf.Abs(allEnemies[i].transform.position.y - positionsFromTo[i, 1].y) < 0.1f) {
+                // Not deleting object but rather just moving it to another starting point
+                createEnemy(i);
+            } 
         }
 	}
 
-    private void createEnemy () {
+    private void createEnemy (int index) {
         // Seeting of object
         float scaleOfEnemy = 1.0f;
         int whichSite = Random.Range(1,5);
@@ -67,9 +71,14 @@ public class SpawningEnemies : MonoBehaviour {
         Vector3 orientationOfEnemy = Vector3.RotateTowards(startPos, endPos, 0.0f, 0.0f);
 
         // Spawning on scene
-        GameObject result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.Euler(orientationOfEnemy));
+        GameObject result;
+        if (allEnemies[index] == null) {
+            result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.Euler(orientationOfEnemy));
+        } else {
+            result = allEnemies[index];
+        }
+         
         result.transform.localScale = new Vector3(scaleOfEnemy, scaleOfEnemy, 1);  // Setting scale of star
-        int index = firstEmptyPosition();
         result.name = "Enemy" + index.ToString();
         positionsFromTo[index, 0] = startPos;
         positionsFromTo[index, 1] = endPos;
