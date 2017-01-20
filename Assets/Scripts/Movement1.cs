@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Movement1 : MonoBehaviour {
 
-    public float speed;
-    //public float timeSpeed;
+    public float playerSpeed;
+    public float minTimeSpeed = 0.5f;
+    public float maxTimeSpeed = 2f;
     private Vector3 newPosition;
+    private bool allowNewPosition;
 
 	// Use this for initialization
 	void Start () {
         newPosition = transform.position;
-        Time.timeScale = 0f;
+        Time.timeScale = minTimeSpeed;
+        allowNewPosition = true;
     }
 	
 	// Update is called once per frame
@@ -23,21 +26,24 @@ public class Movement1 : MonoBehaviour {
 
     private void moveToPosition()
     {
+        //se premaknemo če še nismo dosegli cilj
         if (transform.position != newPosition)
         {
-            Time.timeScale = 1f;
-            float step = speed * Time.deltaTime;
+            Time.timeScale = maxTimeSpeed;
+            float step = playerSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
         }
-        else {
-            Time.timeScale = 0f;
+        else {  //drugače upočasnimo čas in dovolimo novi cilj
+            Time.timeScale = minTimeSpeed;
+            allowNewPosition = true;
             //Debug.Log("No move");
         }
     }
 
     private void checkClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        //preverimo klik za novo pozicijo
+        if (allowNewPosition && Input.GetMouseButtonDown(0))
         {
             //Debug.Log("klik");
             RaycastHit hit;
@@ -46,6 +52,7 @@ public class Movement1 : MonoBehaviour {
             {
                 //Debug.Log("rayCastHit");
                 newPosition = hit.point;
+                allowNewPosition = false;
                 //transform.position = newPosition;
             }
         }
