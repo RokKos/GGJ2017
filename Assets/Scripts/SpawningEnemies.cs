@@ -14,11 +14,17 @@ public class SpawningEnemies : MonoBehaviour {
     private GameObject[] allEnemies;  // List of all enemies
     private Vector3[,] positionsFromTo;
     private const int MAXENEMIESONSCENE = 100;
+    private int currNumberOfEnemies = 10;  // Current number enemies in scene
+    private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
+    private float timePassed = 0.0f;
+    
 	
 	void Start () {
+        timePassed = 0.0f;
+        currNumberOfEnemies = 10;
         allEnemies = new GameObject[MAXENEMIESONSCENE];
         positionsFromTo = new Vector3[MAXENEMIESONSCENE, 2];
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < currNumberOfEnemies; ++i) {
             createEnemy(i);
         }
 	}
@@ -27,13 +33,23 @@ public class SpawningEnemies : MonoBehaviour {
 	void Update () {
         // Moving enemies
         float speed = 5.0f * Time.deltaTime;
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < currNumberOfEnemies; ++i) {
             allEnemies[i].transform.position = Vector3.MoveTowards(allEnemies[i].transform.position, positionsFromTo[i, 1], speed);
+
             if (Mathf.Abs(allEnemies[i].transform.position.x - positionsFromTo[i, 1].x) < 0.1f && Mathf.Abs(allEnemies[i].transform.position.y - positionsFromTo[i, 1].y) < 0.1f) {
                 // Not deleting object but rather just moving it to another starting point
                 createEnemy(i);
             } 
         }
+
+        // Check if you can spawn new enemy
+        if (timePassed > spawnNewEnemyInSeconds) {
+            timePassed = 0.0f;
+            // First create enemy with that number and then add because for loop goes to one less than currNumberOfEnmies
+            createEnemy(currNumberOfEnemies);
+            currNumberOfEnemies++;
+        }
+        timePassed += Time.deltaTime;
 	}
 
     private void createEnemy (int index) {
