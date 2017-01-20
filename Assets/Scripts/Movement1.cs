@@ -9,12 +9,14 @@ public class Movement1 : MonoBehaviour {
     public float maxTimeSpeed = 2f;
     private Vector3 newPosition;
     private bool allowNewPosition;
+    private Rigidbody2D rigidBody;
 
 	// Use this for initialization
 	void Start () {
         newPosition = transform.position;
         Time.timeScale = minTimeSpeed;
         allowNewPosition = true;
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 	
 	// Update is called once per frame
@@ -56,5 +58,16 @@ public class Movement1 : MonoBehaviour {
                 //transform.position = newPosition;
             }
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
+            rigidBody.isKinematic = true;
+
+        }
+
     }
 }
