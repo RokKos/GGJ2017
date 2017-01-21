@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] GameObject mainCamera;
     [SerializeField] AudioClip introSound;
     [SerializeField] AudioClip waweClearedSound;
+    [SerializeField] AudioClip nearMissSound;
     private AudioSource audioSource;
 
     private void Start () {
@@ -59,6 +60,19 @@ public class UIManager : MonoBehaviour {
         waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!!!";
         audioSource.volume = 1f;
         audioSource.clip = waweClearedSound;
+        audioSource.Play();
+        for (int i = 0; i < 200; ++i) {
+            yield return null;
+        }
+        audioSource.volume = 0.1f;
+        waveText.text = "";
+        yield return null;
+    }
+
+    public IEnumerator showNearMiss () {
+        waveText.text = "Near MISS";
+        audioSource.volume = 0.2f;
+        audioSource.clip = nearMissSound;
         audioSource.Play();
         for (int i = 0; i < 200; ++i) {
             yield return null;

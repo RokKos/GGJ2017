@@ -142,8 +142,10 @@ public class Movement1 : MonoBehaviour {
     {
         if (collider.gameObject.tag == "Enemy")
         {
-            Debug.Log("Near bonus");
+            //Debug.Log("Near bonus");
             nearBonus += 50;
+            StartCoroutine(uiManager.showNearMiss());
+
         }
     }
 

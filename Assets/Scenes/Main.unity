@@ -453,7 +453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1500, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &418378370
@@ -831,6 +831,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1962627594719404, guid: 97493cb1cc66d07449aaf77012ced35f,
         type: 2}
+    - target: {fileID: 114661427435545738, guid: 0c7fb39aaa16a4f4da72f8e16396014b,
+        type: 2}
+      propertyPath: nearMissSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c8a6a41f67e99641b0a3d7bf1b7ad58, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c7fb39aaa16a4f4da72f8e16396014b, type: 2}
   m_IsPrefabParent: 0
@@ -1051,7 +1056,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6fdbec0548474734a9dc03188dcabbf1, type: 2}
+  - {fileID: 2100000, guid: 69204c30d092a6044985b7a53c45c43d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1322,6 +1327,11 @@ Prefab:
       propertyPath: speedUpMovementRepeat
       value: 
       objectReference: {fileID: 8300000, guid: 8bc8a8a527288124396ebdc0f0c97d65, type: 3}
+    - target: {fileID: 114696924056810864, guid: 72c46932a7c52364abbdfd7f491ee9fd,
+        type: 2}
+      propertyPath: nearMissSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c8a6a41f67e99641b0a3d7bf1b7ad58, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c46932a7c52364abbdfd7f491ee9fd, type: 2}
   m_IsPrefabParent: 0
