@@ -42,7 +42,7 @@ public class EnemyCurveClass : EnemyBaseClass {
 
         //currentPos.x = curveX;
         //currentPos.y = curveY;
-        Vector3 dirVector = new Vector3();
+        /*Vector3 dirVector = new Vector3();
         if (startPos.x == sizeOfBoxX) {
             dirVector = -currentPos.right;
         }
@@ -52,7 +52,7 @@ public class EnemyCurveClass : EnemyBaseClass {
             dirVector = -currentPos.up;
         } else if (startPos.y == -sizeOfBoxY) {
             dirVector = currentPos.up;
-        }
+        }*/
 
         Vector3 newDir = userPosition - currentPos.position;
         float angle = Vector3.Angle(newDir, currentPos.up);  //calculate angle

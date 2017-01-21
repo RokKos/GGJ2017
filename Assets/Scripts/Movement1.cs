@@ -30,6 +30,7 @@ public class Movement1 : MonoBehaviour {
         Time.timeScale = minTimeSpeed;
         allowNewPosition = true;
         gameRunning = true;
+        
         rigidBody = GetComponent<Rigidbody2D>();
         audioSource =  transform.GetComponent<AudioSource>();
         audioSource.volume = 1.0f;
@@ -49,12 +50,12 @@ public class Movement1 : MonoBehaviour {
     {
         //se premaknemo če še nismo dosegli cilj
         float distance = Vector3.Distance(transform.position, newPosition);
-        totalDistance += distance;
-        lastDistance = distance;
         if (distance > 0.5f && !allowNewPosition)
         {
             Time.timeScale = maxTimeSpeed;
-            
+            totalDistance += distance;
+            lastDistance = distance;
+
             //transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
             //Vector3 newDir = Vector3.RotateTowards(transform.position, newPosition, step, 0.0F);
 
@@ -66,6 +67,7 @@ public class Movement1 : MonoBehaviour {
         else {  //drugače upočasnimo čas in dovolimo novi cilj
             Time.timeScale = minTimeSpeed;
             allowNewPosition = true;
+            
             audioSource.clip = slowMovement;
             audioSource.loop = true;
             audioSource.volume = 0.3f;
@@ -91,7 +93,7 @@ public class Movement1 : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                //Debug.Log("rayCastHit");
+                //Debug.Log("rayCastHit");                
                 // Souund
                 audioSource.clip = speedUpMovement;
                 audioSource.loop = false;
