@@ -8,6 +8,6 @@ public class Shoot : MonoBehaviour {
 
 	public void Laser1()
     {
-        Debug.Log("IMMA SHOOTIN' MAH LAZER!!1");
+        
     }
 }

@@ -35,6 +35,7 @@ public class SpawningEnemies : MonoBehaviour {
         timePassed = 0.0f;
         timeBetwenSpawn = 0.0f;
         waweNumber = 1;
+        gameScore = 0;
         playerPos = new Vector3(0, 0, 0);
         spodnjaIzbira = 1;
         zgornjaIzbira = 2;
@@ -47,7 +48,8 @@ public class SpawningEnemies : MonoBehaviour {
             int tip = randomPick();
             createEnemy(i, tip);
         }
-	}
+        
+    }
 	
 
 	void Update () {
@@ -58,12 +60,13 @@ public class SpawningEnemies : MonoBehaviour {
             // Checking if they are at the end
             if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) >= SIZEOFBOX ||
                 Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX) &&
-                enemiesData[i].getType() != 4) {  // if is bullet do not instantiate again
+                enemiesData[i].getType() != 4 && // if is bullet do not instantiate again
+                timePassed > 2.0f) {  
                 // Not deleting object but rather just moving it to another starting point
                 enemiesDiedInWave++;
-                //Debug.Log("e:" + enemiesDiedInWave.ToString());
                 if (enemiesDiedInWave == currNumberOfEnemies) {
                     nextWave();
+                    
                 }
             }
 
@@ -215,12 +218,12 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     private int randomPick () {
-        int radomNum = Random.Range(1, 101);
-        if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies))) {
-            return 1;
-        } else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3))) {
-            return 2;
-        }
+        //int radomNum = Random.Range(1, 101);
+        //if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies))) {
+        //    return 1;
+        //} else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3))) {
+        //    return 2;
+        //}
         return 3;
     }
 
