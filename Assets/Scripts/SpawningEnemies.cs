@@ -247,7 +247,7 @@ public class SpawningEnemies : MonoBehaviour {
         uiManager.updateScoreText(calculateScore());
 
         StartCoroutine(uiManager.showWaveCleared(waweNumber));
-
+        waweNumber++;
     }
 
     public int calculateScore () {
