@@ -152,7 +152,7 @@ public class Movement1 : MonoBehaviour {
     private void reset()
     {
         audioSource.loop = false;
-        uiManager.endGame(nearBonus + spawningEnemies.calculateScore() + (int)((totalDistance - lastDistance) / numberOfClicks));
+        uiManager.endGame(nearBonus + spawningEnemies.calculateScore() + (int)((totalDistance - lastDistance) / (numberOfClicks+1)));
         gameRunning = false;
         nearBonus = 0;
         GameObject[] lasers;
