@@ -57,7 +57,7 @@ public class SpawningEnemies : MonoBehaviour {
                 enemiesData[i].getType() != 4) {  // if is bullet do not instantiate again
                 // Not deleting object but rather just moving it to another starting point
                 enemiesDiedInWave++;
-                Debug.Log("e:" + enemiesDiedInWave.ToString());
+                //Debug.Log("e:" + enemiesDiedInWave.ToString());
                 if (enemiesDiedInWave == currNumberOfEnemies) {
                     nextWave();
                 }
