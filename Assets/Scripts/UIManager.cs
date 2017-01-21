@@ -12,7 +12,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
     [SerializeField] Text passedTimeText;
-    [SerializeField] Text scoreTimeText;
+    [SerializeField] Text scoreEndText;
+    [SerializeField] Text scoreRealTimeText;
     [SerializeField] GameObject HUD;
     [SerializeField] GameObject endGameMenu;
     [SerializeField] SpawningEnemies spawningEnemies;
@@ -28,8 +29,8 @@ public class UIManager : MonoBehaviour {
         passedTimeText.text = "Time: " + spawningEnemies.timePassed.ToString();
     }
 
-    public void endGame (float score) {
-        scoreTimeText.text = "Your Score: " + score.ToString();
+    public void endGame (int score) {
+        scoreEndText.text = "Your Score: " + score.ToString();
         HUD.SetActive(false);
         endGameMenu.SetActive(true);
         Time.timeScale = 0.0f;
@@ -39,6 +40,9 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public int updateScoreText (int score) {
+        scoreRealTimeText.text = "Score: " + score.ToString();
+    }
 
 
 
