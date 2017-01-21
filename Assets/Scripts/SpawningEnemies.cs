@@ -159,7 +159,10 @@ public class SpawningEnemies : MonoBehaviour {
             enemiesData[index] = temp;
         } else {
             result = allEnemies[index];
+            GameObject trail1 = result.transform.FindChild("Trail1").gameObject;
+            trail1.SetActive(false);
             result.transform.position = startPos;
+            trail1.SetActive(true);
             rotateEnemy(result.transform);
             //result.transform.rotation = Quaternion.identity;
             //result.transform.rotation = Quaternion.Euler(0, 0, 90);
@@ -172,7 +175,6 @@ public class SpawningEnemies : MonoBehaviour {
         result.name = "Enemy" + index.ToString();
         
         allEnemies[index] = result;
-
     }
 
     private void rotateEnemy(Transform enemy)
