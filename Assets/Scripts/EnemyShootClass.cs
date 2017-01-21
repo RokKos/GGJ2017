@@ -39,7 +39,7 @@ public class EnemyShootClass : EnemyCurveClass {
             //trail1.SetActive(false);
             //result.transform.position = startPos;
             //trail1.SetActive(true);
-            shoot.Laser1();
+            shoot.Laser1(transform.position, transform.rotation);
         }
     }
 
