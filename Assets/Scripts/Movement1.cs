@@ -91,7 +91,7 @@ public class Movement1 : MonoBehaviour {
         {
             //Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
             rigidBody.isKinematic = true;
-            uiManager.endGame(calculateScore());
+            uiManager.endGame(spawningEnemies.calculateScore() + (int) ((totalDistance - lastDistance) / numberOfClicks));
             gameRunning = false;
 
         }
@@ -125,11 +125,4 @@ public class Movement1 : MonoBehaviour {
         //Debug.Log(angle);
     }
 
-    private float calculateScore () {
-        float result = 0.0f;
-
-        result = (totalDistance - lastDistance) * spawningEnemies.timePassed / numberOfClicks;
-
-        return result;
-    }
 }

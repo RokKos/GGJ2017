@@ -12,12 +12,14 @@ public class SpawningEnemies : MonoBehaviour {
 
     [SerializeField] GameObject enemyPrefab;  // GameObject for enemie
     [SerializeField] GameObject bulletPrefab;  // GameObject for enemie
+    [SerializeField] UIManager uiManager;
     private GameObject[] allEnemies;  // List of all enemies
     private EnemyBaseClass[] enemiesData;
     private const int MAXENEMIESONSCENE = 1000;
     private const float SIZEOFBOX = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
     private int enemiesDiedInWave = 0;
+    private int waweNumber = 1;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;
     private float timeBetwenSpawn = 0.0f;
@@ -25,12 +27,14 @@ public class SpawningEnemies : MonoBehaviour {
     private int stageNumber = 1;
     private int spodnjaIzbira = 1;
     private int zgornjaIzbira = 2;
+    private int gameScore = 0;
     private Vector3 playerPos;
 
 
     void Start () {
         timePassed = 0.0f;
         timeBetwenSpawn = 0.0f;
+        waweNumber = 1;
         playerPos = new Vector3(0, 0, 0);
         spodnjaIzbira = 1;
         zgornjaIzbira = 2;
@@ -204,7 +208,13 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     private int randomPick () {
-        return Random.Range(spodnjaIzbira, zgornjaIzbira);
+        int radomNum = Random.Range(1, 101);
+        if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies))) {
+            return 1;
+        } else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3))) {
+            return 2;
+        }
+        return 3;
     }
 
     private void createWaveOfEnemies (int number) {
@@ -216,9 +226,18 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     private void nextWave () {
-        currNumberOfEnemies++;
+        currNumberOfEnemies += 2;
         enemiesDiedInWave = 0;
         createWaveOfEnemies(currNumberOfEnemies);
+        uiManager.updateScoreText(calculateScore());
 
+    }
+
+    public int calculateScore () {
+        int result = 0;
+
+        result = waweNumber *  currNumberOfEnemies;
+        gameScore += result;
+        return gameScore;
     }
 }
