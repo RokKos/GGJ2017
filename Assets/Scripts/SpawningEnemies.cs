@@ -48,7 +48,8 @@ public class SpawningEnemies : MonoBehaviour {
             int tip = randomPick();
             createEnemy(i, tip);
         }
-	}
+        
+    }
 	
 
 	void Update () {
@@ -59,12 +60,13 @@ public class SpawningEnemies : MonoBehaviour {
             // Checking if they are at the end
             if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) >= SIZEOFBOX ||
                 Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX) &&
-                enemiesData[i].getType() != 4) {  // if is bullet do not instantiate again
+                enemiesData[i].getType() != 4 && // if is bullet do not instantiate again
+                timePassed > 2.0f) {  
                 // Not deleting object but rather just moving it to another starting point
                 enemiesDiedInWave++;
-                Debug.Log("e:" + enemiesDiedInWave.ToString());
                 if (enemiesDiedInWave == currNumberOfEnemies) {
                     nextWave();
+                    
                 }
             }
 
