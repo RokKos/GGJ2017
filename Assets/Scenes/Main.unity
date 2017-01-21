@@ -419,7 +419,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &418378368
 GameObject:
@@ -662,7 +662,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &600316924
 GameObject:
@@ -783,7 +783,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000348360373442, guid: 0c7fb39aaa16a4f4da72f8e16396014b, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114661427435545738, guid: 0c7fb39aaa16a4f4da72f8e16396014b,
         type: 2}
@@ -1015,7 +1015,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4956041023282978, guid: dea860400c4e6134d903570d1b215c89, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dea860400c4e6134d903570d1b215c89, type: 2}
@@ -1101,7 +1101,7 @@ Transform:
   m_LocalScale: {x: 3.17, y: 1, z: 1.69}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1528697094
 GameObject:
@@ -1163,7 +1163,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1612059828 stripped
 GameObject:
@@ -1257,7 +1257,7 @@ RectTransform:
   - {fileID: 108539547}
   - {fileID: 1046647778}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1301,7 +1301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4917214188284600, guid: 72c46932a7c52364abbdfd7f491ee9fd, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1055919763691758, guid: 72c46932a7c52364abbdfd7f491ee9fd, type: 2}
       propertyPath: m_TagString
@@ -1317,6 +1317,11 @@ Prefab:
       propertyPath: spawningEnemies
       value: 
       objectReference: {fileID: 2055927080}
+    - target: {fileID: 114696924056810864, guid: 72c46932a7c52364abbdfd7f491ee9fd,
+        type: 2}
+      propertyPath: speedUpMovementRepeat
+      value: 
+      objectReference: {fileID: 8300000, guid: 8bc8a8a527288124396ebdc0f0c97d65, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c46932a7c52364abbdfd7f491ee9fd, type: 2}
   m_IsPrefabParent: 0
