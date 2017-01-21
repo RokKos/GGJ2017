@@ -74,10 +74,12 @@ public class SpawningEnemies : MonoBehaviour {
             if (enemiesData[i].getType() == 3) {
                 /*GameObject tempBullet = (GameObject)Instantiate(bulletPrefab, allEnemies[i].transform.position,
                     Quaternion.Euler(Quaternion.ToEulerAngles(allEnemies[i].transform.rotation)));
-
+                    
                 createEnemy(currNumberOfEnemies, 4);
                 currNumberOfEnemies++;
                 Destroy(tempBullet, 10);*/
+
+                ((EnemyShootClass)enemiesData[i]).fireGun();
             }
              
         }
@@ -154,7 +156,7 @@ public class SpawningEnemies : MonoBehaviour {
             temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX);  // TODO: Get user position
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy2");
         } else if (tip == 3) {
-            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX, 20, Time.time);  // TODO: Get user position
+            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX, Random.Range(3f, 6f), Random.Range(0f, 5f));  // TODO: Get user position
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
         }
 
@@ -180,6 +182,11 @@ public class SpawningEnemies : MonoBehaviour {
         result.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
         result.transform.localScale = new Vector3(scaleOfEnemy, scaleOfEnemy, 1);  // Setting scale of star
         result.name = "Enemy" + index.ToString();
+
+        if (tip == 3)
+        {
+            ((EnemyShootClass)temp).setShooter(result.transform);
+        }
         
         allEnemies[index] = result;
     }
@@ -212,9 +219,12 @@ public class SpawningEnemies : MonoBehaviour {
 
     private int randomPick () {
         int radomNum = Random.Range(1, 101);
-        if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies))) {
+        if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies)))
+        {
             return 1;
-        } else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3))) {
+        }
+        else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3)))
+        {
             return 2;
         }
         return 3;
@@ -243,4 +253,6 @@ public class SpawningEnemies : MonoBehaviour {
         gameScore += result;
         return gameScore;
     }
+
+    
 }

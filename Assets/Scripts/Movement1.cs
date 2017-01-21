@@ -116,12 +116,24 @@ public class Movement1 : MonoBehaviour {
             audioSource.Play();
 
             //Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
-            rigidBody.isKinematic = true;
-            uiManager.endGame(spawningEnemies.calculateScore() + (int) ((totalDistance - lastDistance) / numberOfClicks));
-            gameRunning = false;
-
+            //rigidBody.isKinematic = true;
+            reset();
         }
 
+    }
+
+    private void reset()
+    {
+        uiManager.endGame(spawningEnemies.calculateScore() + (int)((totalDistance - lastDistance) / numberOfClicks));
+        gameRunning = false;
+        GameObject[] lasers;
+
+        lasers = GameObject.FindGameObjectsWithTag("Laser");
+
+        foreach (GameObject laser in lasers)
+        {
+            Destroy(laser);
+        }
     }
 
     void calculateAngle()
