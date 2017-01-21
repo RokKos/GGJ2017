@@ -35,6 +35,7 @@ public class SpawningEnemies : MonoBehaviour {
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             //TODO: Create advanced enemies later
             int tip = randomPick();
+            Debug.Log(tip);
             createEnemy(i, tip);
         }
 	}
@@ -72,6 +73,7 @@ public class SpawningEnemies : MonoBehaviour {
             timePassed = 0.0f;
             // First create enemy with that number and then add because for loop goes to one less than currNumberOfEnmies
             int tip = randomPick();
+            Debug.Log(tip);
             createEnemy(currNumberOfEnemies, tip);
             currNumberOfEnemies++;
         }
@@ -83,10 +85,10 @@ public class SpawningEnemies : MonoBehaviour {
             createWaveOfEnemies(BOUND / 2);
             stageNumber++;
             zgornjaIzbira++;
-            zgornjaIzbira = Mathf.Min(4, zgornjaIzbira);
-            if (zgornjaIzbira == 4) {
+            zgornjaIzbira = Mathf.Min(3, zgornjaIzbira);
+            if (zgornjaIzbira == 3) {
                 spodnjaIzbira++;
-                zgornjaIzbira = Mathf.Min(3, zgornjaIzbira);
+                spodnjaIzbira = Mathf.Min(3, zgornjaIzbira);
             }
         }
 
@@ -171,6 +173,7 @@ public class SpawningEnemies : MonoBehaviour {
     private void createWaveOfEnemies (int number) {
         for (int i = 0; i < number; ++i) {
             int tip = randomPick();
+            Debug.Log(tip);
             createEnemy(currNumberOfEnemies, tip);
             currNumberOfEnemies++;
         }
