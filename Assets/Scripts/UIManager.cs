@@ -51,6 +51,10 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void GoToMenu () {
+        SceneManager.LoadScene("StartScene");
+    }
+
     public void updateScoreText (int score) {
         scoreRealTimeText.text = "Score: " + score.ToString();
         //return 0;
