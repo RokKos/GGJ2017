@@ -24,7 +24,7 @@ public class SpawningEnemies : MonoBehaviour {
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;
     private float timeBetwenSpawn = 0.0f;
-    private const int BOUND = 20;
+    //private const int BOUND = 20;
     private int gameScore = 0;
     private Vector3 playerPos;
 
@@ -33,8 +33,10 @@ public class SpawningEnemies : MonoBehaviour {
 
         Camera camera = FindObjectOfType<Camera>();
         Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-        SIZEOFBOX_X = screenPoint1.x + 1;
-        SIZEOFBOX_Y = screenPoint1.y + 1;
+
+        SIZEOFBOX_X = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
+        SIZEOFBOX_Y = SIZEOFBOX_X;
+        //SIZEOFBOX_Y = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
 
         timePassed = 0.0f;
         timeBetwenSpawn = 0.0f;
@@ -63,8 +65,9 @@ public class SpawningEnemies : MonoBehaviour {
             if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) >= SIZEOFBOX_X ||
                 Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX_Y) &&
                 enemiesData[i].getType() != 4 && // if is bullet do not instantiate again
-                timePassed > 2.0f) {  
+                timePassed > 2.0f) {
                 // Not deleting object but rather just moving it to another starting point
+                //Debug.Log("Destroyed at  x: " + allEnemies[i].transform.position.x + "    y :" + allEnemies[i].transform.position.y);
                 enemiesDiedInWave++;
                 if (enemiesDiedInWave == currNumberOfEnemies) {
                     nextWave();
