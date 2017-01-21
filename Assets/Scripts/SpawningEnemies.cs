@@ -23,10 +23,12 @@ public class SpawningEnemies : MonoBehaviour {
     private int stageNumber = 1;
     private int spodnjaIzbira = 1;
     private int zgornjaIzbira = 2;
+    private Vector3 playerPos;
 
 
     void Start () {
         timePassed = 0.0f;
+        playerPos = new Vector3(0, 0, 0);
         spodnjaIzbira = 1;
         zgornjaIzbira = 2;
         currNumberOfEnemies = 10;
@@ -35,7 +37,6 @@ public class SpawningEnemies : MonoBehaviour {
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             //TODO: Create advanced enemies later
             int tip = randomPick();
-            Debug.Log(tip);
             createEnemy(i, tip);
         }
 	}
@@ -45,14 +46,13 @@ public class SpawningEnemies : MonoBehaviour {
         // Moving enemies
         float speed = 2.0f * Time.deltaTime;
         for (int i = 0; i < currNumberOfEnemies; ++i) {
-            allEnemies[i].transform.position = enemiesData[i].nextMove(allEnemies[i].transform.position, speed);
+            enemiesData[i].nextMove(allEnemies[i].transform, speed);
             // Checking if they are at the end
-            if (Mathf.Abs(allEnemies[i].transform.position.x - enemiesData[i].getEndPos().x) < 0.1f &&
-                Mathf.Abs(allEnemies[i].transform.position.y - enemiesData[i].getEndPos().y) < 0.1f &&
+            if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) > SIZEOFBOX ||
+                Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) > SIZEOFBOX) &&
                 enemiesData[i].getType() != 4) {  // if is bullet do not instantiate again
                 // Not deleting object but rather just moving it to another starting point
                 int tip = randomPick();
-                Debug.Log(tip);
                 createEnemy(i, tip);
             }
 
@@ -73,7 +73,6 @@ public class SpawningEnemies : MonoBehaviour {
             timePassed = 0.0f;
             // First create enemy with that number and then add because for loop goes to one less than currNumberOfEnmies
             int tip = randomPick();
-            Debug.Log(tip);
             createEnemy(currNumberOfEnemies, tip);
             currNumberOfEnemies++;
         }
@@ -88,7 +87,7 @@ public class SpawningEnemies : MonoBehaviour {
             zgornjaIzbira = Mathf.Min(3, zgornjaIzbira);
             if (zgornjaIzbira == 3) {
                 spodnjaIzbira++;
-                spodnjaIzbira = Mathf.Min(3, zgornjaIzbira);
+                spodnjaIzbira = Mathf.Min(3, spodnjaIzbira);
             }
         }
 
@@ -136,9 +135,9 @@ public class SpawningEnemies : MonoBehaviour {
         if (tip == 1 || tip == 4) {
             temp = new EnemyBaseClass((byte)tip, startPos, endPos);
         } else if (tip == 2) {
-            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, new Vector3(0,0,0));  // TODO: Get user position
+            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos);  // TODO: Get user position
         } else if (tip == 3) {
-            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, new Vector3(0,0,0), 20, Time.time);  // TODO: Get user position
+            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, 20, Time.time);  // TODO: Get user position
         }
 
         if (allEnemies[index] == null) {
@@ -146,7 +145,7 @@ public class SpawningEnemies : MonoBehaviour {
             enemiesData[index] = temp;
         } else {
             result = allEnemies[index];
-            
+            result.transform.position = startPos;
             enemiesData[index] = temp;
         }
          
@@ -167,13 +166,12 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     private int randomPick () {
-        return Random.Range(spodnjaIzbira, zgornjaIzbira);
+        return 2;//Random.Range(spodnjaIzbira, zgornjaIzbira);
     }
 
     private void createWaveOfEnemies (int number) {
         for (int i = 0; i < number; ++i) {
             int tip = randomPick();
-            Debug.Log(tip);
             createEnemy(currNumberOfEnemies, tip);
             currNumberOfEnemies++;
         }

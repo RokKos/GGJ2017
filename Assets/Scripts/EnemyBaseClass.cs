@@ -31,7 +31,11 @@ public class EnemyBaseClass {
         return this.endPos;
     }
 
-    public virtual Vector3 nextMove (Vector3 currentPos, float speed) {
-        return Vector3.MoveTowards(currentPos,this.endPos, speed);
+    public virtual void nextMove (Transform currentPos, float speed) {
+        //Vector3 newDir = endPos - currentPos.position;
+        //currentPos.rotation = Quaternion.LookRotation(newDir.normalized);
+        //currentPos.position += currentPos.up * speed;
+        currentPos.position = Vector3.MoveTowards(currentPos.position, this.endPos, speed);
+        
     }
 }
