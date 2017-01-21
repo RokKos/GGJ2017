@@ -13,15 +13,15 @@ public class EnemyCurveClass : EnemyBaseClass {
     protected Vector3 userPosition;
 
     // Constuructor and calling base constructor
-    public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _speed, float _timeStart, Vector3 _userPosition) : 
-           base(_tip, _startPos, _endPos, _speed) {
+    public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition) : 
+           base(_tip, _startPos, _endPos) {
 
         this.timeStart = _timeStart;
         this.userPosition = _userPosition;
 
     }
 
-    public override Vector3 nextMove (Vector3 currentPos) {
+    public override Vector3 nextMove (Vector3 currentPos, float speed) {
         float timeAlive = Mathf.Clamp01((Time.time - this.timeStart));
         // Bezeir formula
         float curveX = (((1 - timeAlive) * (1 - timeAlive)) * startPos.x) + (2 * timeAlive * (1 - timeAlive) * userPosition.x) + ((timeAlive * timeAlive) * endPos.x);
@@ -29,6 +29,6 @@ public class EnemyCurveClass : EnemyBaseClass {
         currentPos.x = curveX;
         currentPos.y = curveY;
 
-        return base.nextMove(currentPos);
+        return base.nextMove(currentPos, speed);
     }
 }

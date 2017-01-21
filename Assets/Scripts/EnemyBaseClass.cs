@@ -12,13 +12,11 @@ public class EnemyBaseClass {
     protected byte tip;
     protected Vector3 startPos;
     protected Vector3 endPos;  // Only need with statci enemy
-    protected float speed;
 
-    public EnemyBaseClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _speed) {
+    public EnemyBaseClass (byte _tip, Vector3 _startPos, Vector3 _endPos) {
         this.tip = _tip;
         this.startPos = _startPos;
         this.endPos = _endPos;
-        this.speed = _speed;
     }
 
     public byte getType () {
@@ -33,7 +31,7 @@ public class EnemyBaseClass {
         return this.endPos;
     }
 
-    public virtual Vector3 nextMove (Vector3 currentPos) {
-        return Vector3.MoveTowards(currentPos,this.endPos, this.speed);
+    public virtual Vector3 nextMove (Vector3 currentPos, float speed) {
+        return Vector3.MoveTowards(currentPos,this.endPos, speed);
     }
 }

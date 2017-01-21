@@ -41,8 +41,9 @@ public class SpawningEnemies : MonoBehaviour {
 
 	void Update () {
         // Moving enemies
+        float speed = 2.0f * Time.deltaTime;
         for (int i = 0; i < currNumberOfEnemies; ++i) {
-            allEnemies[i].transform.position = enemiesData[i].nextMove(allEnemies[i].transform.position);
+            allEnemies[i].transform.position = enemiesData[i].nextMove(allEnemies[i].transform.position, speed);
             // Checking if they are at the end
             if (Mathf.Abs(allEnemies[i].transform.position.x - enemiesData[i].getEndPos().x) < 0.1f &&
                 Mathf.Abs(allEnemies[i].transform.position.y - enemiesData[i].getEndPos().y) < 0.1f &&
@@ -92,7 +93,6 @@ public class SpawningEnemies : MonoBehaviour {
     private void createEnemy (int index, int tip) {
         // Seeting of object
         float scaleOfEnemy = 1.0f;
-        float speed = 5.0f * Time.deltaTime;
         int whichSite = Random.Range(1,5);
 
         Vector3 startPos;
@@ -127,13 +127,13 @@ public class SpawningEnemies : MonoBehaviour {
 
         // Spawning on scene
         GameObject result;
-        EnemyBaseClass temp = new EnemyBaseClass((byte)tip, startPos, endPos, speed);
+        EnemyBaseClass temp = new EnemyBaseClass((byte)tip, startPos, endPos);
         if (tip == 1 || tip == 4) {
-            temp = new EnemyBaseClass((byte)tip, startPos, endPos, speed);
+            temp = new EnemyBaseClass((byte)tip, startPos, endPos);
         } else if (tip == 2) {
-            temp = new EnemyCurveClass((byte)tip, startPos, endPos, speed, Time.time, new Vector3(0,0,0));  // TODO: Get user position
+            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, new Vector3(0,0,0));  // TODO: Get user position
         } else if (tip == 3) {
-            temp = new EnemyShootClass((byte)tip, startPos, endPos, speed, Time.time, new Vector3(0,0,0), 20, Time.time);  // TODO: Get user position
+            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, new Vector3(0,0,0), 20, Time.time);  // TODO: Get user position
         }
 
         if (allEnemies[index] == null) {

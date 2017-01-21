@@ -12,8 +12,8 @@ public class EnemyShootClass : EnemyCurveClass {
     private float fireRate;
     private float timeSinceLastShoot;
     // Constructor 
-    public EnemyShootClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _speed, float _timeStart, Vector3 _userPosition, float _fireRate, float timeSinceLastShot) :
-        base(_tip, _startPos, _endPos, _speed, _timeStart, _userPosition) {
+    public EnemyShootClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _fireRate, float timeSinceLastShot) :
+        base(_tip, _startPos, _endPos, _timeStart, _userPosition) {
         this.fireRate = _fireRate;
 
     }
