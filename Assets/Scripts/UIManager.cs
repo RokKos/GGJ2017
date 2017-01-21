@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public IEnumerator showWaveCleared (int numberOfWave) {
-        waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!!!";
+        waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!";
         audioSource.volume = 1f;
         audioSource.clip = waweClearedSound;
         audioSource.Play();
