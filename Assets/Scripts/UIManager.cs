@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public int updateScoreText (int score) {
+    public void updateScoreText (int score) {
         scoreRealTimeText.text = "Score: " + score.ToString();
     }
 

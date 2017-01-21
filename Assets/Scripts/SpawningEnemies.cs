@@ -35,6 +35,7 @@ public class SpawningEnemies : MonoBehaviour {
         timePassed = 0.0f;
         timeBetwenSpawn = 0.0f;
         waweNumber = 1;
+        gameScore = 0;
         playerPos = new Vector3(0, 0, 0);
         spodnjaIzbira = 1;
         zgornjaIzbira = 2;
