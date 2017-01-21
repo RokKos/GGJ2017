@@ -18,7 +18,8 @@ public class SpawningEnemies : MonoBehaviour {
     private const float SIZEOFBOX = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
-    private float timePassed = 0.0f;
+    public float timePassed = 0.0f;
+    private float timeBetwenSpawn = 0.0f;
     private const int BOUND = 20;
     private int stageNumber = 1;
     private int spodnjaIzbira = 1;
@@ -28,6 +29,7 @@ public class SpawningEnemies : MonoBehaviour {
 
     void Start () {
         timePassed = 0.0f;
+        timeBetwenSpawn = 0.0f;
         playerPos = new Vector3(0, 0, 0);
         spodnjaIzbira = 1;
         zgornjaIzbira = 2;
@@ -69,8 +71,8 @@ public class SpawningEnemies : MonoBehaviour {
         }
 
         // Check if you can spawn new enemy
-        if (timePassed > spawnNewEnemyInSeconds) {
-            timePassed = 0.0f;
+        if (timeBetwenSpawn > spawnNewEnemyInSeconds) {
+            timeBetwenSpawn = 0.0f;
             // First create enemy with that number and then add because for loop goes to one less than currNumberOfEnmies
             int tip = randomPick();
             createEnemy(currNumberOfEnemies, tip);
@@ -90,7 +92,7 @@ public class SpawningEnemies : MonoBehaviour {
                 spodnjaIzbira = Mathf.Min(3, spodnjaIzbira);
             }
         }
-
+        timeBetwenSpawn += Time.deltaTime;
         timePassed += Time.deltaTime;
 	}
 
@@ -195,7 +197,7 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     private int randomPick () {
-        return 2;//Random.Range(spodnjaIzbira, zgornjaIzbira);
+        return Random.Range(spodnjaIzbira, zgornjaIzbira);
     }
 
     private void createWaveOfEnemies (int number) {
