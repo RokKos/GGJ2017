@@ -20,6 +20,7 @@ public class SpawningEnemies : MonoBehaviour {
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     private float timePassed = 0.0f;
     private const int BOUND = 20;
+    private int stageNumber = 1;
     private int spodnjaIzbira = 1;
     private int zgornjaIzbira = 2;
 
@@ -77,14 +78,16 @@ public class SpawningEnemies : MonoBehaviour {
 
         // Check if dificulty gets tuffer
         // Tweak a little this parameters
-        if (currNumberOfEnemies > BOUND && currNumberOfEnemies < 2 * BOUND) {
-            zgornjaIzbira = 3;
-        } else if (currNumberOfEnemies > 2 * BOUND && currNumberOfEnemies < 3 * BOUND) {
-            zgornjaIzbira = 4;
-        } else if (currNumberOfEnemies > 3 * BOUND && currNumberOfEnemies < 4 * BOUND) {
-            spodnjaIzbira = 2;
-        } else if (currNumberOfEnemies > 4 * BOUND) {
-            spodnjaIzbira = 3;
+
+        if (currNumberOfEnemies > stageNumber * BOUND && currNumberOfEnemies < (stageNumber + 1) * BOUND) {
+            createWaveOfEnemies(BOUND / 2);
+            stageNumber++;
+            zgornjaIzbira++;
+            zgornjaIzbira = Mathf.Min(4, zgornjaIzbira);
+            if (zgornjaIzbira == 4) {
+                spodnjaIzbira++;
+                zgornjaIzbira = Mathf.Min(3, zgornjaIzbira);
+            }
         }
 
         timePassed += Time.deltaTime;
@@ -163,5 +166,13 @@ public class SpawningEnemies : MonoBehaviour {
 
     private int randomPick () {
         return Random.Range(spodnjaIzbira, zgornjaIzbira);
+    }
+
+    private void createWaveOfEnemies (int number) {
+        for (int i = 0; i < number; ++i) {
+            int tip = randomPick();
+            createEnemy(currNumberOfEnemies, tip);
+            currNumberOfEnemies++;
+        }
     }
 }
