@@ -16,6 +16,8 @@ public class Movement1 : MonoBehaviour {
     private bool gameRunning = true;
     private AudioSource audioSource;
     [SerializeField] AudioClip speedUpMovement;
+    [SerializeField] AudioClip slowMovement;
+    [SerializeField] AudioClip deathSound;
     [SerializeField] UIManager uiManager;
     [SerializeField] SpawningEnemies spawningEnemies;
 
@@ -30,6 +32,8 @@ public class Movement1 : MonoBehaviour {
         gameRunning = true;
         rigidBody = GetComponent<Rigidbody2D>();
         audioSource =  transform.GetComponent<AudioSource>();
+        audioSource.volume = 1.0f;
+        audioSource.loop = false;
     }
 	
 	// Update is called once per frame
@@ -62,6 +66,14 @@ public class Movement1 : MonoBehaviour {
         else {  //drugače upočasnimo čas in dovolimo novi cilj
             Time.timeScale = minTimeSpeed;
             allowNewPosition = true;
+            audioSource.clip = slowMovement;
+            audioSource.loop = true;
+            audioSource.volume = 0.3f;
+            if (!audioSource.isPlaying) {
+                audioSource.Play();
+            }
+            
+
             //Debug.Log("No move");
         }
 
@@ -80,8 +92,12 @@ public class Movement1 : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 //Debug.Log("rayCastHit");
+                // Souund
                 audioSource.clip = speedUpMovement;
+                audioSource.loop = false;
+                audioSource.volume = 1.0f;
                 audioSource.Play();
+
                 newPosition = hit.point;
                 allowNewPosition = false;
                 numberOfClicks++;
@@ -94,6 +110,11 @@ public class Movement1 : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Enemy")
         {
+            audioSource.volume = 1.0f;
+            audioSource.loop = false;
+            audioSource.clip = deathSound;
+            audioSource.Play();
+
             //Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
             rigidBody.isKinematic = true;
             uiManager.endGame(spawningEnemies.calculateScore() + (int) ((totalDistance - lastDistance) / numberOfClicks));
