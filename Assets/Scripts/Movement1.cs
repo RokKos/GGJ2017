@@ -14,6 +14,8 @@ public class Movement1 : MonoBehaviour {
     private float totalDistance = 0.0f;
     private int numberOfClicks = 0; 
     private bool gameRunning = true;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip speedUpMovement;
     [SerializeField] UIManager uiManager;
     [SerializeField] SpawningEnemies spawningEnemies;
 
@@ -27,6 +29,7 @@ public class Movement1 : MonoBehaviour {
         allowNewPosition = true;
         gameRunning = true;
         rigidBody = GetComponent<Rigidbody2D>();
+        audioSource =  transform.GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -77,6 +80,8 @@ public class Movement1 : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
                 //Debug.Log("rayCastHit");
+                audioSource.clip = speedUpMovement;
+                audioSource.Play();
                 newPosition = hit.point;
                 allowNewPosition = false;
                 numberOfClicks++;
