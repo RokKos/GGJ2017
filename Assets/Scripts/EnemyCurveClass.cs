@@ -54,17 +54,24 @@ public class EnemyCurveClass : EnemyBaseClass {
 
         Vector3 newDir = userPosition - currentPos.position;
         float angle = Vector3.Angle(newDir, currentPos.up);  //calculate angle
-        //Debug.Log(angle);
-        //Debug.Log(Vector3.Cross(newDir, currentPos.up).z);
-        if (Mathf.Abs(angle) < 90) {
-            if (Vector3.Cross(newDir, currentPos.up).z > 0) {
-                //angle = -angle;
-                currentPos.Rotate(Vector3.forward, 0.4f);
-            } else {
-                currentPos.Rotate(Vector3.forward, -0.4f);
+        if (angle < 90)
+        {
+            if (Vector3.Cross(newDir, currentPos.up).z < 0)
+            {
+                if (angle > 0.1f)
+                    currentPos.Rotate(Vector3.forward, 0.1f);
+                else
+                    currentPos.Rotate(Vector3.forward, angle);
+            }
+            else
+            {
+                if (angle > 0.1f)
+                    currentPos.Rotate(Vector3.forward, -0.1f);
+                else
+                    currentPos.Rotate(Vector3.forward, -angle);
             }
         }
 
-        currentPos.position += dirVector * speed;
+        currentPos.position += currentPos.up * speed;
     }
 }

@@ -146,11 +146,17 @@ public class SpawningEnemies : MonoBehaviour {
 
         if (allEnemies[index] == null) {
             result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.identity);
+            //result.transform.rotation = Quaternion.Euler(0, 0, 90);
+            rotateEnemy(result.transform);
+            result.transform.LookAt(playerPos);
             enemiesData[index] = temp;
         } else {
             result = allEnemies[index];
             result.transform.position = startPos;
-            result.transform.rotation = Quaternion.identity;
+            rotateEnemy(result.transform);
+            //result.transform.rotation = Quaternion.identity;
+            //result.transform.rotation = Quaternion.Euler(0, 0, 90);
+            //result.transform.LookAt(playerPos);
             enemiesData[index] = temp;
         }
         // Image of enemy
@@ -160,6 +166,23 @@ public class SpawningEnemies : MonoBehaviour {
         
         allEnemies[index] = result;
 
+    }
+
+    private void rotateEnemy(Transform enemy)
+    {
+        //Debug.Log("x: " + enemy.position.x + "  y: " + enemy.position.y + "  z: " + enemy.position.z);
+
+        if (enemy.position.x == SIZEOFBOX)
+            enemy.rotation = Quaternion.Euler(0, 0, 90);
+
+        if (enemy.position.x == -SIZEOFBOX)
+            enemy.rotation = Quaternion.Euler(0, 0, -90);
+
+        if (enemy.position.y == SIZEOFBOX)
+            enemy.rotation = Quaternion.Euler(0, 0, 180);
+
+        if (enemy.position.y == -SIZEOFBOX)
+            enemy.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private int firstEmptyPosition () {

@@ -87,7 +87,7 @@ public class Movement1 : MonoBehaviour {
         Vector3 newDir = newPosition - transform.position;
         float angle = Vector3.Angle(newDir, transform.up);  //calculate angle
 
-        if (angle > 1 || angle < -1)
+        if (angle > 1)
         {
             if (Vector3.Cross(newDir, transform.up).z < 0)
             {
