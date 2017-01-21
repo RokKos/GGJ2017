@@ -10,27 +10,40 @@ public class Movement1 : MonoBehaviour {
     private Vector3 newPosition;
     private bool allowNewPosition;
     private Rigidbody2D rigidBody;
+    private float lastDistance = 0.0f;
+    private float totalDistance = 0.0f;
+    private int numberOfClicks = 0; 
+    private bool gameRunning = true;
+    [SerializeField] UIManager uiManager;
+    [SerializeField] SpawningEnemies spawningEnemies;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        lastDistance = 0.0f;
+        totalDistance = 0.0f;
+        numberOfClicks = 0;
         newPosition = transform.position;
         Time.timeScale = minTimeSpeed;
         allowNewPosition = true;
+        gameRunning = true;
         rigidBody = GetComponent<Rigidbody2D>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-
-        checkClick();
-        moveToPosition();
+        if (gameRunning) {
+            checkClick();
+            moveToPosition();
+        }
+        
     }
 
     private void moveToPosition()
     {
         //se premaknemo če še nismo dosegli cilj
         float distance = Vector3.Distance(transform.position, newPosition);
-
+        totalDistance += distance;
+        lastDistance = distance;
         if (distance > 0.5f && !allowNewPosition)
         {
             Time.timeScale = maxTimeSpeed;
@@ -66,6 +79,7 @@ public class Movement1 : MonoBehaviour {
                 Debug.Log("rayCastHit");
                 newPosition = hit.point;
                 allowNewPosition = false;
+                numberOfClicks++;
                 //transform.position = newPosition;
             }
         }
@@ -77,6 +91,8 @@ public class Movement1 : MonoBehaviour {
         {
             Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
             rigidBody.isKinematic = true;
+            uiManager.endGame(calculateScore());
+            gameRunning = false;
 
         }
 
@@ -107,5 +123,13 @@ public class Movement1 : MonoBehaviour {
 
         }
         //Debug.Log(angle);
+    }
+
+    private float calculateScore () {
+        float result = 0.0f;
+
+        result = (totalDistance - lastDistance) * spawningEnemies.timePassed / numberOfClicks;
+
+        return result;
     }
 }
