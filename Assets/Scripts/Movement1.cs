@@ -29,16 +29,16 @@ public class Movement1 : MonoBehaviour {
     private void moveToPosition()
     {
         //se premaknemo če še nismo dosegli cilj
-        if (transform.position != newPosition)
+        float distance = Vector3.Distance(transform.position, newPosition);
+
+        if (distance > 0.5f && !allowNewPosition)
         {
             Time.timeScale = maxTimeSpeed;
-            float step = playerSpeed * Time.deltaTime;
+            
             //transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
             //Vector3 newDir = Vector3.RotateTowards(transform.position, newPosition, step, 0.0F);
 
-
-            transform.position += transform.up * step;
-
+            calculateAngle();
 
             //transform.Rotate(newDir);
             //transform.rotation = Quaternion.LookRotation(newDir);
@@ -49,13 +49,14 @@ public class Movement1 : MonoBehaviour {
             //Debug.Log("No move");
         }
 
-        calculateAngle();
+        float step = playerSpeed * Time.deltaTime;
+        transform.position += transform.up * step;
     }
 
     private void checkClick()
     {
         //preverimo klik za novo pozicijo
-        if (Input.GetMouseButtonDown(0)) //&& allowNewPosition)
+        if (Input.GetMouseButtonDown(0) && allowNewPosition)
         {
             //Debug.Log("klik");
             RaycastHit hit;
@@ -86,16 +87,22 @@ public class Movement1 : MonoBehaviour {
         Vector3 newDir = newPosition - transform.position;
         float angle = Vector3.Angle(newDir, transform.up);  //calculate angle
 
-        if (angle > 5 || angle < -5)
+        if (angle > 1 || angle < -1)
         {
             if (Vector3.Cross(newDir, transform.up).z < 0)
             {
                 //angle = -angle;
-                transform.Rotate(Vector3.forward, 10f);
+                if (angle > 8)
+                    transform.Rotate(Vector3.forward, 8f);
+                else
+                    transform.Rotate(Vector3.forward, angle);
             }
             else
             {
-                transform.Rotate(Vector3.forward, -10f);
+                if (angle > 8)
+                    transform.Rotate(Vector3.forward, -8f);
+                else
+                    transform.Rotate(Vector3.forward, -angle);
             }
 
         }
