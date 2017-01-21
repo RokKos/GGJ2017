@@ -22,17 +22,36 @@ public class EnemyCurveClass : EnemyBaseClass {
         //this.intitalDistance = Vector3.Distance(this.startPos, this.endPos);
     }
 
-    public override Vector3 nextMove (Vector3 currentPos, float speed) {
+    public override void nextMove (Transform currentPos, float speed) {
 
         //float currentDistanceToEnd = Vector3.Distance(currentPos, endPos);
-        float timeAlive = Mathf.Clamp01(timeStart);//(Time.time - this.timeStart));
-        timeStart += Time.deltaTime * 0.1f;
-        // Bezeir formula
-        float curveX = (((1 - timeAlive) * (1 - timeAlive)) * startPos.x) + (2 * timeAlive * (1 - timeAlive) * userPosition.x) + ((timeAlive * timeAlive) * endPos.x);
-        float curveY = (((1 - timeAlive) * (1 - timeAlive)) * startPos.y) + (2 * timeAlive * (1 - timeAlive) * userPosition.y) + ((timeAlive * timeAlive) * endPos.y);
-        currentPos.x = curveX;
-        currentPos.y = curveY;
+        //float timeAlive = Mathf.Clamp01(timeStart);//(Time.time - this.timeStart));
+        //timeStart += Time.deltaTime * 0.1f;  // TODO: Tweak this speed
+        // Bezeir formula quadric
+        //float curveX = (((1 - timeAlive) * (1 - timeAlive)) * startPos.x) + (2 * timeAlive * (1 - timeAlive) * userPosition.x) + ((timeAlive * timeAlive) * endPos.x);
+        //float curveY = (((1 - timeAlive) * (1 - timeAlive)) * startPos.y) + (2 * timeAlive * (1 - timeAlive) * userPosition.y) + ((timeAlive * timeAlive) * endPos.y);
 
-        return base.nextMove(currentPos, speed);
+        // Bezeir cubic formula
+
+        // float curveX = (((1 - timeAlive) * (1 - timeAlive) * (1 - timeAlive)) * startPos.x) + 3 * (((1 - timeAlive) * (1 - timeAlive) * timeAlive) * (startPos.x - startPos.x / 2)) +
+        //     3 * (((1 - timeAlive) * timeAlive * timeAlive) * endPos.x - endPos.x / 2) + ((timeAlive * timeAlive * timeAlive) * endPos.x );
+        // float curveY = (((1 - timeAlive) * (1 - timeAlive) * (1 - timeAlive)) * startPos.y) + 3 * (((1 - timeAlive) * (1 - timeAlive) * timeAlive) * (startPos.y - startPos.y / 2)) +
+        //     3 * (((1 - timeAlive) * timeAlive * timeAlive) * endPos.y - endPos.y / 2) + ((timeAlive * timeAlive * timeAlive) * endPos.y);
+
+        //currentPos.x = curveX;
+        //currentPos.y = curveY;
+
+        Vector3 newDir = userPosition - currentPos.position;
+        float angle = Vector3.Angle(newDir, currentPos.up);  //calculate angle
+        if (Mathf.Abs(angle) < 90) { 
+            if (Vector3.Cross(newDir, currentPos.up).z < 0) {
+                //angle = -angle;
+                currentPos.Rotate(Vector3.forward, 0.2f);
+            } else {
+                currentPos.Rotate(Vector3.forward, -0.2f);
+            }
+        }
+
+        currentPos.position += currentPos.up * speed;
     }
 }
