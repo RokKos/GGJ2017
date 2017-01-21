@@ -11,15 +11,17 @@ using UnityEngine;
 public class EnemyCurveClass : EnemyBaseClass {
     protected float timeStart;
     protected Vector3 userPosition;
-    protected static float sizeOfBox; 
+    protected static float sizeOfBoxX;
+    protected static float sizeOfBoxY;
 
     // Constuructor and calling base constructor
-    public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _sizeOfBox) : 
+    public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _sizeOfBoxX, float _sizeOfBoxY) : 
            base(_tip, _startPos, _endPos) {
 
         this.timeStart = 0;//_timeStart;
         this.userPosition = _userPosition;
-        sizeOfBox = _sizeOfBox;
+        sizeOfBoxX = _sizeOfBoxX;
+        sizeOfBoxY = _sizeOfBoxY;
     }
 
     public override void nextMove (Transform currentPos, float speed) {
@@ -41,14 +43,14 @@ public class EnemyCurveClass : EnemyBaseClass {
         //currentPos.x = curveX;
         //currentPos.y = curveY;
         Vector3 dirVector = new Vector3();
-        if (startPos.x == sizeOfBox) {
+        if (startPos.x == sizeOfBoxX) {
             dirVector = -currentPos.right;
         }
-        else if (startPos.x == -sizeOfBox) {
+        else if (startPos.x == -sizeOfBoxX) {
             dirVector = currentPos.right;
-        }else if (startPos.y == sizeOfBox) {
+        }else if (startPos.y == sizeOfBoxY) {
             dirVector = -currentPos.up;
-        } else if (startPos.y == -sizeOfBox) {
+        } else if (startPos.y == -sizeOfBoxY) {
             dirVector = currentPos.up;
         }
 

@@ -16,7 +16,8 @@ public class SpawningEnemies : MonoBehaviour {
     private GameObject[] allEnemies;  // List of all enemies
     private EnemyBaseClass[] enemiesData;
     private const int MAXENEMIESONSCENE = 1000;
-    private const float SIZEOFBOX = 7.0f;
+    private float SIZEOFBOX_X = 7.0f;
+    private float SIZEOFBOX_Y = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
     private int enemiesDiedInWave = 0;
     private int waweNumber = 1;
@@ -32,6 +33,12 @@ public class SpawningEnemies : MonoBehaviour {
 
 
     void Start () {
+
+        Camera camera = FindObjectOfType<Camera>();
+        Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        SIZEOFBOX_X = screenPoint1.x + 1;
+        SIZEOFBOX_Y = screenPoint1.y + 1;
+
         timePassed = 0.0f;
         timeBetwenSpawn = 0.0f;
         waweNumber = 1;
@@ -48,7 +55,10 @@ public class SpawningEnemies : MonoBehaviour {
             int tip = randomPick();
             createEnemy(i, tip);
         }
-        
+        //Vector3 screenPoint2 = camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
+
+        Debug.Log("ScreenPoint1: " + screenPoint1.x + " " + screenPoint1.y + " " + screenPoint1.z);
+        //Debug.Log("ScreenPoint2: " + screenPoint2.x + " " + screenPoint2.y + " " + screenPoint2.z);
     }
 	
 
@@ -58,8 +68,8 @@ public class SpawningEnemies : MonoBehaviour {
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             enemiesData[i].nextMove(allEnemies[i].transform, speed);
             // Checking if they are at the end
-            if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) >= SIZEOFBOX ||
-                Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX) &&
+            if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) >= SIZEOFBOX_X ||
+                Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX_Y) &&
                 enemiesData[i].getType() != 4 && // if is bullet do not instantiate again
                 timePassed > 2.0f) {  
                 // Not deleting object but rather just moving it to another starting point
@@ -119,27 +129,27 @@ public class SpawningEnemies : MonoBehaviour {
         Vector3 endPos;
         switch (whichSite) {
             case 1:
-                startPos = new Vector3(SIZEOFBOX, Random.Range(-SIZEOFBOX, SIZEOFBOX), 0.0f);
-                endPos = new Vector3(-SIZEOFBOX, Random.Range(-SIZEOFBOX, SIZEOFBOX), 0.0f);
+                startPos = new Vector3(SIZEOFBOX_X, Random.Range(-SIZEOFBOX_Y, SIZEOFBOX_Y), 0.0f);
+                endPos = new Vector3(-SIZEOFBOX_X, Random.Range(-SIZEOFBOX_Y, SIZEOFBOX_Y), 0.0f);
                 break;
             case 2:
-                startPos = new Vector3(Random.Range(-SIZEOFBOX, SIZEOFBOX), SIZEOFBOX, 0.0f);
-                endPos = new Vector3(Random.Range(-SIZEOFBOX, SIZEOFBOX), -SIZEOFBOX, 0.0f);
+                startPos = new Vector3(Random.Range(-SIZEOFBOX_X, SIZEOFBOX_X), SIZEOFBOX_Y, 0.0f);
+                endPos = new Vector3(Random.Range(-SIZEOFBOX_X, SIZEOFBOX_X), -SIZEOFBOX_Y, 0.0f);
                 break;
 
             case 3:
-                startPos = new Vector3(Random.Range(-SIZEOFBOX, SIZEOFBOX), -SIZEOFBOX, 0.0f);
-                endPos = new Vector3(Random.Range(-SIZEOFBOX, SIZEOFBOX), SIZEOFBOX, 0.0f);
+                startPos = new Vector3(Random.Range(-SIZEOFBOX_X, SIZEOFBOX_X), -SIZEOFBOX_Y, 0.0f);
+                endPos = new Vector3(Random.Range(-SIZEOFBOX_X, SIZEOFBOX_X), SIZEOFBOX_Y, 0.0f);
                 break;
 
             case 4:
-                startPos = new Vector3(-SIZEOFBOX, Random.Range(-SIZEOFBOX, SIZEOFBOX), 0.0f);
-                endPos = new Vector3(SIZEOFBOX, Random.Range(-SIZEOFBOX, SIZEOFBOX), 0.0f);
+                startPos = new Vector3(-SIZEOFBOX_X, Random.Range(-SIZEOFBOX_Y, SIZEOFBOX_Y), 0.0f);
+                endPos = new Vector3(SIZEOFBOX_X, Random.Range(-SIZEOFBOX_Y, SIZEOFBOX_Y), 0.0f);
                 break;
 
             default:
-                startPos = new Vector3(SIZEOFBOX, Random.Range(-SIZEOFBOX, SIZEOFBOX), 0.0f);
-                endPos = new Vector3(-SIZEOFBOX, Random.Range(-SIZEOFBOX, SIZEOFBOX), 0.0f);
+                startPos = new Vector3(SIZEOFBOX_X, Random.Range(-SIZEOFBOX_Y, SIZEOFBOX_Y), 0.0f);
+                endPos = new Vector3(-SIZEOFBOX_X, Random.Range(-SIZEOFBOX_Y, SIZEOFBOX_Y), 0.0f);
                 break;
         }
 
@@ -153,10 +163,10 @@ public class SpawningEnemies : MonoBehaviour {
             temp = new EnemyBaseClass((byte)tip, startPos, endPos);
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy1");
         } else if (tip == 2) {
-            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX);  // TODO: Get user position
+            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX_X, SIZEOFBOX_Y);  // TODO: Get user position
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy2");
         } else if (tip == 3) {
-            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX, Random.Range(3f, 6f), Random.Range(0f, 5f));  // TODO: Get user position
+            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));  // TODO: Get user position
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
         }
 
@@ -195,16 +205,16 @@ public class SpawningEnemies : MonoBehaviour {
     {
         //Debug.Log("x: " + enemy.position.x + "  y: " + enemy.position.y + "  z: " + enemy.position.z);
 
-        if (enemy.position.x == SIZEOFBOX)
+        if (enemy.position.x == SIZEOFBOX_X)
             enemy.rotation = Quaternion.Euler(0, 0, 90);
 
-        if (enemy.position.x == -SIZEOFBOX)
+        if (enemy.position.x == -SIZEOFBOX_X)
             enemy.rotation = Quaternion.Euler(0, 0, -90);
 
-        if (enemy.position.y == SIZEOFBOX)
+        if (enemy.position.y == SIZEOFBOX_X)
             enemy.rotation = Quaternion.Euler(0, 0, 180);
 
-        if (enemy.position.y == -SIZEOFBOX)
+        if (enemy.position.y == -SIZEOFBOX_X)
             enemy.rotation = Quaternion.Euler(0, 0, 0);
     }
 

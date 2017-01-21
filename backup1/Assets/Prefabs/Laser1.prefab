@@ -20,9 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4556206675069510}
   - component: {fileID: 212932322826436052}
-  m_Layer: 0
+  - component: {fileID: 114055608621795908}
+  - component: {fileID: 60354197784021080}
+  m_Layer: 11
   m_Name: Laser1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,12 +36,41 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140509774438320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1687367, y: 0.89358306, z: 0}
+  m_LocalPosition: {x: -12.3262415, y: -2.7716424, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &60354197784021080
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140509774438320}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -0.024999999, y: 0.225}
+      - {x: -0.024999999, y: -0.225}
+      - {x: 0.024999999, y: -0.225}
+      - {x: 0.024999999, y: 0.225}
+--- !u!114 &114055608621795908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140509774438320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a3ea0a29cb88549af3416db1802cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212932322826436052
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -15,8 +15,8 @@ public class EnemyShootClass : EnemyCurveClass {
     private Shoot shoot;
 
     // Constructor 
-    public EnemyShootClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _sizeOfBox, float _fireRate, float timeSinceLastShot) :
-        base(_tip, _startPos, _endPos, _timeStart, _userPosition, _sizeOfBox) {
+    public EnemyShootClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _sizeOfBoxX, float _sizeOfBoxY, float _fireRate, float timeSinceLastShot) :
+        base(_tip, _startPos, _endPos, _timeStart, _userPosition, _sizeOfBoxX, _sizeOfBoxY) {
         this.fireRate = _fireRate;
 
     }
@@ -39,7 +39,7 @@ public class EnemyShootClass : EnemyCurveClass {
             //trail1.SetActive(false);
             //result.transform.position = startPos;
             //trail1.SetActive(true);
-            shoot.Laser1();
+            shoot.Laser1(transform.position, transform.rotation);
         }
     }
 
