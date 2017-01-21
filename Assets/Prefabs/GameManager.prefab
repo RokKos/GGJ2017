@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1047867042648094}
+  m_IsPrefabParent: 1
+--- !u!1 &1047867042648094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4000348360373442}
+  - component: {fileID: 114637060638316930}
+  - component: {fileID: 114661427435545738}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000348360373442
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047867042648094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2161493, y: -0.13900384, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114637060638316930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047867042648094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383dff25b4d09dc42afa84b750e9bab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 1090475320499700, guid: 543c4a116ea263440bac218b7cacd8f8,
+    type: 2}
+  bulletPrefab: {fileID: 0}
+  uiManager: {fileID: 114661427435545738}
+  timePassed: 0
+--- !u!114 &114661427435545738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1047867042648094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f3deebcb0a99641894bc9584bf4f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passedTimeText: {fileID: 0}
+  scoreEndText: {fileID: 0}
+  scoreRealTimeText: {fileID: 0}
+  waveText: {fileID: 0}
+  HUD: {fileID: 0}
+  endGameMenu: {fileID: 0}
+  spawningEnemies: {fileID: 114637060638316930}
+  movement: {fileID: 0}
+  mainCamera: {fileID: 0}
+  introSound: {fileID: 8300000, guid: 19dd625cd3a982a4ebca87ed2adccfbb, type: 3}
+  waweClearedSound: {fileID: 8300000, guid: 399ee4f66e085014d87041190cedd72a, type: 3}
