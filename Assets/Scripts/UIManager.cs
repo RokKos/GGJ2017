@@ -14,15 +14,24 @@ public class UIManager : MonoBehaviour {
     [SerializeField] Text passedTimeText;
     [SerializeField] Text scoreEndText;
     [SerializeField] Text scoreRealTimeText;
+    [SerializeField] Text waveText;
     [SerializeField] GameObject HUD;
     [SerializeField] GameObject endGameMenu;
     [SerializeField] SpawningEnemies spawningEnemies;
     [SerializeField] Movement1 movement;
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] AudioClip introSound;
+    [SerializeField] AudioClip waweClearedSound;
+    private AudioSource audioSource;
 
     private void Start () {
         passedTimeText.text = "Time: " + 0;
         HUD.SetActive(true);
         endGameMenu.SetActive(false);
+        audioSource = mainCamera.GetComponent<AudioSource>();
+        audioSource.loop = false;
+        audioSource.clip = introSound;
+        waveText.text = "";
     }
 
     private void Update () {
@@ -43,6 +52,17 @@ public class UIManager : MonoBehaviour {
     public void updateScoreText (int score) {
         scoreRealTimeText.text = "Score: " + score.ToString();
         //return 0;
+    }
+
+    public IEnumerator showWaveCleared (int numberOfWave) {
+        waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!!!";
+        audioSource.clip = waweClearedSound;
+        audioSource.Play();
+        for (int i = 0; i < 200; ++i) {
+            yield return null;
+        }
+        waveText.text = "";
+        yield return null;
     }
 
 

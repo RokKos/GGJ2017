@@ -24,9 +24,6 @@ public class SpawningEnemies : MonoBehaviour {
     public float timePassed = 0.0f;
     private float timeBetwenSpawn = 0.0f;
     private const int BOUND = 20;
-    private int stageNumber = 1;
-    private int spodnjaIzbira = 1;
-    private int zgornjaIzbira = 2;
     private int gameScore = 0;
     private Vector3 playerPos;
 
@@ -37,8 +34,6 @@ public class SpawningEnemies : MonoBehaviour {
         waweNumber = 1;
         gameScore = 0;
         playerPos = new Vector3(0, 0, 0);
-        spodnjaIzbira = 1;
-        zgornjaIzbira = 2;
         currNumberOfEnemies = 10;
         enemiesDiedInWave = 0;
         enemiesData = new EnemyBaseClass[MAXENEMIESONSCENE];
@@ -243,6 +238,8 @@ public class SpawningEnemies : MonoBehaviour {
         enemiesDiedInWave = 0;
         createWaveOfEnemies(currNumberOfEnemies);
         uiManager.updateScoreText(calculateScore());
+
+        StartCoroutine(uiManager.showWaveCleared(waweNumber));
 
     }
 
