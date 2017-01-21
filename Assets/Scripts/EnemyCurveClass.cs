@@ -11,15 +11,15 @@ using UnityEngine;
 public class EnemyCurveClass : EnemyBaseClass {
     protected float timeStart;
     protected Vector3 userPosition;
-    //private float intitalDistance; 
+    protected static float sizeOfBox; 
 
     // Constuructor and calling base constructor
-    public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition) : 
+    public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _sizeOfBox) : 
            base(_tip, _startPos, _endPos) {
 
         this.timeStart = 0;//_timeStart;
         this.userPosition = _userPosition;
-        //this.intitalDistance = Vector3.Distance(this.startPos, this.endPos);
+        sizeOfBox = _sizeOfBox;
     }
 
     public override void nextMove (Transform currentPos, float speed) {
@@ -40,18 +40,31 @@ public class EnemyCurveClass : EnemyBaseClass {
 
         //currentPos.x = curveX;
         //currentPos.y = curveY;
+        Vector3 dirVector = new Vector3();
+        if (startPos.x == sizeOfBox) {
+            dirVector = -currentPos.right;
+        }
+        else if (startPos.x == -sizeOfBox) {
+            dirVector = currentPos.right;
+        }else if (startPos.y == sizeOfBox) {
+            dirVector = -currentPos.up;
+        } else if (startPos.y == -sizeOfBox) {
+            dirVector = currentPos.up;
+        }
 
         Vector3 newDir = userPosition - currentPos.position;
         float angle = Vector3.Angle(newDir, currentPos.up);  //calculate angle
-        if (Mathf.Abs(angle) < 90) { 
-            if (Vector3.Cross(newDir, currentPos.up).z < 0) {
+        //Debug.Log(angle);
+        //Debug.Log(Vector3.Cross(newDir, currentPos.up).z);
+        if (Mathf.Abs(angle) < 90) {
+            if (Vector3.Cross(newDir, currentPos.up).z > 0) {
                 //angle = -angle;
-                currentPos.Rotate(Vector3.forward, 0.2f);
+                currentPos.Rotate(Vector3.forward, 0.4f);
             } else {
-                currentPos.Rotate(Vector3.forward, -0.2f);
+                currentPos.Rotate(Vector3.forward, -0.4f);
             }
         }
 
-        currentPos.position += currentPos.up * speed;
+        currentPos.position += dirVector * speed;
     }
 }

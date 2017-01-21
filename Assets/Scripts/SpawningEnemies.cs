@@ -15,7 +15,7 @@ public class SpawningEnemies : MonoBehaviour {
     private GameObject[] allEnemies;  // List of all enemies
     private EnemyBaseClass[] enemiesData;
     private const int MAXENEMIESONSCENE = 1000;
-    private const float SIZEOFBOX = 10.0f;
+    private const float SIZEOFBOX = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     private float timePassed = 0.0f;
@@ -48,8 +48,8 @@ public class SpawningEnemies : MonoBehaviour {
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             enemiesData[i].nextMove(allEnemies[i].transform, speed);
             // Checking if they are at the end
-            if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) > SIZEOFBOX ||
-                Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) > SIZEOFBOX) &&
+            if ((Mathf.Abs(allEnemies[i].transform.position.x - playerPos.x) >= SIZEOFBOX ||
+                Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX) &&
                 enemiesData[i].getType() != 4) {  // if is bullet do not instantiate again
                 // Not deleting object but rather just moving it to another starting point
                 int tip = randomPick();
@@ -127,28 +127,34 @@ public class SpawningEnemies : MonoBehaviour {
                 break;
         }
 
-        Vector3 orientationOfEnemy = Vector3.RotateTowards(startPos, endPos, 0.0f, 0.0f);
+        //Vector3 orientationOfEnemy = Vector3.RotateTowards(startPos, endPos, 0.0f, 0.0f);
 
         // Spawning on scene
         GameObject result;
         EnemyBaseClass temp = new EnemyBaseClass((byte)tip, startPos, endPos);
+        Sprite imageOfEnemy = new Sprite(); 
         if (tip == 1 || tip == 4) {
             temp = new EnemyBaseClass((byte)tip, startPos, endPos);
+            imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy1");
         } else if (tip == 2) {
-            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos);  // TODO: Get user position
+            temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX);  // TODO: Get user position
+            imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy2");
         } else if (tip == 3) {
-            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, 20, Time.time);  // TODO: Get user position
+            temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX, 20, Time.time);  // TODO: Get user position
+            imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
         }
 
         if (allEnemies[index] == null) {
-            result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.Euler(orientationOfEnemy));
+            result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.identity);
             enemiesData[index] = temp;
         } else {
             result = allEnemies[index];
             result.transform.position = startPos;
+            result.transform.rotation = Quaternion.identity;
             enemiesData[index] = temp;
         }
-         
+        // Image of enemy
+        result.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
         result.transform.localScale = new Vector3(scaleOfEnemy, scaleOfEnemy, 1);  // Setting scale of star
         result.name = "Enemy" + index.ToString();
         
