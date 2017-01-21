@@ -60,15 +60,15 @@ public class EnemyCurveClass : EnemyBaseClass {
         {
             if (Vector3.Cross(newDir, currentPos.up).z < 0)
             {
-                if (angle > 0.1f)
-                    currentPos.Rotate(Vector3.forward, 0.1f);
+                if (angle > 0.2f)
+                    currentPos.Rotate(Vector3.forward, 0.2f);
                 else
                     currentPos.Rotate(Vector3.forward, angle);
             }
             else
             {
-                if (angle > 0.1f)
-                    currentPos.Rotate(Vector3.forward, -0.1f);
+                if (angle > 0.2f)
+                    currentPos.Rotate(Vector3.forward, -0.2f);
                 else
                     currentPos.Rotate(Vector3.forward, -angle);
             }

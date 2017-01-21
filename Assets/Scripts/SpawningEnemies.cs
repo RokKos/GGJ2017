@@ -61,7 +61,7 @@ public class SpawningEnemies : MonoBehaviour {
 
 	void Update () {
         // Moving enemies
-        float speed = 2.0f * Time.deltaTime;
+        float speed = Random.Range(1.5f, 2f) * Time.deltaTime;
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             enemiesData[i].nextMove(allEnemies[i].transform, speed);
             // Checking if they are at the end
