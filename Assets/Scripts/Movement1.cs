@@ -76,7 +76,7 @@ public class Movement1 : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("rayCastHit");
+                //Debug.Log("rayCastHit");
                 newPosition = hit.point;
                 allowNewPosition = false;
                 numberOfClicks++;
@@ -89,7 +89,7 @@ public class Movement1 : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Enemy")
         {
-            Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
+            //Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
             rigidBody.isKinematic = true;
             uiManager.endGame(calculateScore());
             gameRunning = false;
