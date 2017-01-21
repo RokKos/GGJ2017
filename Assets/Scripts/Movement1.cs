@@ -33,26 +33,36 @@ public class Movement1 : MonoBehaviour {
         {
             Time.timeScale = maxTimeSpeed;
             float step = playerSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
+            //transform.position = Vector3.MoveTowards(transform.position, newPosition, step);
+            //Vector3 newDir = Vector3.RotateTowards(transform.position, newPosition, step, 0.0F);
+
+
+            transform.position += transform.up * step;
+
+
+            //transform.Rotate(newDir);
+            //transform.rotation = Quaternion.LookRotation(newDir);
         }
         else {  //drugače upočasnimo čas in dovolimo novi cilj
             Time.timeScale = minTimeSpeed;
             allowNewPosition = true;
             //Debug.Log("No move");
         }
+
+        calculateAngle();
     }
 
     private void checkClick()
     {
         //preverimo klik za novo pozicijo
-        if (allowNewPosition && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //&& allowNewPosition)
         {
             //Debug.Log("klik");
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                //Debug.Log("rayCastHit");
+                Debug.Log("rayCastHit");
                 newPosition = hit.point;
                 allowNewPosition = false;
                 //transform.position = newPosition;
@@ -69,5 +79,26 @@ public class Movement1 : MonoBehaviour {
 
         }
 
+    }
+
+    void calculateAngle()
+    {
+        Vector3 newDir = newPosition - transform.position;
+        float angle = Vector3.Angle(newDir, transform.up);  //calculate angle
+
+        if (angle > 5 || angle < -5)
+        {
+            if (Vector3.Cross(newDir, transform.up).z < 0)
+            {
+                //angle = -angle;
+                transform.Rotate(Vector3.forward, 10f);
+            }
+            else
+            {
+                transform.Rotate(Vector3.forward, -10f);
+            }
+
+        }
+        //Debug.Log(angle);
     }
 }
