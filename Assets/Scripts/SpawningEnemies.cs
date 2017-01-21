@@ -17,6 +17,7 @@ public class SpawningEnemies : MonoBehaviour {
     private const int MAXENEMIESONSCENE = 1000;
     private const float SIZEOFBOX = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
+    private int enemiesDiedInWave = 0;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;
     private float timeBetwenSpawn = 0.0f;
@@ -34,6 +35,7 @@ public class SpawningEnemies : MonoBehaviour {
         spodnjaIzbira = 1;
         zgornjaIzbira = 2;
         currNumberOfEnemies = 10;
+        enemiesDiedInWave = 0;
         enemiesData = new EnemyBaseClass[MAXENEMIESONSCENE];
         allEnemies = new GameObject[MAXENEMIESONSCENE];
         for (int i = 0; i < currNumberOfEnemies; ++i) {
@@ -54,8 +56,11 @@ public class SpawningEnemies : MonoBehaviour {
                 Mathf.Abs(allEnemies[i].transform.position.y - playerPos.y) >= SIZEOFBOX) &&
                 enemiesData[i].getType() != 4) {  // if is bullet do not instantiate again
                 // Not deleting object but rather just moving it to another starting point
-                int tip = randomPick();
-                createEnemy(i, tip);
+                enemiesDiedInWave++;
+                Debug.Log("e:" + enemiesDiedInWave.ToString());
+                if (enemiesDiedInWave == currNumberOfEnemies) {
+                    nextWave();
+                }
             }
 
             // Check if they can shoot
@@ -71,7 +76,7 @@ public class SpawningEnemies : MonoBehaviour {
         }
 
         // Check if you can spawn new enemy
-        if (timeBetwenSpawn > spawnNewEnemyInSeconds) {
+        /*if (timeBetwenSpawn > spawnNewEnemyInSeconds) {
             timeBetwenSpawn = 0.0f;
             // First create enemy with that number and then add because for loop goes to one less than currNumberOfEnmies
             int tip = randomPick();
@@ -91,7 +96,7 @@ public class SpawningEnemies : MonoBehaviour {
                 spodnjaIzbira++;
                 spodnjaIzbira = Mathf.Min(3, spodnjaIzbira);
             }
-        }
+        }*/
         timeBetwenSpawn += Time.deltaTime;
         timePassed += Time.deltaTime;
 	}
@@ -150,7 +155,7 @@ public class SpawningEnemies : MonoBehaviour {
             result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.identity);
             //result.transform.rotation = Quaternion.Euler(0, 0, 90);
             rotateEnemy(result.transform);
-            result.transform.LookAt(playerPos);
+            //result.transform.LookAt(playerPos);
             enemiesData[index] = temp;
         } else {
             result = allEnemies[index];
@@ -203,8 +208,15 @@ public class SpawningEnemies : MonoBehaviour {
     private void createWaveOfEnemies (int number) {
         for (int i = 0; i < number; ++i) {
             int tip = randomPick();
-            createEnemy(currNumberOfEnemies, tip);
-            currNumberOfEnemies++;
+            createEnemy(i, tip);
+            //currNumberOfEnemies++;
         }
+    }
+
+    private void nextWave () {
+        currNumberOfEnemies++;
+        enemiesDiedInWave = 0;
+        createWaveOfEnemies(currNumberOfEnemies);
+
     }
 }

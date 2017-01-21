@@ -68,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 1729568193141668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4048556523203998}
   m_Father: {fileID: 0}
@@ -126,6 +126,8 @@ MonoBehaviour:
   playerSpeed: 2
   minTimeSpeed: 0.2
   maxTimeSpeed: 2
+  uiManager: {fileID: 0}
+  spawningEnemies: {fileID: 0}
 --- !u!198 &198576059550019766
 ParticleSystem:
   m_ObjectHideFlags: 1
