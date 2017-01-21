@@ -50,10 +50,7 @@ public class SpawningEnemies : MonoBehaviour {
             int tip = randomPick();
             createEnemy(i, tip);
         }
-        //Vector3 screenPoint2 = camera.ScreenToWorldPoint(new Vector3(0, 0, 0));
-
-        Debug.Log("ScreenPoint1: " + screenPoint1.x + " " + screenPoint1.y + " " + screenPoint1.z);
-        //Debug.Log("ScreenPoint2: " + screenPoint2.x + " " + screenPoint2.y + " " + screenPoint2.z);
+        //Debug.Log("ScreenPoint1: " + screenPoint1.x + " " + screenPoint1.y + " " + screenPoint1.z);
     }
 	
 
