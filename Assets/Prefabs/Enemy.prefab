@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4243635316503472}
   - component: {fileID: 212927507776746278}
   - component: {fileID: 60558439897949858}
+  - component: {fileID: 58065854619326414}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
@@ -81,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1090475320499700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.493465, y: 1.2299591, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4977779067780074}
@@ -102,6 +103,20 @@ Transform:
   m_Father: {fileID: 4243635316503472}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!58 &58065854619326414
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1090475320499700}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!60 &60558439897949858
 PolygonCollider2D:
   m_ObjectHideFlags: 1

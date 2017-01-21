@@ -9,7 +9,7 @@ public class StartMenu : MonoBehaviour {
 	public void onStartClicked()
     {
         Debug.Log("START");
-        SceneManager.LoadScene("TestMovement1");
+        SceneManager.LoadScene("Main");
     }
 
     public void onExitClicked()

@@ -34,7 +34,10 @@ public class SpawningEnemies : MonoBehaviour {
         Camera camera = FindObjectOfType<Camera>();
         Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
-        SIZEOFBOX_X = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
+        //SIZEOFBOX_X = screenPoint1.x;
+        //SIZEOFBOX_Y = screenPoint1.y;
+
+        SIZEOFBOX_X = Mathf.Max(screenPoint1.x, screenPoint1.y) + 0.5f;
         SIZEOFBOX_Y = SIZEOFBOX_X;
         //SIZEOFBOX_Y = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
 

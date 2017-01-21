@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour {
         audioSource = mainCamera.GetComponent<AudioSource>();
         audioSource.loop = false;
         audioSource.clip = introSound;
+        audioSource.volume = 0.1f;
         waveText.text = "";
     }
 
@@ -56,11 +57,13 @@ public class UIManager : MonoBehaviour {
 
     public IEnumerator showWaveCleared (int numberOfWave) {
         waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!!!";
+        audioSource.volume = 1f;
         audioSource.clip = waweClearedSound;
         audioSource.Play();
         for (int i = 0; i < 200; ++i) {
             yield return null;
         }
+        audioSource.volume = 0.1f;
         waveText.text = "";
         yield return null;
     }
