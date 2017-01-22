@@ -28,3 +28,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.exe
+*.rar
+*.zip
+
+#Build folders
+/Version*
