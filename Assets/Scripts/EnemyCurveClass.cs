@@ -13,6 +13,7 @@ public class EnemyCurveClass : EnemyBaseClass {
     protected Vector3 userPosition;
     protected static float sizeOfBoxX;
     protected static float sizeOfBoxY;
+    private GameObject player;
 
     // Constuructor and calling base constructor
     public EnemyCurveClass (byte _tip, Vector3 _startPos, Vector3 _endPos, float _timeStart, Vector3 _userPosition, float _sizeOfBoxX, float _sizeOfBoxY) : 
@@ -22,6 +23,7 @@ public class EnemyCurveClass : EnemyBaseClass {
         this.userPosition = _userPosition;
         sizeOfBoxX = _sizeOfBoxX;
         sizeOfBoxY = _sizeOfBoxY;
+        player = GameObject.Find("Player");
     }
 
     public override void nextMove (Transform currentPos, float speed) {
@@ -54,25 +56,21 @@ public class EnemyCurveClass : EnemyBaseClass {
             dirVector = currentPos.up;
         }*/
 
-        Vector3 newDir = userPosition - currentPos.position;
+        Vector3 newDir = player.transform.position - currentPos.position;
         float angle = Vector3.Angle(newDir, currentPos.up);  //calculate angle
+
         if (angle < 90)
         {
             if (Vector3.Cross(newDir, currentPos.up).z < 0)
             {
-                if (angle > 0.2f)
-                    currentPos.Rotate(Vector3.forward, 0.2f);
-                else
-                    currentPos.Rotate(Vector3.forward, angle);
+                    currentPos.Rotate(Vector3.forward, 0.5f);
             }
             else
             {
-                if (angle > 0.2f)
-                    currentPos.Rotate(Vector3.forward, -0.2f);
-                else
-                    currentPos.Rotate(Vector3.forward, -angle);
+                    currentPos.Rotate(Vector3.forward, -0.5f);
             }
         }
+        //Debug.Log("Curving");
 
         currentPos.position += currentPos.up * speed;
     }
