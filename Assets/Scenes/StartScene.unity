@@ -1147,6 +1147,16 @@ Prefab:
       propertyPath: m_FontData.m_FontSize
       value: 28
       objectReference: {fileID: 0}
+    - target: {fileID: 114543953595116444, guid: 830b38e06a7a1424c8a95a5b39c3ce4d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onExitClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 114769393037740660, guid: 830b38e06a7a1424c8a95a5b39c3ce4d,
+        type: 2}
+      propertyPath: m_Text
+      value: EXIT
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 830b38e06a7a1424c8a95a5b39c3ce4d, type: 2}
   m_IsPrefabParent: 0
