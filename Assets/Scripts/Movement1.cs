@@ -153,11 +153,11 @@ public class Movement1 : MonoBehaviour {
     {
         audioSource.loop = false;
         uiManager.endGame(spawningEnemies.calculateScore());
-        Debug.Log("Time: " + ((int)spawningEnemies.timePassed * 3).ToString());
-        Debug.Log("Waves: " + spawningEnemies.calculateScore());
-        Debug.Log("Near: " + nearBonus);
-        Debug.Log("Distance: " + (int)(totalDistance - lastDistance));
-        Debug.Log("Number of Clicks: " + numberOfClicks);
+        //Debug.Log("Time: " + ((int)spawningEnemies.timePassed * 3).ToString());
+        //Debug.Log("Waves: " + spawningEnemies.calculateScore());
+        //Debug.Log("Near: " + nearBonus);
+        //Debug.Log("Distance: " + (int)(totalDistance - lastDistance));
+        //Debug.Log("Number of Clicks: " + numberOfClicks);
 
         gameRunning = false;
         nearBonus = 0;

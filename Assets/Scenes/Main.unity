@@ -796,6 +796,11 @@ Prefab:
       propertyPath: highScoreText
       value: 
       objectReference: {fileID: 300568545}
+    - target: {fileID: 114637060638316930, guid: 0c7fb39aaa16a4f4da72f8e16396014b,
+        type: 2}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 638032832}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c7fb39aaa16a4f4da72f8e16396014b, type: 2}
   m_IsPrefabParent: 0

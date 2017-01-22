@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public IEnumerator showNearMiss () {
-        waveText.text = "Near MISS";
+        waveText.text = "Good DODGE";
         audioSource.volume = 0.2f;
         audioSource.clip = nearMissSound;
         audioSource.Play();

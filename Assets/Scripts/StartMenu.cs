@@ -15,13 +15,13 @@ public class StartMenu : MonoBehaviour {
 
     public void onStartClicked()
     {
-        Debug.Log("START");
+        //Debug.Log("START");
         SceneManager.LoadScene("Main");
     }
 
     public void onExitClicked()
     {
-        Debug.Log("EXIT");
+        //Debug.Log("EXIT");
         Application.Quit();
     }
 
