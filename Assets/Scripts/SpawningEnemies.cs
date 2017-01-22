@@ -225,16 +225,25 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     private int randomPick () {
+
         int radomNum = Random.Range(1, 101);
-        if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies)))
-        {
+        if (radomNum < 95 - waweNumber)
             return 1;
-        }
-        else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3)))
-        {
+        else if (radomNum < 100 - waweNumber)
             return 2;
-        }
+
         return 3;
+
+        //int radomNum = Random.Range(1, 101);
+        //if (radomNum < 100 - (waweNumber * Mathf.Sqrt(currNumberOfEnemies)))
+        //{
+        //    return 1;
+        //}
+        //else if (radomNum < 100 - (waweNumber * Mathf.Pow(currNumberOfEnemies, 1.0f / 3)))
+        //{
+        //    return 2;
+        //}
+        //return 3;
     }
 
     private void createWaveOfEnemies (int number) {
