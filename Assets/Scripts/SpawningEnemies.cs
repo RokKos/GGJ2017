@@ -279,6 +279,6 @@ public class SpawningEnemies : MonoBehaviour {
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             s += deadEnemies[i].ToString() + " ";
         }
-        Debug.Log(s);
+        //Debug.Log(s);
     }
 }
