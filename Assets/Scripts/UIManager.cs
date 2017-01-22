@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
     [SerializeField] Text passedTimeText;
     [SerializeField] Text scoreEndText;
+    [SerializeField] Text highScoreText;
     [SerializeField] Text scoreRealTimeText;
     [SerializeField] Text waveText;
     [SerializeField] GameObject HUD;
@@ -37,7 +38,8 @@ public class UIManager : MonoBehaviour {
         waveText.text = "";
 
         highscore = PlayerPrefs.GetInt("HighScore");
-        Debug.Log("Highscore: " + highscore);
+        highScoreText.text = "High Score: " + highscore.ToString();
+        //Debug.Log("Highscore: " + highscore);
     }
 
     private void Update () {
@@ -50,7 +52,8 @@ public class UIManager : MonoBehaviour {
         {
             highscore = score;
             PlayerPrefs.SetInt("HighScore", score);
-            Debug.Log("New Highscore: " + highscore);
+            highScoreText.text = "High Score: " + highscore.ToString();
+            //Debug.Log("New Highscore: " + highscore);
         }
 
         scoreEndText.text = "Your Score: " + score.ToString();
