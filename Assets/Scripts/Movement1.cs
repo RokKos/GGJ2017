@@ -7,15 +7,15 @@ public class Movement1 : MonoBehaviour {
     public float playerSpeed;
     public float minTimeSpeed = 0.5f;
     public float maxTimeSpeed = 2f;
-    private int nearBonus;
+    public int nearBonus;
     private Vector3 newPosition;
     private bool allowNewPosition;
     private Rigidbody2D rigidBody;
-    private float lastDistance = 0.0f;
-    private float totalDistance = 0.0f;
+    public float lastDistance = 0.0f;
+    public float totalDistance = 0.0f;
     private float SIZEOFBOX_X;
     private float SIZEOFBOX_Y;
-    private int numberOfClicks = 0; 
+    public int numberOfClicks = 0; 
     private bool gameRunning = true;
     private AudioSource audioSource;
     [SerializeField] AudioClip speedUpMovement;
@@ -152,7 +152,13 @@ public class Movement1 : MonoBehaviour {
     private void reset()
     {
         audioSource.loop = false;
-        uiManager.endGame(nearBonus + spawningEnemies.calculateScore() + (int)((totalDistance - lastDistance) / (numberOfClicks+1)));
+        uiManager.endGame(spawningEnemies.calculateScore());
+        Debug.Log("Time: " + ((int)spawningEnemies.timePassed * 3).ToString());
+        Debug.Log("Waves: " + spawningEnemies.calculateScore());
+        Debug.Log("Near: " + nearBonus);
+        Debug.Log("Distance: " + (int)(totalDistance - lastDistance));
+        Debug.Log("Number of Clicks: " + numberOfClicks);
+
         gameRunning = false;
         nearBonus = 0;
         GameObject[] lasers;
