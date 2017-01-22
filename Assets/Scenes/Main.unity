@@ -717,6 +717,11 @@ Prefab:
       propertyPath: nearMissSound
       value: 
       objectReference: {fileID: 8300000, guid: 1c8a6a41f67e99641b0a3d7bf1b7ad58, type: 3}
+    - target: {fileID: 114637060638316930, guid: 0c7fb39aaa16a4f4da72f8e16396014b,
+        type: 2}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 638032832}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c7fb39aaa16a4f4da72f8e16396014b, type: 2}
   m_IsPrefabParent: 0
