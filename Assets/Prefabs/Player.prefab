@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 82600314111774776}
   m_Layer: 11
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,6 +215,10 @@ MonoBehaviour:
   playerSpeed: 2
   minTimeSpeed: 0.2
   maxTimeSpeed: 2
+  nearBonus: 0
+  lastDistance: 0
+  totalDistance: 0
+  numberOfClicks: 0
   speedUpMovement: {fileID: 8300000, guid: 62d3cfb00aed00f4eb6422949f2bbeae, type: 3}
   slowMovement: {fileID: 8300000, guid: 0d77ca80fb9b8144d8741e92dec4c5b7, type: 3}
   deathSound: {fileID: 8300000, guid: 0f32364e2088bb649aacccc42decfbde, type: 3}
@@ -275,12 +279,12 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -945585852
+  randomSeed: -179873139
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -319,7 +323,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 0.5
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
