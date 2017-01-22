@@ -15,11 +15,11 @@ public class SpawningEnemies : MonoBehaviour {
     [SerializeField] UIManager uiManager;
     private GameObject[] allEnemies;  // List of all enemies
     private EnemyBaseClass[] enemiesData;
+    private bool[] deadEnemies;  // List of all dead enemies
     private const int MAXENEMIESONSCENE = 1000;
     private float SIZEOFBOX_X = 7.0f;
     private float SIZEOFBOX_Y = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
-    private int enemiesDiedInWave = 0;
     private int waweNumber = 1;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;
@@ -47,7 +47,7 @@ public class SpawningEnemies : MonoBehaviour {
         gameScore = 0;
         playerPos = new Vector3(0, 0, 0);
         currNumberOfEnemies = 10;
-        enemiesDiedInWave = 0;
+        deadEnemies = new bool[currNumberOfEnemies];  // Default value false
         enemiesData = new EnemyBaseClass[MAXENEMIESONSCENE];
         allEnemies = new GameObject[MAXENEMIESONSCENE];
         for (int i = 0; i < currNumberOfEnemies; ++i) {
@@ -70,9 +70,10 @@ public class SpawningEnemies : MonoBehaviour {
                 enemiesData[i].getType() != 4 && // if is bullet do not instantiate again
                 timePassed > 2.0f) {
                 // Not deleting object but rather just moving it to another starting point
-                //Debug.Log("Destroyed at  x: " + allEnemies[i].transform.position.x + "    y :" + allEnemies[i].transform.position.y);
-                enemiesDiedInWave++;
-                if (enemiesDiedInWave == currNumberOfEnemies) {
+               
+                deadEnemies[i] = true;
+                printAllDead();
+                if (checkIfAllDead()) {
                     nextWave();
                     
                 }
@@ -248,7 +249,7 @@ public class SpawningEnemies : MonoBehaviour {
 
     private void nextWave () {
         currNumberOfEnemies += 2;
-        enemiesDiedInWave = 0;
+        deadEnemies = new bool[currNumberOfEnemies];
         createWaveOfEnemies(currNumberOfEnemies);
         uiManager.updateScoreText(calculateScore());
 
@@ -264,5 +265,20 @@ public class SpawningEnemies : MonoBehaviour {
         return gameScore;
     }
 
-    
+    private bool checkIfAllDead () {
+        for (int i = 0; i < currNumberOfEnemies; ++i) {
+            if (!deadEnemies[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void printAllDead () {
+        string s = "";
+        for (int i = 0; i < currNumberOfEnemies; ++i) {
+            s += deadEnemies[i].ToString() + " ";
+        }
+        Debug.Log(s);
+    }
 }
