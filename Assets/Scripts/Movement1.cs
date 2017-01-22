@@ -45,7 +45,7 @@ public class Movement1 : MonoBehaviour {
 
         SIZEOFBOX_X = screenPoint1.x + 0.5f;
         SIZEOFBOX_Y = screenPoint1.y + 0.5f;
-       
+
     }
 
     // Update is called once per frame

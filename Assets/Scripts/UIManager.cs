@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] AudioClip waweClearedSound;
     [SerializeField] AudioClip nearMissSound;
     private AudioSource audioSource;
+    private int highscore;
 
     private void Start () {
         passedTimeText.text = "Time: " + 0;
@@ -34,6 +35,9 @@ public class UIManager : MonoBehaviour {
         audioSource.clip = introSound;
         audioSource.volume = 0.1f;
         waveText.text = "";
+
+        highscore = PlayerPrefs.GetInt("HighScore");
+        Debug.Log("Highscore: " + highscore);
     }
 
     private void Update () {
@@ -41,6 +45,14 @@ public class UIManager : MonoBehaviour {
     }
 
     public void endGame (int score) {
+        
+        if (score > highscore)
+        {
+            highscore = score;
+            PlayerPrefs.SetInt("HighScore", score);
+            Debug.Log("New Highscore: " + highscore);
+        }
+
         scoreEndText.text = "Your Score: " + score.ToString();
         HUD.SetActive(false);
         endGameMenu.SetActive(true);

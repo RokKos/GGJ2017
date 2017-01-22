@@ -119,7 +119,7 @@ public class SpawningEnemies : MonoBehaviour {
 
     private void createEnemy (int index, int tip) {
         // Seeting of object
-        float scaleOfEnemy = 1.0f;
+        float scaleOfEnemy = 2f;
         int whichSite = Random.Range(1,5);
 
         Vector3 startPos;
@@ -279,6 +279,6 @@ public class SpawningEnemies : MonoBehaviour {
         for (int i = 0; i < currNumberOfEnemies; ++i) {
             s += deadEnemies[i].ToString() + " ";
         }
-        Debug.Log(s);
+        //Debug.Log(s);
     }
 }
