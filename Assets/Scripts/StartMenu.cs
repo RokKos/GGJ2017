@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour {
 
-	
-	public void onStartClicked()
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject credistsMenu;
+
+    private void Start () {
+        // Set Main Page active
+        onBackClicked();
+    }
+
+    public void onStartClicked()
     {
         Debug.Log("START");
         SceneManager.LoadScene("Main");
@@ -16,5 +23,15 @@ public class StartMenu : MonoBehaviour {
     {
         Debug.Log("EXIT");
         Application.Quit();
+    }
+
+    public void onCredistsClicked () {
+        mainMenu.SetActive(false);
+        credistsMenu.SetActive(true);
+    }
+
+    public void onBackClicked () {
+        mainMenu.SetActive(true);
+        credistsMenu.SetActive(false);
     }
 }
