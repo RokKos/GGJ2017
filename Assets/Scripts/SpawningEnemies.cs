@@ -13,6 +13,7 @@ public class SpawningEnemies : MonoBehaviour {
     [SerializeField] GameObject enemyPrefab;  // GameObject for enemie
     [SerializeField] GameObject bulletPrefab;  // GameObject for enemie
     [SerializeField] UIManager uiManager;
+    [SerializeField] Movement1 movement;
     private GameObject[] allEnemies;  // List of all enemies
     private EnemyBaseClass[] enemiesData;
     private bool[] deadEnemies;  // List of all dead enemies
@@ -23,7 +24,6 @@ public class SpawningEnemies : MonoBehaviour {
     private int waweNumber = 1;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;
-    private float timeBetwenSpawn = 0.0f;
     //private const int BOUND = 20;
     private int gameScore = 0;
     private Vector3 playerPos;
@@ -42,7 +42,6 @@ public class SpawningEnemies : MonoBehaviour {
         //SIZEOFBOX_Y = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
 
         timePassed = 0.0f;
-        timeBetwenSpawn = 0.0f;
         waweNumber = 1;
         gameScore = 0;
         playerPos = new Vector3(0, 0, 0);
@@ -72,7 +71,7 @@ public class SpawningEnemies : MonoBehaviour {
                 // Not deleting object but rather just moving it to another starting point
                
                 deadEnemies[i] = true;
-                printAllDead();
+                //printAllDead();
                 if (checkIfAllDead()) {
                     nextWave();
                     
@@ -115,7 +114,6 @@ public class SpawningEnemies : MonoBehaviour {
                 spodnjaIzbira = Mathf.Min(3, spodnjaIzbira);
             }
         }*/
-        timeBetwenSpawn += Time.deltaTime;
         timePassed += Time.deltaTime;
 	}
 
@@ -260,7 +258,9 @@ public class SpawningEnemies : MonoBehaviour {
     public int calculateScore () {
         int result = 0;
 
-        result = waweNumber *  currNumberOfEnemies;
+        result = waweNumber * currNumberOfEnemies + movement.nearBonus + (int)(movement.totalDistance - movement.lastDistance) -
+            movement.numberOfClicks + (int)(timePassed) * 3;
+
         gameScore += result;
         return gameScore;
     }
