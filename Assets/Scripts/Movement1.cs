@@ -50,7 +50,6 @@ public class Movement1 : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Debug.Log(gameRunning);
         if (gameRunning) {
             checkClick();
             moveToPosition();
