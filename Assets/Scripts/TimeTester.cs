@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeTester : MonoBehaviour {
 
-    bool moveUp = true;
+    //bool moveUp = true;
     Vector3 newPosition;
 
 	// Use this for initialization

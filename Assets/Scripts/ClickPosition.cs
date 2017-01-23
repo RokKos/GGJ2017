@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ClickPosition : MonoBehaviour {
 
-    SpriteRenderer renderer;
+    private SpriteRenderer renderer;
 
 	void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        renderer = GetComponentInChildren<SpriteRenderer>();
     }
 
 	void Update () {
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("klik");
+            //Debug.Log("klik");
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
@@ -27,13 +27,13 @@ public class ClickPosition : MonoBehaviour {
 
         if (Time.timeScale == 0.2f)
         {
-            Debug.Log("true " + Time.timeScale);
+            //Debug.Log("true " + Time.timeScale);
             //gameObject.SetActive(false);
             renderer.enabled = false;
         }
         else
         {
-            Debug.Log("false " + Time.timeScale);
+            //Debug.Log("false " + Time.timeScale);
             //gameObject.SetActive(true);
             renderer.enabled = true;
         }

@@ -10,13 +10,13 @@ public class Movement1 : MonoBehaviour {
     public int nearBonus;
     private Vector3 newPosition;
     private bool allowNewPosition;
-    private Rigidbody2D rigidBody;
+    //private Rigidbody2D rigidBody;
     public float lastDistance = 0.0f;
     public float totalDistance = 0.0f;
     private float SIZEOFBOX_X;
     private float SIZEOFBOX_Y;
     public int numberOfClicks = 0; 
-    private bool gameRunning = true;
+    public bool gameRunning = true;
     private AudioSource audioSource;
     [SerializeField] AudioClip speedUpMovement;
     [SerializeField] AudioClip slowMovement;
@@ -35,7 +35,7 @@ public class Movement1 : MonoBehaviour {
         allowNewPosition = true;
         gameRunning = true;
         
-        rigidBody = GetComponent<Rigidbody2D>();
+        //rigidBody = GetComponent<Rigidbody2D>();
         audioSource =  transform.GetComponent<AudioSource>();
         audioSource.volume = 0.1f;
         audioSource.loop = false;
@@ -50,6 +50,7 @@ public class Movement1 : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        Debug.Log(gameRunning);
         if (gameRunning) {
             checkClick();
             moveToPosition();
