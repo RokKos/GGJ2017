@@ -131,7 +131,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.12
+  m_Radius: 0.08
 --- !u!60 &60558439897949858
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -236,7 +236,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1408061088
+  randomSeed: 1108924905
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2898,8 +2898,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c2e6c064b817bb840bd64249e01f6598, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: c79c51649919475469a589c0f9f1b01b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

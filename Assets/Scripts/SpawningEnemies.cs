@@ -34,12 +34,12 @@ public class SpawningEnemies : MonoBehaviour {
         Camera camera = FindObjectOfType<Camera>();
         Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
-        //SIZEOFBOX_X = screenPoint1.x;
-        //SIZEOFBOX_Y = screenPoint1.y;
+        SIZEOFBOX_X = screenPoint1.x + 1;
+        SIZEOFBOX_Y = screenPoint1.y + 1;
 
-        SIZEOFBOX_X = Mathf.Max(screenPoint1.x, screenPoint1.y) + 0.5f;
-        SIZEOFBOX_Y = SIZEOFBOX_X;
-        //SIZEOFBOX_Y = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
+        //SIZEOFBOX_X = Mathf.Max(screenPoint1.x, screenPoint1.y) + 0.5f;
+        //SIZEOFBOX_Y = SIZEOFBOX_X;
+        ////SIZEOFBOX_Y = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
 
         timePassed = 0.0f;
         waweNumber = 1;
@@ -153,24 +153,30 @@ public class SpawningEnemies : MonoBehaviour {
         //Vector3 orientationOfEnemy = Vector3.RotateTowards(startPos, endPos, 0.0f, 0.0f);
 
         // Spawning on scene
+        float colliderSize = 1f;
         GameObject result;
         EnemyBaseClass temp = new EnemyBaseClass((byte)tip, startPos, endPos);
         Sprite imageOfEnemy = new Sprite(); 
         if (tip == 1 || tip == 4) {
             temp = new EnemyBaseClass((byte)tip, startPos, endPos);
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy1");
+            colliderSize = 0.08f;
+
         } else if (tip == 2) {
             temp = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX_X, SIZEOFBOX_Y);  // TODO: Get user position
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy2");
+            colliderSize = 0.13f;
+
         } else if (tip == 3) {
             temp = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, playerPos, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));  // TODO: Get user position
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
+            colliderSize = 0.14f;
         }
 
         if (allEnemies[index] == null) {
             result = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.identity);
             //result.transform.rotation = Quaternion.Euler(0, 0, 90);
-            rotateEnemy(result.transform);
+            rotateEnemy(result.transform, endPos);
             //result.transform.LookAt(playerPos);
             enemiesData[index] = temp;
         } else {
@@ -179,7 +185,7 @@ public class SpawningEnemies : MonoBehaviour {
             trail1.SetActive(false);
             result.transform.position = startPos;
             trail1.SetActive(true);
-            rotateEnemy(result.transform);
+            rotateEnemy(result.transform, endPos);
             //result.transform.rotation = Quaternion.identity;
             //result.transform.rotation = Quaternion.Euler(0, 0, 90);
             //result.transform.LookAt(playerPos);
@@ -187,6 +193,7 @@ public class SpawningEnemies : MonoBehaviour {
         }
         // Image of enemy
         result.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
+        result.GetComponent<CircleCollider2D>().radius = colliderSize;
         result.transform.localScale = new Vector3(scaleOfEnemy, scaleOfEnemy, 1);  // Setting scale of star
         result.name = "Enemy" + index.ToString();
 
@@ -198,21 +205,31 @@ public class SpawningEnemies : MonoBehaviour {
         allEnemies[index] = result;
     }
 
-    private void rotateEnemy(Transform enemy)
+    private void rotateEnemy(Transform enemy, Vector3 endPosition)
     {
+        Vector3 newDir = endPosition - enemy.transform.position;
+        float angle = Vector3.Angle(newDir, transform.up); 
+        
+        if (Vector3.Cross(newDir, transform.up).z < 0)        
+            transform.Rotate(Vector3.forward, angle);
+        else
+            transform.Rotate(Vector3.forward, -angle);
+
+
+
         //Debug.Log("x: " + enemy.position.x + "  y: " + enemy.position.y + "  z: " + enemy.position.z);
 
-        if (enemy.position.x == SIZEOFBOX_X)
-            enemy.rotation = Quaternion.Euler(0, 0, 90);
+        //if (enemy.position.x == SIZEOFBOX_X)
+        //    enemy.rotation = Quaternion.Euler(0, 0, 90);
 
-        if (enemy.position.x == -SIZEOFBOX_X)
-            enemy.rotation = Quaternion.Euler(0, 0, -90);
+        //if (enemy.position.x == -SIZEOFBOX_X)
+        //    enemy.rotation = Quaternion.Euler(0, 0, -90);
 
-        if (enemy.position.y == SIZEOFBOX_X)
-            enemy.rotation = Quaternion.Euler(0, 0, 180);
+        //if (enemy.position.y == SIZEOFBOX_X)
+        //    enemy.rotation = Quaternion.Euler(0, 0, 180);
 
-        if (enemy.position.y == -SIZEOFBOX_X)
-            enemy.rotation = Quaternion.Euler(0, 0, 0);
+        //if (enemy.position.y == -SIZEOFBOX_X)
+        //    enemy.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private int firstEmptyPosition () {
