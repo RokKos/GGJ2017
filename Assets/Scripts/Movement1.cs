@@ -17,6 +17,7 @@ public class Movement1 : MonoBehaviour {
     private float SIZEOFBOX_Y;
     public int numberOfClicks = 0; 
     public bool gameRunning = true;
+    public bool TutorialMode = false;
     private AudioSource audioSource;
     [SerializeField] AudioClip speedUpMovement;
     [SerializeField] AudioClip slowMovement;
@@ -125,8 +126,7 @@ public class Movement1 : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Enemy")
-        {
+        if ((coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Laser") && !TutorialMode) {
             audioSource.volume = 0.1f;
             audioSource.loop = false;
             audioSource.clip = deathSound;
@@ -135,6 +135,19 @@ public class Movement1 : MonoBehaviour {
             //Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
             //rigidBody.isKinematic = true;
             reset();
+        } else if ((coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Laser") && TutorialMode) {  // If player fails show him instruction again dont reset game
+
+            GameObject trail1 = transform.FindChild("Trail1").gameObject;
+            trail1.SetActive(false);
+            transform.position = new Vector3(0, 0, 0);
+            trail1.SetActive(true);
+
+            Tutorial tutorial = (Tutorial)FindObjectOfType(typeof(Tutorial));
+
+            DestroyLasers();
+            newPosition = new Vector3(0, 0, 0);
+            //tutorial.stageOfTutorial--;
+            tutorial.showInstrucitons();
         }
     }
 
@@ -161,14 +174,7 @@ public class Movement1 : MonoBehaviour {
 
         gameRunning = false;
         nearBonus = 0;
-        GameObject[] lasers;
-
-        lasers = GameObject.FindGameObjectsWithTag("Laser");
-
-        foreach (GameObject laser in lasers)
-        {
-            Destroy(laser);
-        }
+        DestroyLasers();
     }
 
     void calculateAngle()
@@ -196,6 +202,16 @@ public class Movement1 : MonoBehaviour {
 
         }
         //Debug.Log(angle);
+    }
+
+    private void DestroyLasers () {
+        GameObject[] lasers;
+
+        lasers = GameObject.FindGameObjectsWithTag("Laser");
+
+        foreach (GameObject laser in lasers) {
+            Destroy(laser);
+        }
     }
 
 }

@@ -91,6 +91,11 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &22161283 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1532639249387514, guid: 2be6f08bfef946c45ab431d70eb8507a,
+    type: 2}
+  m_PrefabInternal: {fileID: 923982890}
 --- !u!1 &99336638
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +617,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2019929001}
   m_Script: {fileID: 11500000, guid: b1e0c3060751bb84ba588f7a42869f17, type: 3}
+--- !u!1 &652801418 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1532639249387514, guid: 2be6f08bfef946c45ab431d70eb8507a,
+    type: 2}
+  m_PrefabInternal: {fileID: 905065951}
 --- !u!4 &704121666 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4917214188284600, guid: 72c46932a7c52364abbdfd7f491ee9fd,
@@ -1202,6 +1212,16 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1058596238}
+--- !u!1 &1142878475 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1532639249387514, guid: 2be6f08bfef946c45ab431d70eb8507a,
+    type: 2}
+  m_PrefabInternal: {fileID: 929108814}
+--- !u!1 &1193789856 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1532639249387514, guid: 2be6f08bfef946c45ab431d70eb8507a,
+    type: 2}
+  m_PrefabInternal: {fileID: 924501305}
 --- !u!224 &1207748889 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224704647478221676, guid: 830b38e06a7a1424c8a95a5b39c3ce4d,
@@ -1469,6 +1489,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 20586763264431458, guid: dea860400c4e6134d903570d1b215c89,
+        type: 2}
+      propertyPath: m_ClearFlags
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dea860400c4e6134d903570d1b215c89, type: 2}
   m_IsPrefabParent: 0
@@ -1573,8 +1598,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialText: {fileID: 241763482}
   movement: {fileID: 638032832}
-  checkpoints: []
+  checkpoints:
+  - {fileID: 652801418}
+  - {fileID: 1142878475}
+  - {fileID: 1193789856}
+  - {fileID: 22161283}
   stageOfTutorial: 0
+  enemyPrefab: {fileID: 1090475320499700, guid: 543c4a116ea263440bac218b7cacd8f8,
+    type: 2}
 --- !u!1 &1514001377
 GameObject:
   m_ObjectHideFlags: 0

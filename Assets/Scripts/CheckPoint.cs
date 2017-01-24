@@ -20,7 +20,10 @@ public class CheckPoint : MonoBehaviour {
         Debug.Log("here");
         Debug.Log(tutorial.stageOfTutorial);
         tutorial.checkpoints[tutorial.stageOfTutorial-1].SetActive(false);
-        tutorial.checkpoints[tutorial.stageOfTutorial % tutorial.checkpoints.Length].SetActive(true);
+        if (tutorial.stageOfTutorial < tutorial.checkpoints.Length) {
+            tutorial.checkpoints[tutorial.stageOfTutorial].SetActive(true);
+        }
+        
         tutorial.stageOfTutorial++;
         tutorial.showInstrucitons();
     }
