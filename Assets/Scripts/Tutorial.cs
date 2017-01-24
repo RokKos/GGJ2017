@@ -43,7 +43,7 @@ public class Tutorial : MonoBehaviour {
     }
 
     private void Update () {
-        Debug.Log(stageOfTutorial);
+        
 
         if (stageOfTutorial == -1) {
             //StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty.", 1));
@@ -51,7 +51,7 @@ public class Tutorial : MonoBehaviour {
         }
 
         if (stageOfTutorial == 0) {
-            StartCoroutine(showTextToForDuration("Click to pinpoint location where you want to go.", 1));
+            StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty. Click to pinpoint location where you want to go.", 1));
             stageOfTutorial++;
             checkpoints[0].SetActive(true);
         }
@@ -65,7 +65,7 @@ public class Tutorial : MonoBehaviour {
                 Mathf.Abs(tutorialEnemy.transform.position.y) >= Mathf.Abs(tutorialEnemyData.getEndPos().y) ||  // for enemies type 1
                (Mathf.Abs(tutorialEnemy.transform.position.x - center.x) >= (2 * SIZEOFBOX_Y + 1.0f) ||
                Mathf.Abs(tutorialEnemy.transform.position.y - center.y) >= (2 * SIZEOFBOX_Y + 1.0f)) ) { //  fro enemies typ 2 and 3
-                Debug.Log("Here");
+                
                 stageOfTutorial++;
 
                 showInstrucitons();

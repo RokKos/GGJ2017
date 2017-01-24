@@ -17,8 +17,6 @@ public class CheckPoint : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D (Collider2D other) {
-        Debug.Log("here");
-        Debug.Log(tutorial.stageOfTutorial);
         tutorial.checkpoints[tutorial.stageOfTutorial-1].SetActive(false);
         if (tutorial.stageOfTutorial < tutorial.checkpoints.Length) {
             tutorial.checkpoints[tutorial.stageOfTutorial].SetActive(true);

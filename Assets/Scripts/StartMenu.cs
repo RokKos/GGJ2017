@@ -34,4 +34,9 @@ public class StartMenu : MonoBehaviour {
         mainMenu.SetActive(true);
         credistsMenu.SetActive(false);
     }
+
+    public void onTutorialClicked () {
+        //Debug.Log("START");
+        SceneManager.LoadScene("MainTutorial");
+    }
 }
