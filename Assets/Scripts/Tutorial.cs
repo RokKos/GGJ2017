@@ -46,7 +46,7 @@ public class Tutorial : MonoBehaviour {
         Debug.Log(stageOfTutorial);
 
         if (stageOfTutorial == -1) {
-            StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty.", 1));
+            //StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty.", 1));
             stageOfTutorial++;
         }
 
@@ -85,10 +85,28 @@ public class Tutorial : MonoBehaviour {
         movement.gameRunning = false;
         Time.timeScale = 0.0f;
         tutorialText.SetActive(true);
-        tutorialText.GetComponentInChildren<Text>().text = text;
-        for (int i = 0; i < timeToFrames; ++i) {
-            yield return null;
+        // Write out text
+        string[] words = text.Split(' ');
+        int pos = 0;
+        const int maxCharsInLine = 35;
+        tutorialText.GetComponentInChildren<Text>().text = " ";
+        foreach (string word in words) {
+            int currLengt = word.Length + 1;
+            if (currLengt + pos > maxCharsInLine) {
+                pos = word.Length;
+                tutorialText.GetComponentInChildren<Text>().text = word + " ";
+            } else {
+                pos += currLengt;
+                tutorialText.GetComponentInChildren<Text>().text += word + " ";
+            }
+
+            for (int i = 0; i < currLengt * 6; ++i) {
+                yield return null;
+            }
+
+
         }
+        // End of writing
         tutorialText.SetActive(false);
         movement.gameRunning = true;
 
