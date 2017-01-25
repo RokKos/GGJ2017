@@ -13,7 +13,9 @@ public class Tutorial : MonoBehaviour {
 
     private const int FramesPerSecond = 60;  // TODO: Get real frames per second
     [SerializeField] GameObject tutorialText;
+    [SerializeField] GameObject nextText;
     [SerializeField] Movement1 movement;
+    [SerializeField] GameObject clickPosition;
     public GameObject[] checkpoints;
     public int stageOfTutorial = -1;
     private EnemyBaseClass tutorialEnemyData;
@@ -51,7 +53,7 @@ public class Tutorial : MonoBehaviour {
         }
 
         if (stageOfTutorial == 0) {
-            StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty. Click to pinpoint location where you want to go.", 1));
+            StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty. TAP to pinpoint location where you want to go.", 1));
             stageOfTutorial++;
             checkpoints[0].SetActive(true);
         }
@@ -85,14 +87,23 @@ public class Tutorial : MonoBehaviour {
         movement.gameRunning = false;
         Time.timeScale = 0.0f;
         tutorialText.SetActive(true);
+        clickPosition.SetActive(false);
         // Write out text
         string[] words = text.Split(' ');
         int pos = 0;
         const int maxCharsInLine = 35;
         tutorialText.GetComponentInChildren<Text>().text = " ";
+        nextText.SetActive(false);
+
         foreach (string word in words) {
             int currLengt = word.Length + 1;
             if (currLengt + pos > maxCharsInLine) {
+                nextText.SetActive(true);
+                // While player doest tap on screen show message
+                while (!Input.GetMouseButtonDown(0)) {
+                    yield return null;
+                }
+                nextText.SetActive(false);
                 pos = word.Length;
                 tutorialText.GetComponentInChildren<Text>().text = word + " ";
             } else {
@@ -109,7 +120,7 @@ public class Tutorial : MonoBehaviour {
         // End of writing
         tutorialText.SetActive(false);
         movement.gameRunning = true;
-
+        clickPosition.SetActive(true);
         // If its end of tutorial
         if (stageOfTutorial == 8) {
             SceneManager.LoadScene("StartScene");
