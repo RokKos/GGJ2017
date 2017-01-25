@@ -104,19 +104,35 @@ public class Tutorial : MonoBehaviour {
                 }
                 nextText.SetActive(false);
                 pos = word.Length;
-                tutorialText.GetComponentInChildren<Text>().text = word + " ";
+                //tutorialText.GetComponentInChildren<Text>().text = word + " ";
+                tutorialText.GetComponentInChildren<Text>().text ="";
             } else {
                 pos += currLengt;
-                tutorialText.GetComponentInChildren<Text>().text += word + " ";
+                //tutorialText.GetComponentInChildren<Text>().text += word + " ";
             }
 
-            for (int i = 0; i < currLengt * 6; ++i) {
-                yield return null;
+            // Smoth writing
+            for (int i = 0; i < currLengt - 1; ++i) {
+                tutorialText.GetComponentInChildren<Text>().text += word[i];
+                for (int j = 0; j < 6; ++j) {
+                    yield return null;
+                }
+                
             }
+            tutorialText.GetComponentInChildren<Text>().text += " ";
+
 
 
         }
         // End of writing
+        // Before end give player option to read
+        nextText.SetActive(true);
+        // While player doest tap on screen show message
+        while (!Input.GetMouseButtonDown(0)) {
+            yield return null;
+        }
+        nextText.SetActive(false);
+
         tutorialText.SetActive(false);
         movement.gameRunning = true;
         clickPosition.SetActive(true);
