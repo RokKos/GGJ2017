@@ -21,7 +21,7 @@ public class SpawningEnemies : MonoBehaviour {
     private float SIZEOFBOX_X = 7.0f;
     private float SIZEOFBOX_Y = 7.0f;
     private int currNumberOfEnemies = 10;  // Current number enemies in scene
-    private int waweNumber = 1;
+    private int waveNumber = 1;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;
     //private const int BOUND = 20;
@@ -42,7 +42,7 @@ public class SpawningEnemies : MonoBehaviour {
         ////SIZEOFBOX_Y = Mathf.Max(screenPoint1.x, screenPoint1.y) + 1;
 
         timePassed = 0.0f;
-        waweNumber = 1;
+        waveNumber = 1;
         gameScore = 0;
         playerPos = new Vector3(0, 0, 0);
         currNumberOfEnemies = 10;
@@ -244,9 +244,9 @@ public class SpawningEnemies : MonoBehaviour {
     private int randomPick () {
 
         int radomNum = Random.Range(1, 101);
-        if (radomNum < 95 - waweNumber)
+        if (radomNum < 95 - waveNumber)
             return 1;
-        else if (radomNum < 100 - waweNumber)
+        else if (radomNum < 100 - waveNumber)
             return 2;
 
         return 3;
@@ -278,15 +278,15 @@ public class SpawningEnemies : MonoBehaviour {
         uiManager.updateScoreText(calculateScore());
         movement.totalDistance = 0.0f;
         movement.lastDistance = 0.0f;
-        StartCoroutine(uiManager.showWaveCleared(waweNumber));
-        waweNumber++;
+        StartCoroutine(uiManager.showWaveCleared(waveNumber));
+        waveNumber++;
     }
 
     public int calculateScore () {
         int result = 0;
 
-        int modifiedDistance = (int)(movement.totalDistance - movement.lastDistance) * waweNumber;
-        result = waweNumber * currNumberOfEnemies + movement.nearBonus + modifiedDistance -
+        int modifiedDistance = (int)(movement.totalDistance - movement.lastDistance) * waveNumber;
+        result = waveNumber * currNumberOfEnemies + movement.nearBonus + modifiedDistance -
                    movement.numberOfClicks + (int)(timePassed) * 3;
 
         gameScore += result;

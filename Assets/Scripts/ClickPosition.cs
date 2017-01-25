@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickPosition : MonoBehaviour {
-
+public class ClickPosition : MonoBehaviour
+{
     private SpriteRenderer renderer;
+    private bool allowNewPosition;
 
-	void Start()
+
+    void Start()
     {
         renderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-	void Update () {
+    void Update()
+    {
 
-        if (Input.GetMouseButtonDown(0))
+        //Debug.Log("allowed: " + playerScript.isNewPositionAllowed());
+        if (Input.GetMouseButtonDown(0) && allowNewPosition)
         {
             //Debug.Log("klik");
             RaycastHit hit;
@@ -28,14 +32,14 @@ public class ClickPosition : MonoBehaviour {
         if (Time.timeScale == 0.2f)
         {
             //Debug.Log("true " + Time.timeScale);
-            //gameObject.SetActive(false);
             renderer.enabled = false;
+            allowNewPosition = true;
         }
         else
         {
             //Debug.Log("false " + Time.timeScale);
-            //gameObject.SetActive(true);
             renderer.enabled = true;
+            allowNewPosition = false;
         }
     }
 }
