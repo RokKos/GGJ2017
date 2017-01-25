@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class Highscores : MonoBehaviour{
 
-    
+    private const string privateCode = "EVWGpuw5H0OMgVlswN3riwWmy_QQEUi0OT1b7KRCGJcw";
+    private const string publicCode = "5888c705b6dd1500a4e3927f";
+    private const string URL = "http://dreamlo.com/lb/";
 
     public Button upload;
     public InputField displayName;

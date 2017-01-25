@@ -128,7 +128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.00375, y: 0.9367684}
   m_AnchorMax: {x: 0.25, y: 1}
-  m_AnchoredPosition: {x: -0.000034332, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 788.2, y: 116.5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &99336640
@@ -989,7 +989,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4180472211488152, guid: 2be6f08bfef946c45ab431d70eb8507a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.32
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4180472211488152, guid: 2be6f08bfef946c45ab431d70eb8507a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1035,7 +1035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4180472211488152, guid: 2be6f08bfef946c45ab431d70eb8507a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.48
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4180472211488152, guid: 2be6f08bfef946c45ab431d70eb8507a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1483,8 +1483,8 @@ RectTransform:
   m_Father: {fileID: 241763483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.05125, y: 0.23}
+  m_AnchorMax: {x: 0.95375, y: 0.72}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1512,8 +1512,8 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 0a4a9ccff2bed1749ba848e3f95852f1, type: 3}
     m_FontSize: 32
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 0
+    m_BestFit: 1
+    m_MinSize: 8
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1910,7 +1910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8794377}
   m_AnchorMax: {x: 0.25, y: 0.9367684}
-  m_AnchoredPosition: {x: 2.9999, y: 1.1000004}
+  m_AnchoredPosition: {x: 2.999878, y: 1.1000061}
   m_SizeDelta: {x: 785, y: 115.2}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1612059828 stripped
