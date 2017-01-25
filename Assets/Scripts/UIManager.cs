@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] Text highScoreText;
     [SerializeField] Text scoreRealTimeText;
     [SerializeField] Text waveText;
+    [SerializeField] Text waveCounterText;
     [SerializeField] GameObject HUD;
     [SerializeField] GameObject endGameMenu;
     [SerializeField] SpawningEnemies spawningEnemies;
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour {
         audioSource.clip = introSound;
         audioSource.volume = 0.1f;
         waveText.text = "";
+        waveCounterText.text = "Wave 1";
 
         highscore = PlayerPrefs.GetInt("HighScore");
         highScoreText.text = "High Score: " + highscore.ToString();
@@ -76,6 +78,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public IEnumerator showWaveCleared (int numberOfWave) {
+        waveCounterText.text = "Wave " + (numberOfWave + 1);
         waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!";
         audioSource.volume = 1f;
         audioSource.clip = waweClearedSound;

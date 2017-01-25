@@ -276,7 +276,8 @@ public class SpawningEnemies : MonoBehaviour {
         deadEnemies = new bool[currNumberOfEnemies];
         createWaveOfEnemies(currNumberOfEnemies);
         uiManager.updateScoreText(calculateScore());
-
+        movement.totalDistance = 0.0f;
+        movement.lastDistance = 0.0f;
         StartCoroutine(uiManager.showWaveCleared(waweNumber));
         waweNumber++;
     }
@@ -284,8 +285,9 @@ public class SpawningEnemies : MonoBehaviour {
     public int calculateScore () {
         int result = 0;
 
-        result = waweNumber * currNumberOfEnemies + movement.nearBonus + (int)(movement.totalDistance - movement.lastDistance) -
-            movement.numberOfClicks + (int)(timePassed) * 3;
+        int modifiedDistance = (int)(movement.totalDistance - movement.lastDistance) * waweNumber;
+        result = waweNumber * currNumberOfEnemies + movement.nearBonus + modifiedDistance -
+                   movement.numberOfClicks + (int)(timePassed) * 3;
 
         gameScore += result;
         return gameScore;

@@ -58,16 +58,17 @@ public class EnemyCurveClass : EnemyBaseClass {
 
         Vector3 newDir = player.transform.position - currentPos.position;
         float angle = Vector3.Angle(newDir, currentPos.up);  //calculate angle
+        float rotateSpeed = 22.5f * Time.deltaTime;
 
         if (angle < 90)
         {
             if (Vector3.Cross(newDir, currentPos.up).z < 0)
             {
-                    currentPos.Rotate(Vector3.forward, 0.5f);
+                    currentPos.Rotate(Vector3.forward, rotateSpeed);
             }
             else
             {
-                    currentPos.Rotate(Vector3.forward, -0.5f);
+                    currentPos.Rotate(Vector3.forward, -rotateSpeed);
             }
         }
         //Debug.Log("Curving");
