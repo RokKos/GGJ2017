@@ -212,8 +212,8 @@ public class Tutorial : MonoBehaviour {
         if (stageOfTutorial == 7) {
             StartCoroutine(showTextToForDuration("Nice manuver. They had tracking system. But watch out for next ones with BLASTER CANNONS!"));
 
-            Vector3 startPos = new Vector3(SIZEOFBOX_X, -SIZEOFBOX_Y);
-            Vector3 endPos = new Vector3(-SIZEOFBOX_X, SIZEOFBOX_Y );
+            Vector3 startPos = new Vector3(SIZEOFBOX_X / 2, -SIZEOFBOX_Y, 0.0f);
+            Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
             int tip = 3;
             float colliderSize = 0.14f;
             Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
