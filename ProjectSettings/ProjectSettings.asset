@@ -198,7 +198,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/DashWave/DashWave.keystore
+  AndroidKeystoreName: D:/Documents/Unity/GGJ2017/DashWave.keystore
   AndroidKeyaliasName: dashwave
   AndroidTVCompatibility: 1
   AndroidIsGame: 1

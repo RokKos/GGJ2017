@@ -19,19 +19,23 @@ public class UIManager : MonoBehaviour {
     [SerializeField] Text waveCounterText;
     [SerializeField] GameObject HUD;
     [SerializeField] GameObject endGameMenu;
+    [SerializeField] GameObject leaderboardMenu;
     [SerializeField] SpawningEnemies spawningEnemies;
     [SerializeField] Movement1 movement;
+    [SerializeField] Highscores highScores;
     [SerializeField] GameObject mainCamera;
     [SerializeField] AudioClip introSound;
     [SerializeField] AudioClip waweClearedSound;
     [SerializeField] AudioClip nearMissSound;
     private AudioSource audioSource;
     private int highscore;
+    public int endGameScore = 0;
 
     private void Start () {
         passedTimeText.text = "Time: " + 0;
         HUD.SetActive(true);
         endGameMenu.SetActive(false);
+        leaderboardMenu.SetActive(false);
         audioSource = mainCamera.GetComponent<AudioSource>();
         audioSource.loop = false;
         audioSource.clip = introSound;
@@ -57,10 +61,20 @@ public class UIManager : MonoBehaviour {
             highScoreText.text = "High Score: " + highscore.ToString();
             //Debug.Log("New Highscore: " + highscore);
         }
+        // Important line for upload new highscore
+        endGameScore = score;
+
+        if (highScores.positionOnLeaderBoard(score) == 100) {
+            highScores.hideUploadPanel();
+        } else if (highScores.positionOnLeaderBoard(score) < 100) {
+            highScores.showUploadPanel();
+        }
+
 
         scoreEndText.text = "Your Score: " + score.ToString();
         HUD.SetActive(false);
         endGameMenu.SetActive(true);
+        leaderboardMenu.SetActive(false);
         Time.timeScale = 0.0f;
     }
 
@@ -104,6 +118,11 @@ public class UIManager : MonoBehaviour {
         yield return null;
     }
 
-
+    public void GoToLeaderboards () {
+        HUD.SetActive(false);
+        endGameMenu.SetActive(false);
+        leaderboardMenu.SetActive(true);
+        highScores.updateHighscores();
+    }
 
 }
