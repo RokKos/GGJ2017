@@ -38,6 +38,9 @@ public class Highscores : MonoBehaviour{
 
     public void addNewHighscore(string username)
     {
+        // Save player name for later use
+        PlayerPrefs.SetString("NameOfPlayer", username);
+
         // WARNING This only works if player ended game!!!
         int score = uiManager.endGameScore;
 
@@ -131,6 +134,7 @@ public class Highscores : MonoBehaviour{
     public void showUploadPanel()
     {
         addScorePanel.SetActive(true);
+        displayName.text = PlayerPrefs.GetString("NameOfPlayer", "");
     }
 
     public void hideUploadPanel()

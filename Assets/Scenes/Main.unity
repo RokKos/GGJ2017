@@ -3409,7 +3409,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2055927079}
     - target: {fileID: 114543953595116444, guid: 830b38e06a7a1424c8a95a5b39c3ce4d,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -4226,7 +4226,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2055927079}
     - target: {fileID: 114895310299794042, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
         type: 2}
       propertyPath: m_Text
@@ -4235,6 +4235,11 @@ Prefab:
     - target: {fileID: 1560243084416582, guid: 69780f3a8b04df14fbebf43d20a0a8f7, type: 2}
       propertyPath: m_Name
       value: ButtonMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114523067670040206, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69780f3a8b04df14fbebf43d20a0a8f7, type: 2}
