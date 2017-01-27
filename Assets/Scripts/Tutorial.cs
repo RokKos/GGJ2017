@@ -24,6 +24,17 @@ public class Tutorial : MonoBehaviour {
     private float SIZEOFBOX_X = 7.0f;
     private float SIZEOFBOX_Y = 7.0f;
     private Vector3 center = new Vector3 (0, 0, 0);
+    private string[] tutorialMessage = new string[] {
+        "Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty. TAP to pinpoint location where you want to go.",
+        "Vau! That was fast! If you noticed your ship manipulates time. When you move time moves.",
+        "Your commands are OBEYED until the END. You cannot change direction until the last command is finished. There is no room for COWARDS!",
+        "Time to shine Commander. DODGE incoming enemies if you don't want to MEET YOUR MAKER.",
+        "NOW is time for the real deal. Watch your six.",
+        "Nice manuver. They had tracking system. But watch out for next ones with BLASTER CANNONS!",
+        "Ship is in good hands. Try to survive as many waves as you can. TIP: you will get better score if you travel long distances and click fewer times. Good luck commander."
+
+    };
+
     
 
     private void Start () {
@@ -53,7 +64,7 @@ public class Tutorial : MonoBehaviour {
         }
 
         if (stageOfTutorial == 0) {
-            StartCoroutine(showTextToForDuration("Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty. TAP to pinpoint location where you want to go."));
+            StartCoroutine(showTextToForDuration(tutorialMessage[0]));
             stageOfTutorial++;
             checkpoints[0].SetActive(true);
         }
@@ -146,16 +157,16 @@ public class Tutorial : MonoBehaviour {
 
     public void showInstrucitons () {
         if (stageOfTutorial == 2) {
-            StartCoroutine(showTextToForDuration("Vau! That was fast! If you noticed your ship manipulates time. When you move time moves."));
+            StartCoroutine(showTextToForDuration(tutorialMessage[1]));
         }
 
         if (stageOfTutorial == 4) {
-            StartCoroutine(showTextToForDuration("Your commands are OBEYED until the END. You cannot change direction until the last command is finished. There is no room for COWARDS!"));
+            StartCoroutine(showTextToForDuration(tutorialMessage[2]));
         }
 
         if (stageOfTutorial == 5) {
             checkpoints[3].SetActive(false);
-            StartCoroutine(showTextToForDuration("Time to shine Commander."));
+            StartCoroutine(showTextToForDuration(tutorialMessage[3]));
             // Spawning enemy
 
             Vector3 startPos = new Vector3(SIZEOFBOX_X, -SIZEOFBOX_Y, 0.0f);
@@ -186,7 +197,7 @@ public class Tutorial : MonoBehaviour {
         }
 
         if (stageOfTutorial == 6) {
-            StartCoroutine(showTextToForDuration("NOW is time for the real deal."));
+            StartCoroutine(showTextToForDuration(tutorialMessage[4]));
 
             Vector3 startPos = new Vector3(SIZEOFBOX_X/2, -SIZEOFBOX_Y, 0.0f);
             Vector3 endPos = new Vector3(-SIZEOFBOX_X/2, SIZEOFBOX_Y, 0.0f);
@@ -210,7 +221,7 @@ public class Tutorial : MonoBehaviour {
         }
 
         if (stageOfTutorial == 7) {
-            StartCoroutine(showTextToForDuration("Nice manuver. They had tracking system. But watch out for next ones with BLASTER CANNONS!"));
+            StartCoroutine(showTextToForDuration(tutorialMessage[5]));
 
             Vector3 startPos = new Vector3(SIZEOFBOX_X / 2, -SIZEOFBOX_Y, 0.0f);
             Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
@@ -239,7 +250,7 @@ public class Tutorial : MonoBehaviour {
 
         if (stageOfTutorial == 8) {
             
-            StartCoroutine(showTextToForDuration("Ship is in good hands. Try to survive as many waves as you can. Good luck commander."));
+            StartCoroutine(showTextToForDuration(tutorialMessage[6]));
             
         }
 
