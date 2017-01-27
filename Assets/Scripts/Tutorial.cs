@@ -25,9 +25,9 @@ public class Tutorial : MonoBehaviour {
     private float SIZEOFBOX_Y = 7.0f;
     private Vector3 center = new Vector3 (0, 0, 0);
     private string[] tutorialMessage = new string[] {
-        "Hi Commander. Crew of spaceship Bajus Zanikus reporting to your duty. TAP to pinpoint location where you want to go.",
-        "Vau! That was fast! If you noticed your ship manipulates time. When you move time moves.",
-        "Your commands are OBEYED until the END. You cannot change direction until the last command is finished. There is no room for COWARDS!",
+        "Welcome Commander. Crew of spaceship Bajus Zanikus reporting for duty. TAP to pinpoint location where you want to go.",
+        "Wow! That was fast! If you noticed your ship manipulates time. When you move time moves.",
+        "Your commands are OBEYED until the very last END. You cannot change direction until the last command is finished. There is no room for COWARDS!",
         "Time to shine Commander. DODGE incoming enemies if you don't want to MEET YOUR MAKER.",
         "NOW is time for the real deal. Watch your six.",
         "Nice manuver. They had tracking system. But watch out for next ones with BLASTER CANNONS!",
@@ -99,40 +99,60 @@ public class Tutorial : MonoBehaviour {
         tutorialText.SetActive(true);
         clickPosition.SetActive(false);
         // Write out text
-        string[] words = text.Split(' ');
+        
         int pos = 0;
         const int maxCharsInLine = 35;
         tutorialText.GetComponentInChildren<Text>().text = " ";
         nextText.SetActive(false);
 
-        foreach (string word in words) {
-            int currLengt = word.Length + 1;
-            if (currLengt + pos > maxCharsInLine) {
-                nextText.SetActive(true);
-                // While player doest tap on screen show message
-                while (!Input.GetMouseButtonDown(0)) {
-                    yield return null;
+        string[] sentence = text.Split('.');
+        foreach (string part in sentence) {
+
+            string[] words = part.Split(' ');
+
+            foreach (string word in words) {
+                int currLengt = word.Length + 1;
+                if (currLengt + pos > maxCharsInLine) {
+                    nextText.SetActive(true);
+                    // While player doest tap on screen show message
+                    while (!Input.GetMouseButtonDown(0)) {
+                        yield return null;
+                    }
+                    nextText.SetActive(false);
+                    pos = word.Length;
+                    //tutorialText.GetComponentInChildren<Text>().text = word + " ";
+                    tutorialText.GetComponentInChildren<Text>().text = "";
+                } else {
+                    pos += currLengt;
+                    //tutorialText.GetComponentInChildren<Text>().text += word + " ";
                 }
-                nextText.SetActive(false);
-                pos = word.Length;
-                //tutorialText.GetComponentInChildren<Text>().text = word + " ";
-                tutorialText.GetComponentInChildren<Text>().text ="";
-            } else {
-                pos += currLengt;
-                //tutorialText.GetComponentInChildren<Text>().text += word + " ";
-            }
 
-            // Smoth writing
-            for (int i = 0; i < currLengt - 1; ++i) {
-                tutorialText.GetComponentInChildren<Text>().text += word[i];
-                for (int j = 0; j < 6; ++j) {
-                    yield return null;
+                // Smoth writing
+                for (int i = 0; i < currLengt - 1; ++i) {
+                    tutorialText.GetComponentInChildren<Text>().text += word[i];
+                    for (int j = 0; j < 6; ++j) {
+                        yield return null;
+                    }
+
                 }
-                
+                tutorialText.GetComponentInChildren<Text>().text += " ";
+
             }
-            tutorialText.GetComponentInChildren<Text>().text += " ";
+            string endText = tutorialText.GetComponentInChildren<Text>().text;
+            // Here is -2 because there is " " character at the end (CAUTION!!!)
+            if (endText.Length > 2 && endText[endText.Length - 2] != '!' && endText[endText.Length - 2] != '?' && endText[endText.Length - 2] != ',') {
+                tutorialText.GetComponentInChildren<Text>().text = endText.Substring(0, endText.Length - 1) + ".";
+            }
+            
 
-
+            // Wait to tap for next sentence
+            nextText.SetActive(true);
+            while (!Input.GetMouseButtonDown(0)) {
+                yield return null;
+            }
+            nextText.SetActive(false);
+            pos = 0;
+            tutorialText.GetComponentInChildren<Text>().text = "";
 
         }
         // End of writing
