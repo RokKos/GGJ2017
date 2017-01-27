@@ -197,9 +197,10 @@ public class Tutorial : MonoBehaviour {
 
             if (tutorialEnemy == null) {
                 tutorialEnemy = (GameObject)Instantiate(enemyPrefab, startPos, Quaternion.identity);
-            } else {
-                tutorialEnemy.transform.position = startPos;
             }
+            //else {
+            //    tutorialEnemy.transform.position = startPos;
+            //}
 
             GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
             trail1.SetActive(false);
@@ -240,26 +241,28 @@ public class Tutorial : MonoBehaviour {
 
         }
 
-        if (stageOfTutorial == 7) {
+        if (stageOfTutorial == 7)
+        {
             StartCoroutine(showTextToForDuration(tutorialMessage[5]));
 
             Vector3 startPos = new Vector3(SIZEOFBOX_X / 2, -SIZEOFBOX_Y, 0.0f);
             Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
             int tip = 3;
             float colliderSize = 0.14f;
-            Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
+            //Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
 
 
-            GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
-            trail1.SetActive(false);
+            //GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
+            //trail1.SetActive(false);
             tutorialEnemy.transform.position = startPos;
-            trail1.SetActive(true);
+            //trail1.SetActive(true);
 
-            tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
-            tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
+            //tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
+            //tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
+            tutorialEnemy = GameObject.Find("Enemy3");
             tutorialEnemy.name = "EnemyTutorial";
 
-            rotateEnemy(tutorialEnemy.transform, endPos);
+            //rotateEnemy(tutorialEnemy.transform, endPos);
 
             tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
             ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);
@@ -267,6 +270,35 @@ public class Tutorial : MonoBehaviour {
 
 
         }
+
+        //if (stageOfTutorial == 7)
+        //{
+        //    StartCoroutine(showTextToForDuration(tutorialMessage[5]));
+
+        //    Vector3 startPos = new Vector3(SIZEOFBOX_X / 2, -SIZEOFBOX_Y, 0.0f);
+        //    Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
+        //    int tip = 3;
+        //    float colliderSize = 0.14f;
+        //    Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
+
+
+        //    GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
+        //    trail1.SetActive(false);
+        //    tutorialEnemy.transform.position = startPos;
+        //    trail1.SetActive(true);
+
+        //    tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
+        //    tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
+        //    tutorialEnemy.name = "EnemyTutorial";
+
+        //    rotateEnemy(tutorialEnemy.transform, endPos);
+
+        //    tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
+        //    ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);
+
+
+
+        //}
 
         if (stageOfTutorial == 8) {
             

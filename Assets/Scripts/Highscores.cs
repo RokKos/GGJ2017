@@ -13,6 +13,7 @@ public class Highscores : MonoBehaviour{
     [SerializeField] Button upload;
     [SerializeField] InputField displayName;
     public GameObject addScorePanel;
+    public GameObject noConnectionPanel;
     //public Text highscoresList;
 
     [SerializeField] UIManager uiManager;  
@@ -21,6 +22,8 @@ public class Highscores : MonoBehaviour{
     private GameObject[] leaderBoardsColums;  // Just to delete them easily
     private int numberOfPlayers = 100;
     private int[] scoresToBeat;  // Scores that are top and must player beat to be on leadeboards
+    private bool internetConnection;
+    private bool uploaded;
 
     void Awake()
     {
@@ -28,12 +31,52 @@ public class Highscores : MonoBehaviour{
         leaderBoardsColums = new GameObject[numberOfPlayers];
         scoresToBeat = new int[numberOfPlayers];
         updateHighscores();
+        uploaded = false;
     }
 
     void Start()
     {
         upload.onClick.AddListener(() => addNewHighscore(displayName.text));
+        displayName.text = PlayerPrefs.GetString("NameOfPlayer", "");
+    }
 
+    void Update()
+    {
+        checkInternetConnection();
+    }
+
+    public void checkInternetConnection()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            if (internetConnection == true)
+            {
+                noConnectionPanel.SetActive(true);
+                addScorePanel.SetActive(false);
+                internetConnection = false;
+            }
+            
+        }
+        else
+        {
+            if (internetConnection == false)
+            {
+                noConnectionPanel.SetActive(false);
+                addScorePanel.SetActive(true);
+                internetConnection = true;
+            }
+        }
+
+        if (uploaded)
+        {
+            addScorePanel.SetActive(false);
+            noConnectionPanel.SetActive(false);
+        }
+    }
+
+    public void setUploaded(bool state)
+    {
+        uploaded = state;
     }
 
     public void addNewHighscore(string username)
@@ -60,12 +103,16 @@ public class Highscores : MonoBehaviour{
         yield return www;
 
         if (string.IsNullOrEmpty(www.error))
+        {
             Debug.Log("Upload Successful!");
-        else
+            uploaded = true;
+            hideUploadPanel();
+        }
+        else {
             Debug.Log("Upload Error: " + www.error);
+        }
 
         updateHighscores();
-        hideUploadPanel();
     }
 
     public void updateHighscores()
@@ -84,8 +131,9 @@ public class Highscores : MonoBehaviour{
             //highscoresList.text = "Highscores\n\n" + parseHighscores(www.text);
             parseHighscores(www.text);
         }
-        else
+        else {
             Debug.Log("Download Error: " + www.error);
+        }
     }
 
     private void parseHighscores(string text)
@@ -118,22 +166,15 @@ public class Highscores : MonoBehaviour{
             } else {
                 Debug.Log("String could not be parsed.");
             }
-
-                     
-
-
             //formatedScores += splitLine[0].Replace('+', ' ') + ":\t" + splitLine[1] + "\n";
         }
 
         //return formatedScores;
-
-
-
     }
 
     public void showUploadPanel()
     {
-        addScorePanel.SetActive(true);
+        //addScorePanel.SetActive(true);
         displayName.text = PlayerPrefs.GetString("NameOfPlayer", "");
     }
 
