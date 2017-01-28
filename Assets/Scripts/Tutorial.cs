@@ -250,7 +250,7 @@ public class Tutorial : MonoBehaviour {
             tutorialEnemy.name = "EnemyTutorial";
 
             //rotateEnemy(tutorialEnemy.transform, endPos);
-            tutorialEnemy.transform.Rotate(new Vector3(0, 0, 32f));
+            tutorialEnemy.transform.rotation = new Quaternion();
 
             tutorialEnemyData = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, center,  SIZEOFBOX_X, SIZEOFBOX_Y);
 
@@ -307,7 +307,7 @@ public class Tutorial : MonoBehaviour {
             tutorialEnemy.name = "EnemyTutorial";
 
             //rotateEnemy(tutorialEnemy.transform, GameObject.Find("Player").transform.position);
-            tutorialEnemy.transform.Rotate(new Vector3(0, 0, 32f));
+            tutorialEnemy.transform.rotation = new Quaternion();
 
             tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
             ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);

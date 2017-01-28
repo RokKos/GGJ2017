@@ -11,8 +11,8 @@ public class Movement1 : MonoBehaviour {
     private Vector3 newPosition;
     private bool allowNewPosition;
     //private Rigidbody2D rigidBody;
-    public float lastDistance = 0.0f;
-    public float totalDistance = 0.0f;
+    public float lastDistance;
+    public float totalDistance;
     private float SIZEOFBOX_X;
     private float SIZEOFBOX_Y;
     public int numberOfClicks = 0; 
@@ -27,6 +27,17 @@ public class Movement1 : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //rigidBody = GetComponent<Rigidbody2D>();
+        audioSource =  transform.GetComponent<AudioSource>();        
+        Camera camera = FindObjectOfType<Camera>();
+        Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        SIZEOFBOX_X = screenPoint1.x + 0.5f;
+        SIZEOFBOX_Y = screenPoint1.y + 0.5f;
+        resetPlayer();
+    }
+
+    public void resetPlayer()
+    {
         lastDistance = 0.0f;
         totalDistance = 0.0f;
         nearBonus = 0;
@@ -35,18 +46,8 @@ public class Movement1 : MonoBehaviour {
         Time.timeScale = minTimeSpeed;
         allowNewPosition = true;
         gameRunning = true;
-        
-        //rigidBody = GetComponent<Rigidbody2D>();
-        audioSource =  transform.GetComponent<AudioSource>();
         audioSource.volume = 0.1f;
         audioSource.loop = false;
-
-        Camera camera = FindObjectOfType<Camera>();
-        Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-
-        SIZEOFBOX_X = screenPoint1.x + 0.5f;
-        SIZEOFBOX_Y = screenPoint1.y + 0.5f;
-
     }
 
     // Update is called once per frame

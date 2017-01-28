@@ -29,9 +29,14 @@ public class UIManager : MonoBehaviour {
     [SerializeField] AudioClip nearMissSound;
     private AudioSource audioSource;
     private int highscore;
-    public int endGameScore = 0;
+    public int endGameScore;
 
     private void Start () {
+        newGame();
+    }
+
+    private void newGame()
+    {
         passedTimeText.text = "Time: " + 0;
         HUD.SetActive(true);
         endGameMenu.SetActive(false);
@@ -42,12 +47,18 @@ public class UIManager : MonoBehaviour {
         audioSource.volume = 0.1f;
         waveText.text = "";
         waveCounterText.text = "Wave 1";
+        endGameScore = 0;
 
         if (highScores != null)
+        {
             highScores.setUploaded(false);
+        }
 
         highscore = PlayerPrefs.GetInt("HighScore");
         highScoreText.text = "High Score: " + highscore.ToString();
+
+        //GameObject.Find("Player").GetComponent<Movement1>().resetPlayer();
+
         //Debug.Log("Highscore: " + highscore);
     }
 
@@ -68,7 +79,11 @@ public class UIManager : MonoBehaviour {
         endGameScore = score;
 
         if (highScores != null)
-            highScores.checkInternetConnection();
+        {
+            //highScores.checkInternetConnection();
+            highScores.addNewHighscore();
+            //highScores.updateHighscores();
+        }
 
         //if (highScores.positionOnLeaderBoard(score) == 100) {
         //    highScores.hideUploadPanel();
@@ -86,6 +101,7 @@ public class UIManager : MonoBehaviour {
 
     public void RestartGame () {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //newGame();
     }
 
     public void GoToMenu () {
