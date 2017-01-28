@@ -62,7 +62,8 @@ public class Movement1 : MonoBehaviour {
     {
         //se premaknemo če še nismo dosegli cilj
         float distance = Vector3.Distance(transform.position, newPosition);
-        if (distance > 0.5f && !allowNewPosition)
+        //if (distance > 0.5f && !allowNewPosition)
+        if (distance > 0.2f && !allowNewPosition)
         {
             Time.timeScale = maxTimeSpeed;
             totalDistance += distance;
@@ -109,17 +110,20 @@ public class Movement1 : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                //Debug.Log("rayCastHit");                
-                // Souund
-                audioSource.clip = speedUpMovement;
-                audioSource.loop = false;
-                audioSource.volume = 0.1f;
-                audioSource.Play();
+                if (Vector3.Distance(transform.position, hit.point) > 0.7)
+                {
+                    //Debug.Log("rayCastHit");                
+                    // Souund
+                    audioSource.clip = speedUpMovement;
+                    audioSource.loop = false;
+                    audioSource.volume = 0.1f;
+                    audioSource.Play();
 
-                newPosition = hit.point;
-                allowNewPosition = false;
-                numberOfClicks++;
-                //transform.position = newPosition;
+                    newPosition = hit.point;
+                    allowNewPosition = false;
+                    numberOfClicks++;
+                    //transform.position = newPosition;
+                }
             }
         }
     }

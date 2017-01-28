@@ -21,21 +21,33 @@ public class Tutorial : MonoBehaviour {
     private EnemyBaseClass tutorialEnemyData;
     private GameObject tutorialEnemy;
     [SerializeField] GameObject enemyPrefab;
-    private float SIZEOFBOX_X = 7.0f;
-    private float SIZEOFBOX_Y = 7.0f;
+    private float SIZEOFBOX_X;
+    private float SIZEOFBOX_Y;
     private Vector3 center = new Vector3 (0, 0, 0);
+
     private string[] tutorialMessage = new string[] {
-        "Welcome Commander. Crew of spaceship Bajus Zanikus reporting for duty. TAP to pinpoint location where you want to go.",
-        "Wow! That was fast! If you noticed your ship manipulates time. When you move time moves.",
-        "Your commands are OBEYED until the very last END. You cannot change direction until the last command is finished. There is no room for COWARDS!",
-        "Time to shine Commander. DODGE incoming enemies if you don't want to MEET YOUR MAKER.",
-        "NOW is time for the real deal. Watch your six.",
-        "Nice manuver. They had tracking system. But watch out for next ones with BLASTER CANNONS!",
-        "Ship is in good hands. Try to survive as many waves as you can. TIP: you will get better score if you travel long distances and click fewer times. Good luck commander."
+        "Welcome Commander. The crew is reporting for duty. To move the ship simply TAP the screen. The ship will automatically move to that position. Try moving the ship through all the checkpoints.",
+        "Good job! If you noticed your ship manipulates time. When the designated position is reached, time will slow down. Our scientists developed this technology to counter the enemy swarming tactics. That way you will have more time to change course.",
+        "But be careful! We cannot change course until we reach the new position.",
+        "Our scanners are picking up several enemy ships. We will have to DODGE the enemies if we want to survive. Get ready Commander!",
+        "Good job Commander. We survived the first wave. But it's only going to get harder. The next ship has a tracking system and will follow us. But it has a weak spot. It cannot track us if we get behind it. Get ready!",
+        "Nice maneuver. Get ready for the final challenge. The next ship has a tracking system and a BLASTER CANNON!",
+        "Outstanding performance Commander! We survived all the waves. Ship is in good hands. TIP: you will get better score if you travel longer distances and click fewer times. Good luck Commander."
 
     };
 
-    
+    //private string[] tutorialMessage = new string[] {
+    //    "Welcome Commander. Crew of spaceship Bajus Zanikus reporting for duty. TAP to pinpoint location where you want to go.",
+    //    "Wow! That was fast! If you noticed your ship manipulates time. When you move time moves.",
+    //    "Your commands are OBEYED until the very last END. You cannot change direction until the last command is finished. There is no room for COWARDS!",
+    //    "Time to shine Commander. DODGE incoming enemies if you don't want to MEET YOUR MAKER.",
+    //    "NOW is time for the real deal. Watch your six.",
+    //    "Nice manuver. They had tracking system. But watch out for next ones with BLASTER CANNONS!",
+    //    "Ship is in good hands. Try to survive as many waves as you can. TIP: you will get better score if you travel long distances and click fewer times. Good luck commander."
+
+    //};
+
+
 
     private void Start () {
         tutorialText.SetActive(false);
@@ -46,8 +58,8 @@ public class Tutorial : MonoBehaviour {
         // Geting size of screen
         Camera camera = FindObjectOfType<Camera>();
         Vector3 screenPoint1 = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-        SIZEOFBOX_X = screenPoint1.x + 1;
-        SIZEOFBOX_Y = screenPoint1.y + 1;
+        SIZEOFBOX_X = screenPoint1.x + 0.5f;
+        SIZEOFBOX_Y = screenPoint1.y + 0.5f;
         //checkpoints = GameObject.FindGameObjectsWithTag("CheckPoint");
         for (int i = 0; i < checkpoints.Length; ++i) {
             checkpoints[i].SetActive(false);
@@ -241,36 +253,6 @@ public class Tutorial : MonoBehaviour {
 
         }
 
-        if (stageOfTutorial == 7)
-        {
-            StartCoroutine(showTextToForDuration(tutorialMessage[5]));
-
-            Vector3 startPos = new Vector3(SIZEOFBOX_X / 2, -SIZEOFBOX_Y, 0.0f);
-            Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
-            int tip = 3;
-            float colliderSize = 0.14f;
-            //Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
-
-
-            //GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
-            //trail1.SetActive(false);
-            tutorialEnemy.transform.position = startPos;
-            //trail1.SetActive(true);
-
-            //tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
-            //tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
-            tutorialEnemy = GameObject.Find("Enemy3");
-            tutorialEnemy.name = "EnemyTutorial";
-
-            //rotateEnemy(tutorialEnemy.transform, endPos);
-
-            tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
-            ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);
-
-
-
-        }
-
         //if (stageOfTutorial == 7)
         //{
         //    StartCoroutine(showTextToForDuration(tutorialMessage[5]));
@@ -279,19 +261,20 @@ public class Tutorial : MonoBehaviour {
         //    Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
         //    int tip = 3;
         //    float colliderSize = 0.14f;
-        //    Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
+        //    //Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
 
 
-        //    GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
-        //    trail1.SetActive(false);
+        //    //GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
+        //    //trail1.SetActive(false);
         //    tutorialEnemy.transform.position = startPos;
-        //    trail1.SetActive(true);
+        //    //trail1.SetActive(true);
 
-        //    tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
-        //    tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
+        //    //tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
+        //    //tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
+        //    tutorialEnemy = GameObject.Find("Enemy3");
         //    tutorialEnemy.name = "EnemyTutorial";
 
-        //    rotateEnemy(tutorialEnemy.transform, endPos);
+        //    //rotateEnemy(tutorialEnemy.transform, endPos);
 
         //    tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
         //    ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);
@@ -299,6 +282,35 @@ public class Tutorial : MonoBehaviour {
 
 
         //}
+
+        if (stageOfTutorial == 7)
+        {
+            StartCoroutine(showTextToForDuration(tutorialMessage[5]));
+
+            Vector3 startPos = new Vector3(SIZEOFBOX_X / 2, -SIZEOFBOX_Y, 0.0f);
+            Vector3 endPos = new Vector3(-SIZEOFBOX_X / 2, SIZEOFBOX_Y, 0.0f);
+            int tip = 3;
+            float colliderSize = 0.14f;
+            Sprite imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy3");
+
+
+            GameObject trail1 = tutorialEnemy.transform.FindChild("Trail1").gameObject;
+            trail1.SetActive(false);
+            tutorialEnemy.transform.position = startPos;
+            trail1.SetActive(true);
+
+            tutorialEnemy.GetComponent<SpriteRenderer>().sprite = imageOfEnemy;
+            tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
+            tutorialEnemy.name = "EnemyTutorial";
+
+            rotateEnemy(tutorialEnemy.transform, GameObject.Find("Player").transform.position);
+
+            tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
+            ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);
+
+
+
+        }
 
         if (stageOfTutorial == 8) {
             

@@ -155,7 +155,7 @@ public class Highscores : MonoBehaviour{
             tempColum.transform.Find("Place").GetComponent<Text>().text = (i + 1).ToString();
             tempColum.transform.Find("Name").GetComponent<Text>().text = splitLine[0].Replace('+', ' ');
             tempColum.transform.Find("Score").GetComponent<Text>().text = splitLine[1];
-
+            tempColum.transform.localScale = new Vector3(1f, 1f, 1f);
             leaderBoardsColums[i] = tempColum;
 
             // Saves score to scoreToBeat
