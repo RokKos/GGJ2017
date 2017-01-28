@@ -42,7 +42,9 @@ public class UIManager : MonoBehaviour {
         audioSource.volume = 0.1f;
         waveText.text = "";
         waveCounterText.text = "Wave 1";
-        highScores.setUploaded(false);
+
+        if (highScores != null)
+            highScores.setUploaded(false);
 
         highscore = PlayerPrefs.GetInt("HighScore");
         highScoreText.text = "High Score: " + highscore.ToString();
@@ -65,7 +67,8 @@ public class UIManager : MonoBehaviour {
         // Important line for upload new highscore
         endGameScore = score;
 
-        highScores.checkInternetConnection();
+        if (highScores != null)
+            highScores.checkInternetConnection();
 
         //if (highScores.positionOnLeaderBoard(score) == 100) {
         //    highScores.hideUploadPanel();
