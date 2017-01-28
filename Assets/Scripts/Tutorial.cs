@@ -26,7 +26,7 @@ public class Tutorial : MonoBehaviour {
     private Vector3 center = new Vector3 (0, 0, 0);
 
     private string[] tutorialMessage = new string[] {
-        "Welcome Commander. The crew is reporting for duty. To move the ship simply TAP the screen. The ship will automatically move to that position. Try moving the ship through all the checkpoints.",
+        "Welcome Commander. The crew is reporting for duty. To move the ship simply TAP the screen. Try moving the ship through all the checkpoints.", //The ship will automatically move to that position.
         "Good JOB! If you noticed your ship MANIPULATES TIME. When traveling, time speeds up and when the designated position is reached, time will slow down.",
         "But be careful! We CANNOT CHANGE course until we reach the new position.",
         "Our scanners are picking up several enemy ships. We will have to DODGE the enemies if we don't want to MEET OUR MAKER! Get ready Commander!",
@@ -249,7 +249,8 @@ public class Tutorial : MonoBehaviour {
             tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
             tutorialEnemy.name = "EnemyTutorial";
 
-            rotateEnemy(tutorialEnemy.transform, endPos);
+            //rotateEnemy(tutorialEnemy.transform, endPos);
+            tutorialEnemy.transform.Rotate(new Vector3(0, 0, 32f));
 
             tutorialEnemyData = new EnemyCurveClass((byte)tip, startPos, endPos, Time.time, center,  SIZEOFBOX_X, SIZEOFBOX_Y);
 
@@ -305,7 +306,8 @@ public class Tutorial : MonoBehaviour {
             tutorialEnemy.GetComponent<CircleCollider2D>().radius = colliderSize;
             tutorialEnemy.name = "EnemyTutorial";
 
-            rotateEnemy(tutorialEnemy.transform, GameObject.Find("Player").transform.position);
+            //rotateEnemy(tutorialEnemy.transform, GameObject.Find("Player").transform.position);
+            tutorialEnemy.transform.Rotate(new Vector3(0, 0, 32f));
 
             tutorialEnemyData = new EnemyShootClass((byte)tip, startPos, endPos, Time.time, center, SIZEOFBOX_X, SIZEOFBOX_Y, Random.Range(3f, 6f), Random.Range(0f, 5f));
             ((EnemyShootClass)tutorialEnemyData).setShooter(tutorialEnemy.transform);

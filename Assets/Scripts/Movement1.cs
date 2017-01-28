@@ -61,9 +61,14 @@ public class Movement1 : MonoBehaviour {
     private void moveToPosition()
     {
         //se premaknemo če še nismo dosegli cilj
+        //Vector3 modifiedPos = transform.position - (transform.up * 0.5f);
+        //float distance = Vector3.Distance(modifiedPos, newPosition);
         float distance = Vector3.Distance(transform.position, newPosition);
+
+        //Debug.Log("Pos: " + transform.position + "     New pos: " + newPosition + "    Modified pos: "+modifiedPos);
+
         //if (distance > 0.5f && !allowNewPosition)
-        if (distance > 0.2f && !allowNewPosition)
+        if (distance > 0.2f && !allowNewPosition)//newPosition
         {
             Time.timeScale = maxTimeSpeed;
             totalDistance += distance;
@@ -201,11 +206,12 @@ public class Movement1 : MonoBehaviour {
 
     void calculateAngle()
     {
-        Vector3 newDir = newPosition - transform.position;
+        //Vector3 newDir = newPosition - transform.position;
+        Vector3 newDir = newPosition - transform.position + transform.up;   //da ni trzanja ki pokvari trail je + transform.up 
         float angle = Vector3.Angle(newDir, transform.up);  //calculate angle
 
-        if (angle > 1)
-        {
+        //if (angle > 4)//&& Vector3.Distance(newPosition, transform.position) > 0.5f)
+        //{
             if (Vector3.Cross(newDir, transform.up).z < 0)
             {
                 //angle = -angle;
@@ -222,7 +228,7 @@ public class Movement1 : MonoBehaviour {
                     transform.Rotate(Vector3.forward, -angle);
             }
 
-        }
+        //}
         //Debug.Log(angle);
     }
 
