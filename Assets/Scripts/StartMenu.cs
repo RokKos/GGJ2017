@@ -14,13 +14,24 @@ public class StartMenu : MonoBehaviour {
 
     private void Start () {
         // Set Main Page active
-        onBackClicked();
+        mainMenu.SetActive(true);
+        credistsMenu.SetActive(false);
+        usernamePanel.SetActive(false);
+
+
+        //PlayerPrefs.DeleteAll();
     }
 
     public void onStartClicked()
     {
         //Debug.Log("START");
-        SceneManager.LoadScene("Main");
+        if (PlayerPrefs.GetString("NameOfPlayer", "") == "") {
+            mainMenu.SetActive(false);
+            credistsMenu.SetActive(false);
+            usernamePanel.SetActive(true);
+        } else {
+            SceneManager.LoadScene("Main");
+        }
     }
 
     public void onExitClicked()
@@ -32,23 +43,9 @@ public class StartMenu : MonoBehaviour {
     public void onCredistsClicked () {
         mainMenu.SetActive(false);
         credistsMenu.SetActive(true);
+        usernamePanel.SetActive(false);
     }
 
-    public void onBackClicked () {
-
-        if (PlayerPrefs.GetString("NameOfPlayer", "") == "")
-        {
-            mainMenu.SetActive(false);
-            credistsMenu.SetActive(false);
-            usernamePanel.SetActive(true);
-        }
-        else
-        {
-            mainMenu.SetActive(true);
-            credistsMenu.SetActive(false);
-            usernamePanel.SetActive(false);
-        }
-    }
 
     public void onTutorialClicked () {
         //Debug.Log("START");
@@ -62,6 +59,10 @@ public class StartMenu : MonoBehaviour {
         if (username != "")
             PlayerPrefs.SetString("NameOfPlayer", username);
 
-        onBackClicked();
+        onStartClicked();
+    }
+
+    public void onSkipClicked () {
+        SceneManager.LoadScene("Main");
     }
 }
