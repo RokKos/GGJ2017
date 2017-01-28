@@ -27,10 +27,10 @@ public class Tutorial : MonoBehaviour {
 
     private string[] tutorialMessage = new string[] {
         "Welcome Commander. The crew is reporting for duty. To move the ship simply TAP the screen. The ship will automatically move to that position. Try moving the ship through all the checkpoints.",
-        "Good job! If you noticed your ship manipulates time. When the designated position is reached, time will slow down. Our scientists developed this technology to counter the enemy swarming tactics. That way you will have more time to change course.",
-        "But be careful! We cannot change course until we reach the new position.",
-        "Our scanners are picking up several enemy ships. We will have to DODGE the enemies if we want to survive. Get ready Commander!",
-        "Good job Commander. We survived the first wave. But it's only going to get harder. The next ship has a tracking system and will follow us. But it has a weak spot. It cannot track us if we get behind it. Get ready!",
+        "Good JOB! If you noticed your ship MANIPULATES TIME. When traveling, time speeds up and when the designated position is reached, time will slow down.",
+        "But be careful! We CANNOT CHANGE course until we reach the new position.",
+        "Our scanners are picking up several enemy ships. We will have to DODGE the enemies if we don't want to MEET OUR MAKER! Get ready Commander!",
+        "Good job Commander. We survived the first wave. But it's only going to get harder. The next ship has a TRACKING SYSTEM and will follow us. But it has a weak spot. It cannot track us if we get BEHIND it. Watch your six!",
         "Nice maneuver. Get ready for the final challenge. The next ship has a tracking system and a BLASTER CANNON!",
         "Outstanding performance Commander! We survived all the waves. Ship is in good hands. TIP: you will get better score if you travel longer distances and click fewer times. Good luck Commander."
 
@@ -108,6 +108,8 @@ public class Tutorial : MonoBehaviour {
         //Stop time so that player can see waht text shows
         movement.gameRunning = false;
         Time.timeScale = 0.0f;
+        // Stop playing current sound
+        movement.audioSource.Stop();
         tutorialText.SetActive(true);
         clickPosition.SetActive(false);
         // Write out text

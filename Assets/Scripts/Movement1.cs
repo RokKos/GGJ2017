@@ -18,7 +18,7 @@ public class Movement1 : MonoBehaviour {
     public int numberOfClicks = 0; 
     public bool gameRunning = true;
     public bool TutorialMode = false;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     [SerializeField] AudioClip speedUpMovement;
     [SerializeField] AudioClip slowMovement;
     [SerializeField] AudioClip deathSound;
@@ -95,9 +95,27 @@ public class Movement1 : MonoBehaviour {
         float step = playerSpeed * Time.deltaTime;
         transform.position += transform.up * step;
 
-        if (transform.position.x > SIZEOFBOX_X || transform.position.x < -SIZEOFBOX_X ||
-            transform.position.y > SIZEOFBOX_Y || transform.position.y < -SIZEOFBOX_Y)
+        if ((transform.position.x > SIZEOFBOX_X || transform.position.x < -SIZEOFBOX_X ||
+            transform.position.y > SIZEOFBOX_Y || transform.position.y < -SIZEOFBOX_Y) &&
+            !TutorialMode) {
             reset();
+        } else if ((transform.position.x > SIZEOFBOX_X || transform.position.x < -SIZEOFBOX_X ||
+            transform.position.y > SIZEOFBOX_Y || transform.position.y < -SIZEOFBOX_Y) &&
+            TutorialMode) {
+            // If player goes out of bounds
+            GameObject trail1 = transform.FindChild("Trail1").gameObject;
+            trail1.SetActive(false);
+            transform.position = new Vector3(0, 0, 0);
+            trail1.SetActive(true);
+
+            Tutorial tutorial = (Tutorial)FindObjectOfType(typeof(Tutorial));
+
+            DestroyLasers();
+            newPosition = new Vector3(0, 0, 0);
+            //tutorial.stageOfTutorial--;
+            tutorial.showInstrucitons();
+        }
+            
     }
 
     private void checkClick()
