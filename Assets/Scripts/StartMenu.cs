@@ -11,12 +11,11 @@ public class StartMenu : MonoBehaviour {
     [SerializeField] GameObject usernamePanel;
     [SerializeField] InputField displayName;
     [SerializeField] GameObject addUsernameButton;
+    [SerializeField] GameObject BlackOut;
 
     private void Start () {
         // Set Main Page active
-        mainMenu.SetActive(true);
-        credistsMenu.SetActive(false);
-        usernamePanel.SetActive(false);
+        onBackClicked();
 
 
         //PlayerPrefs.DeleteAll();
@@ -29,8 +28,9 @@ public class StartMenu : MonoBehaviour {
             mainMenu.SetActive(false);
             credistsMenu.SetActive(false);
             usernamePanel.SetActive(true);
+            BlackOut.SetActive(false);
         } else {
-            SceneManager.LoadScene("Main");
+            LoadMainSceneAsync();
         }
     }
 
@@ -44,6 +44,7 @@ public class StartMenu : MonoBehaviour {
         mainMenu.SetActive(false);
         credistsMenu.SetActive(true);
         usernamePanel.SetActive(false);
+        BlackOut.SetActive(false);
     }
 
 
@@ -63,6 +64,34 @@ public class StartMenu : MonoBehaviour {
     }
 
     public void onSkipClicked () {
-        SceneManager.LoadScene("Main");
+        LoadMainSceneAsync();
+    }
+
+    private void LoadMainSceneAsync () {
+        SceneManager.LoadSceneAsync("Main");
+        StartCoroutine(FadeOut());
+
+    }
+
+    private IEnumerator FadeOut () {
+        Debug.Log("Here");
+        BlackOut.SetActive(true);
+        float alpha = 0.0f;
+        while (alpha < 1.0f) {
+            Color newColor = BlackOut.GetComponent<Image>().color;
+            BlackOut.GetComponent<Image>().color =new Color(newColor.r, newColor.g, newColor.b, alpha);
+            alpha += 0.01f;
+            Debug.Log("Doing");
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+    public void onBackClicked () {
+        mainMenu.SetActive(true);
+        credistsMenu.SetActive(false);
+        usernamePanel.SetActive(false);
+        BlackOut.SetActive(false);
     }
 }
