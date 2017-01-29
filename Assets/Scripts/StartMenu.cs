@@ -8,6 +8,7 @@ public class StartMenu : MonoBehaviour {
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject credistsMenu;
+    [SerializeField] GameObject leaderBoardMenu;
     [SerializeField] GameObject usernamePanel;
     [SerializeField] InputField displayName;
     [SerializeField] GameObject addUsernameButton;
@@ -29,6 +30,7 @@ public class StartMenu : MonoBehaviour {
             credistsMenu.SetActive(false);
             usernamePanel.SetActive(true);
             BlackOut.SetActive(false);
+            leaderBoardMenu.SetActive(false);
         } else {
             LoadMainSceneAsync();
         }
@@ -45,6 +47,7 @@ public class StartMenu : MonoBehaviour {
         credistsMenu.SetActive(true);
         usernamePanel.SetActive(false);
         BlackOut.SetActive(false);
+        leaderBoardMenu.SetActive(false);
     }
 
 
@@ -74,14 +77,12 @@ public class StartMenu : MonoBehaviour {
     }
 
     private IEnumerator FadeOut () {
-        Debug.Log("Here");
         BlackOut.SetActive(true);
         float alpha = 0.0f;
         while (alpha < 1.0f) {
             Color newColor = BlackOut.GetComponent<Image>().color;
             BlackOut.GetComponent<Image>().color =new Color(newColor.r, newColor.g, newColor.b, alpha);
             alpha += 0.01f;
-            Debug.Log("Doing");
             yield return null;
         }
 
@@ -93,5 +94,14 @@ public class StartMenu : MonoBehaviour {
         credistsMenu.SetActive(false);
         usernamePanel.SetActive(false);
         BlackOut.SetActive(false);
+        leaderBoardMenu.SetActive(false);
+    }
+
+    public void onLeaderBoardsClicked () {
+        mainMenu.SetActive(false);
+        credistsMenu.SetActive(false);
+        usernamePanel.SetActive(false);
+        BlackOut.SetActive(false);
+        leaderBoardMenu.SetActive(true);
     }
 }

@@ -10,8 +10,6 @@ public class Highscores : MonoBehaviour{
     private const string publicCode = "5888c705b6dd1500a4e3927f";
     private const string URL = "http://dreamlo.com/lb/";
 
-    [SerializeField] Button uploadButton;
-    [SerializeField] InputField displayName;
     //public GameObject addScorePanel;
     //public GameObject noConnectionPanel;
     public Text UploadMessageText; 
@@ -38,9 +36,7 @@ public class Highscores : MonoBehaviour{
 
     void Start()
     {
-        uploadButton.onClick.AddListener(() => addNewHighscore());
         username = PlayerPrefs.GetString("NameOfPlayer", "");
-        displayName.text = username;
     }
 
     void Update()
@@ -81,7 +77,6 @@ public class Highscores : MonoBehaviour{
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-            uploadButton.gameObject.SetActive(false);
             //UploadMessageText.text = "No internet connection.";
             internetConnection = false;
         }
@@ -91,7 +86,6 @@ public class Highscores : MonoBehaviour{
             {
                 UploadMessageText.text = "Uploading Score";
             }
-            uploadButton.gameObject.SetActive(true);
             internetConnection = true;
         }
 
@@ -141,7 +135,7 @@ public class Highscores : MonoBehaviour{
                 StartCoroutine(uploadNewHighscore(username, score));
             } else {
                 StartCoroutine(uploadNewHighscore("EndoplazmatskiRetikulum", score));
-                Debug.Log("Missing username...");   //načeloma to ni potrebno ker če je username prazen se ne posodobi na strani
+                //Debug.Log("Missing username...");   //načeloma to ni potrebno ker če je username prazen se ne posodobi na strani
             }
         }            
     }
@@ -153,13 +147,13 @@ public class Highscores : MonoBehaviour{
 
         if (string.IsNullOrEmpty(www.error))
         {
-            Debug.Log("Upload Successful!");
+            //Debug.Log("Upload Successful!");
             UploadMessageText.text = "Upload successful!";
             uploaded = true;
             //hideUploadPanel();
         }
         else {
-            Debug.Log("Upload Error: " + www.error);
+            //Debug.Log("Upload Error: " + www.error);
             UploadMessageText.text = "Upload failed";
             uploaded = false;
         }
@@ -179,12 +173,12 @@ public class Highscores : MonoBehaviour{
 
         if (string.IsNullOrEmpty(www.error))
         {
-            Debug.Log("Download Successful!");
+            //Debug.Log("Download Successful!");
             //highscoresList.text = "Highscores\n\n" + parseHighscores(www.text);
             parseHighscores(www.text);
         }
         else {
-            Debug.Log("Download Error: " + www.error);
+            //Debug.Log("Download Error: " + www.error);
         }
     }
 
@@ -216,7 +210,7 @@ public class Highscores : MonoBehaviour{
             if (Int32.TryParse(splitLine[1], out value)) {
                 scoresToBeat[i] = value;
             } else {
-                Debug.Log("String could not be parsed.");
+                //Debug.Log("String could not be parsed.");
             }
             //formatedScores += splitLine[0].Replace('+', ' ') + ":\t" + splitLine[1] + "\n";
         }
@@ -224,17 +218,6 @@ public class Highscores : MonoBehaviour{
         //return formatedScores;
     }
 
-    public void showUploadPanel()
-    {
-        //addScorePanel.SetActive(true);
-        displayName.text = PlayerPrefs.GetString("NameOfPlayer", "");
-    }
-
-    //public void hideUploadPanel()
-    //{
-    //    displayName.text = "";
-    //    addScorePanel.SetActive(false);
-    //}
 
     private void DestroyAllColums () {
         for (int i = 0; i < leaderBoardsColums.Length; ++i) {
