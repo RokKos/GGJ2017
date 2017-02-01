@@ -16,6 +16,8 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] GameObject nextText;
     [SerializeField] Movement1 movement;
     [SerializeField] GameObject clickPosition;
+    [SerializeField] AudioClip[] TalksSound;
+    [SerializeField] AudioSource audioSource;
     public GameObject[] checkpoints;
     public int stageOfTutorial = -1;
     private EnemyBaseClass tutorialEnemyData;
@@ -154,6 +156,10 @@ public class Tutorial : MonoBehaviour {
                 continue;
             } 
             int i = 0;
+
+            
+            audioSource.volume = 0.3f;
+            playRandomTalk();
             // Does normal writing if player doesnt clics if it does then just write whole thing
             for(i  = 0; i < block.Length; ++i) {
                 tutorialText.GetComponentInChildren<Text>().text += block[i];
@@ -164,7 +170,15 @@ public class Tutorial : MonoBehaviour {
                     yield return null;
                 }
 
+                if (!audioSource.isPlaying) {
+                    playRandomTalk();
+                }
+
+
             }
+
+            audioSource.Stop();
+            audioSource.volume = 0.1f;
             // Write whole thing
             if (i < block.Length) {
                 tutorialText.GetComponentInChildren<Text>().text = block;
@@ -173,7 +187,8 @@ public class Tutorial : MonoBehaviour {
             yield return null;  // This is here to reset GetMouseButtonDown (so that player doesnt miss click twice)
 
             nextText.SetActive(true);
-            // While player doest tap on screen show message
+            // While player doest tap on screen show message 
+            // This basicly wait for player to read
             while (!Input.GetMouseButtonDown(0)) {
                 yield return null;
             }
@@ -183,17 +198,8 @@ public class Tutorial : MonoBehaviour {
             yield return null;  // This is here to reset GetMouseButtonDown
 
         }
-
-        
         // End of writing
-        // Before end give player option to read
-        nextText.SetActive(true);
-        // While player doest tap on screen show message
-        while (!Input.GetMouseButtonDown(0)) {
-            yield return null;
-        }
-        nextText.SetActive(false);
-        */
+
         tutorialText.SetActive(false);
         movement.gameRunning = true;
         clickPosition.SetActive(true);
@@ -349,5 +355,14 @@ public class Tutorial : MonoBehaviour {
         else
             transform.Rotate(Vector3.forward, -angle);
 
+    }
+
+    private void playRandomTalk () {
+        int chooseClip = Random.Range(0, TalksSound.Length);
+        float choosePitch = Random.Range(0.8f, 1.2f);
+        Debug.Log(chooseClip);
+        audioSource.clip = TalksSound[chooseClip];
+        audioSource.pitch = choosePitch;
+        audioSource.Play();
     }
 }
