@@ -105,6 +105,8 @@ public class Tutorial : MonoBehaviour {
     }
 
     private IEnumerator showTextToForDuration (string text) {
+        yield return null;  // This is here to reset GetMouseButtonDown by waiting one frame
+
         //Stop time so that player can see waht text shows
         movement.gameRunning = false;
         Time.timeScale = 0.0f;
@@ -115,60 +117,74 @@ public class Tutorial : MonoBehaviour {
         // Write out text
         
         int pos = 0;
-        const int maxCharsInLine = 35;
-        tutorialText.GetComponentInChildren<Text>().text = " ";
+        const int maxCharsInLine = 70;
+        tutorialText.GetComponentInChildren<Text>().text = "";
         nextText.SetActive(false);
 
         string[] sentence = text.Split('.');
+        string[] blocks = new string[sentence.Length + text.Length / maxCharsInLine];  // It will be maximal of this lengt
+        int indexOfBlock = 0;
         foreach (string part in sentence) {
+            // Check if there is no empty strings
+            if (part.Length == 0) {
+                continue;
+            }
+            int currLengt = part.Length;
 
-            string[] words = part.Split(' ');
+            if (currLengt + pos > maxCharsInLine) {
+                indexOfBlock++;
+                blocks[indexOfBlock] = part;
+                pos = currLengt;
+                if (part.Length > 1 && part[part.Length - 1] != '!' && part[part.Length - 1] != '?' && part[part.Length - 1] != ',' && part[part.Length - 1] != '.') {
+                    blocks[indexOfBlock] += ".";
+                    pos++;
+                }
+                continue;
+            }
+            pos += currLengt;
+            blocks[indexOfBlock] += part;
+            if (part.Length > 1 && part[part.Length - 1] != '!' && part[part.Length - 1] != '?' && part[part.Length - 1] != ',' && part[part.Length - 1] != '.') {
+                blocks[indexOfBlock] += ".";
+                pos++;
+            }
+        }
 
-            foreach (string word in words) {
-                int currLengt = word.Length + 1;
-                if (currLengt + pos > maxCharsInLine) {
-                    nextText.SetActive(true);
-                    // While player doest tap on screen show message
-                    while (!Input.GetMouseButtonDown(0)) {
-                        yield return null;
+        foreach (string block in blocks) {
+            if (block == null) {
+                continue;
+            } 
+            int i = 0;
+            // Does normal writing if player doesnt clics if it does then just write whole thing
+            for(i  = 0; i < block.Length; ++i) {
+                tutorialText.GetComponentInChildren<Text>().text += block[i];
+                for (int j = 0; j < 6; ++j) {
+                    if (Input.GetMouseButtonDown(0)) {
+                        break;
                     }
-                    nextText.SetActive(false);
-                    pos = word.Length;
-                    //tutorialText.GetComponentInChildren<Text>().text = word + " ";
-                    tutorialText.GetComponentInChildren<Text>().text = "";
-                } else {
-                    pos += currLengt;
-                    //tutorialText.GetComponentInChildren<Text>().text += word + " ";
+                    yield return null;
                 }
 
-                // Smoth writing
-                for (int i = 0; i < currLengt - 1; ++i) {
-                    tutorialText.GetComponentInChildren<Text>().text += word[i];
-                    for (int j = 0; j < 6; ++j) {
-                        yield return null;
-                    }
-
-                }
-                tutorialText.GetComponentInChildren<Text>().text += " ";
-
             }
-            string endText = tutorialText.GetComponentInChildren<Text>().text;
-            // Here is -2 because there is " " character at the end (CAUTION!!!)
-            if (endText.Length > 2 && endText[endText.Length - 2] != '!' && endText[endText.Length - 2] != '?' && endText[endText.Length - 2] != ',') {
-                tutorialText.GetComponentInChildren<Text>().text = endText.Substring(0, endText.Length - 1) + ".";
+            // Write whole thing
+            if (i < block.Length) {
+                tutorialText.GetComponentInChildren<Text>().text = block;
             }
-            
 
-            // Wait to tap for next sentence
+            yield return null;  // This is here to reset GetMouseButtonDown (so that player doesnt miss click twice)
+
             nextText.SetActive(true);
+            // While player doest tap on screen show message
             while (!Input.GetMouseButtonDown(0)) {
                 yield return null;
             }
             nextText.SetActive(false);
-            pos = 0;
+
             tutorialText.GetComponentInChildren<Text>().text = "";
+            yield return null;  // This is here to reset GetMouseButtonDown
 
         }
+
+        
         // End of writing
         // Before end give player option to read
         nextText.SetActive(true);
@@ -177,7 +193,7 @@ public class Tutorial : MonoBehaviour {
             yield return null;
         }
         nextText.SetActive(false);
-
+        */
         tutorialText.SetActive(false);
         movement.gameRunning = true;
         clickPosition.SetActive(true);
