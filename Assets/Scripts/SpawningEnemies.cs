@@ -283,13 +283,16 @@ public class SpawningEnemies : MonoBehaviour {
     }
 
     public int calculateScore () {
-        int result = 0;
-
-        int modifiedDistance = (int)(movement.totalDistance - movement.lastDistance) * waveNumber;
-        result = waveNumber * currNumberOfEnemies + movement.nearBonus + modifiedDistance -
+        int  result = waveNumber * currNumberOfEnemies + movement.nearBonus -
                    movement.numberOfClicks + (int)(timePassed) * 3;
 
-        gameScore += result;
+        // Now score from distance cannot be bigger than all other scores combined
+        // This will still give reward to player if he makes long distances
+        // But he cannot abuse this to get big scores when only one enemy is chasing him
+        int modifiedDistance = Mathf.Min((int)(movement.totalDistance - movement.lastDistance) * waveNumber, result);
+        
+
+        gameScore += result + modifiedDistance;
         return gameScore;
     }
 
