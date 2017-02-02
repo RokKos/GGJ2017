@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour {
         audioSource.volume = 1f;
         audioSource.clip = waweClearedSound;
         audioSource.Play();
-        for (int i = 0; i < 200; ++i) {
+        while (audioSource.isPlaying) {
             yield return null;
         }
         audioSource.volume = 0.1f;
