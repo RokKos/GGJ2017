@@ -490,12 +490,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224466077793790508, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
     type: 2}
   m_PrefabInternal: {fileID: 71424336}
---- !u!114 &71424338 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114523067670040206, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
-    type: 2}
-  m_PrefabInternal: {fileID: 71424336}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &99336638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,7 +1462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &687619578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1862,12 +1856,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0acb63977b9ea147ab9267059878969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uploadButton: {fileID: 71424338}
-  displayName: {fileID: 1954328737}
   UploadMessageText: {fileID: 1985458121}
   uiManager: {fileID: 2055927079}
   contentPanel: {fileID: 622008100}
   leaderboardColumPrefab: {fileID: 1977260565302152, guid: 718eba7dfc04cff4ca1bdc50dc42a9e8,
+    type: 2}
+--- !u!114 &770314069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 770314067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7fe085b2b5a4746a66dadfbd5e98be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabPowerUp: {fileID: 1635362176658040, guid: c73b39e04f22fe9458af7308f02611e6,
     type: 2}
 --- !u!1 &864043204
 GameObject:
@@ -4634,12 +4639,12 @@ Prefab:
     - target: {fileID: 224011642732134898, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.6
+      value: 0.6000061
       objectReference: {fileID: 0}
     - target: {fileID: 224011642732134898, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.7
+      value: 1.699997
       objectReference: {fileID: 0}
     - target: {fileID: 224011642732134898, guid: 69780f3a8b04df14fbebf43d20a0a8f7,
         type: 2}
