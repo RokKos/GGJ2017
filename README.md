@@ -55,5 +55,5 @@ his project is licensed under the MIT License - see the [LICENSE](https://github
 [RokKos]:  https://github.com/RokKos
 [AljazBorko]: https://github.com/Choro11
 [GPLAY]: https://play.google.com/store/apps/details?id=com.AljazRokGGJ2017.DashWave
-[Waffle-link] : https://waffle.io/RokKos/GGJ2017
-[Waffle-badge] : https://badge.waffle.io/RokKos/GGJ2017.png?label=ready&title=Ready
+[Waffle-link]: https://waffle.io/RokKos/GGJ2017
+[Waffle-badge]: https://badge.waffle.io/RokKos/GGJ2017.png?label=ready&title=Ready
