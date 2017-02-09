@@ -16,14 +16,20 @@ public class SpawningPowerUps : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         allPowerUps = new BasePowerUp[2];
-        GameObject temp = (GameObject)Instantiate(prefabPowerUp, new Vector3(0, 0, 0), Quaternion.identity);
-        
-        ShieldPowerUp tPowerUp = temp.AddComponent<ShieldPowerUp>() as ShieldPowerUp;
-        allPowerUps[0] = tPowerUp;
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown("space")) {
+            GameObject temp = (GameObject)Instantiate(prefabPowerUp, new Vector3(0, 0, 0), Quaternion.identity);
+
+            ShieldPowerUp tPowerUp = temp.AddComponent<ShieldPowerUp>() as ShieldPowerUp;
+            allPowerUps[0] = tPowerUp;
+
+            temp.transform.position = tPowerUp.placePowerUp();
+            Debug.Log(temp.transform.position);
+        }
 		
 	}
 }

@@ -40,6 +40,25 @@ public abstract class BasePowerUp : MonoBehaviour {
 
     protected abstract void loadImage ();
 
+    public Vector3 placePowerUp () {
+        float x = 0.0f;
+        float y = 0.0f;
+        // Find all enemies
+        SpawningEnemies spawningEnemies = (SpawningEnemies) FindObjectOfType(typeof(SpawningEnemies));
+        GameObject[] enemies = spawningEnemies.allEnemies;
+        int N = 0;
+        for (int i = 0; i < enemies.Length; ++i) {
+            if (enemies[i] != null) {
+                x += enemies[i].transform.position.x;
+                y += enemies[i].transform.position.y;
+                N++;
+            }
+            
+        }
+
+        return new Vector3(x / N, y / N, 0.0f);
+    }
+
 
 
 }

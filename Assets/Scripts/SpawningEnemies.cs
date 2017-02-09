@@ -10,11 +10,14 @@ using UnityEngine;
 
 public class SpawningEnemies : MonoBehaviour {
 
+    [Header("Prefabs")]
     [SerializeField] GameObject enemyPrefab;  // GameObject for enemie
     [SerializeField] GameObject bulletPrefab;  // GameObject for enemie
+    [Space(5)]
     [SerializeField] UIManager uiManager;
     [SerializeField] Movement1 movement;
-    private GameObject[] allEnemies;  // List of all enemies
+    [HideInInspector]
+    public GameObject[] allEnemies;  // List of all enemies
     private EnemyBaseClass[] enemiesData;
     private bool[] deadEnemies;  // List of all dead enemies
     private const int MAXENEMIESONSCENE = 1000;
