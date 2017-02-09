@@ -9,6 +9,11 @@ public class Movement1 : MonoBehaviour {
     public float maxTimeSpeed = 2f;
     public int nearBonus;
     private Vector3 newPosition;
+    private float distance;
+    private float oldDistance;
+    private float angle;
+    private float oldAngle;
+    private float cicleDistanceModifier;
     private bool allowNewPosition;
     //private Rigidbody2D rigidBody;
     public float lastDistance;
@@ -42,7 +47,9 @@ public class Movement1 : MonoBehaviour {
         totalDistance = 0.0f;
         nearBonus = 0;
         numberOfClicks = 0;
+        cicleDistanceModifier = 100f;
         newPosition = transform.position;
+        oldDistance = int.MaxValue;
         Time.timeScale = minTimeSpeed;
         allowNewPosition = true;
         gameRunning = true;
@@ -55,8 +62,41 @@ public class Movement1 : MonoBehaviour {
         if (gameRunning) {
             checkClick();
             moveToPosition();
+            fixCicle();
         }
         
+    }
+
+    private void fixCicle()
+    {
+        
+        if (!allowNewPosition)
+        {
+            //Debug.Log("0 Distance: " + distance + ", oldDistance: " + oldDistance + ", angle: " + angle + ", oldAngle: " + oldAngle);
+            if (oldDistance + cicleDistanceModifier < distance && angle < 30) //&& oldAngle < angle && angle < 90)
+            {
+                Debug.Log("PLAYER ZACIKALN! Distance: " + distance + ", oldDistance: " + oldDistance + ", modifier: " + cicleDistanceModifier + ", angle: " + angle + ", oldAngle: " + oldAngle);
+                //Debug.Log("PLAYER ZACIKALN! Distance: " + distance + ", oldDistance: " + oldDistance + ", modifier: " + cicleDistanceModifier);
+                //Debug.Log("Player zaciklan!!!");
+                newPosition = transform.position;
+                allowNewPosition = true;
+                oldDistance = int.MaxValue;
+                oldAngle = int.MaxValue;
+                distance = int.MaxValue;
+                angle = int.MaxValue;
+                cicleDistanceModifier = 100f;
+                return;
+            }
+
+            if (cicleDistanceModifier > 0)
+                cicleDistanceModifier -= 2f;
+            else
+                cicleDistanceModifier = 0;
+
+
+            oldDistance = distance;
+            oldAngle = angle;
+        }
     }
 
     private void moveToPosition()
@@ -64,7 +104,7 @@ public class Movement1 : MonoBehaviour {
         //se premaknemo če še nismo dosegli cilj
         //Vector3 modifiedPos = transform.position - (transform.up * 0.5f);
         //float distance = Vector3.Distance(modifiedPos, newPosition);
-        float distance = Vector3.Distance(transform.position, newPosition);
+        distance = Vector3.Distance(transform.position, newPosition);
 
         //Debug.Log("Pos: " + transform.position + "     New pos: " + newPosition + "    Modified pos: "+modifiedPos);
 
@@ -124,6 +164,33 @@ public class Movement1 : MonoBehaviour {
             
     }
 
+    //private void checkClick()
+    //{
+    //    //preverimo klik za novo pozicijo
+    //    if (Input.GetMouseButtonDown(0) && allowNewPosition)
+    //    {
+    //        //Debug.Log("klik");
+    //        RaycastHit hit;
+    //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //        if (Physics.Raycast(ray, out hit))
+    //        {
+    //            Vector3 newDir = hit.point - transform.position + transform.up;
+    //            float angle = Vector3.Angle(newDir, transform.up);
+    //            //Debug.Log("Click angle: " + angle);
+
+    //            if (angle > 30 && angle < 150)
+    //            {
+    //                if (Vector3.Distance(transform.position, hit.point) > 1)
+    //                    newPositionConfirmed(hit.point);
+    //            }
+    //            else {
+    //                if (Vector3.Distance(transform.position, hit.point) > 0.2)
+    //                    newPositionConfirmed(hit.point);
+    //            }
+    //        }
+    //    }
+    //}
+
     private void checkClick()
     {
         //preverimo klik za novo pozicijo
@@ -134,22 +201,26 @@ public class Movement1 : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                if (Vector3.Distance(transform.position, hit.point) > 0.7)
+                if (Vector3.Distance(transform.position, hit.point) > 0.2)
                 {
-                    //Debug.Log("rayCastHit");                
-                    // Souund
-                    audioSource.clip = speedUpMovement;
-                    audioSource.loop = false;
-                    audioSource.volume = 0.1f;
-                    audioSource.Play();
-
-                    newPosition = hit.point;
-                    allowNewPosition = false;
-                    numberOfClicks++;
-                    //transform.position = newPosition;
+                    newPositionConfirmed(hit.point);
                 }
             }
         }
+    }
+
+    private void newPositionConfirmed(Vector3 clickedPos)
+    {
+        // Souund
+        audioSource.clip = speedUpMovement;
+        audioSource.loop = false;
+        audioSource.volume = 0.1f;
+        audioSource.Play();
+
+        newPosition = clickedPos;
+        allowNewPosition = false;
+        numberOfClicks++;
+        oldDistance = int.MaxValue;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -209,7 +280,7 @@ public class Movement1 : MonoBehaviour {
     {
         //Vector3 newDir = newPosition - transform.position;
         Vector3 newDir = newPosition - transform.position + transform.up;   //da ni trzanja ki pokvari trail je + transform.up 
-        float angle = Vector3.Angle(newDir, transform.up);  //calculate angle
+        angle = Vector3.Angle(newDir, transform.up);  //calculate angle
 
         //if (angle > 4)//&& Vector3.Distance(newPosition, transform.position) > 0.5f)
         //{
