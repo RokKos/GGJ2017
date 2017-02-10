@@ -5,8 +5,10 @@ using UnityEngine;
 public class Movement1 : MonoBehaviour {
 
     public float playerSpeed;
+    public int playerLifes = 1;
     public float minTimeSpeed = 0.5f;
     public float maxTimeSpeed = 2f;
+    [HideInInspector]
     public int nearBonus;
     private Vector3 newPosition;
     private float distance;
@@ -16,17 +18,22 @@ public class Movement1 : MonoBehaviour {
     private float cicleDistanceModifier;
     private bool allowNewPosition;
     //private Rigidbody2D rigidBody;
+    [HideInInspector]
     public float lastDistance;
     public float totalDistance;
     private float SIZEOFBOX_X;
     private float SIZEOFBOX_Y;
-    public int numberOfClicks = 0; 
+    public int numberOfClicks = 0;
+    [HideInInspector]
     public bool gameRunning = true;
+    [HideInInspector]
     public bool TutorialMode = false;
+    [Space(10)][Header("Audio")]
     public AudioSource audioSource;
     [SerializeField] AudioClip speedUpMovement;
     [SerializeField] AudioClip slowMovement;
     [SerializeField] AudioClip deathSound;
+    [Space(10)][Header("Refernce to sripts")]
     [SerializeField] UIManager uiManager;
     [SerializeField] SpawningEnemies spawningEnemies;
 
@@ -43,6 +50,7 @@ public class Movement1 : MonoBehaviour {
 
     public void resetPlayer()
     {
+        playerLifes = 1;
         lastDistance = 0.0f;
         totalDistance = 0.0f;
         nearBonus = 0;
@@ -230,10 +238,18 @@ public class Movement1 : MonoBehaviour {
             audioSource.loop = false;
             audioSource.clip = deathSound;
             audioSource.Play();
+            playerLifes--;
+            if (playerLifes == 0) {
+                reset();
+            } else {
+                // Shield destroy enemy and enemy destroy shield
+                //Destroy(coll.gameObject);  --> No detroy rather just hide
+                coll.gameObject.SetActive(false);
+                
+                //TODO: Animation of shield destroying
+            }
 
-            //Debug.Log("Collision detetcted, rigidbody set to kinematic. END GAME");
-            //rigidBody.isKinematic = true;
-            reset();
+            
         } else if ((coll.gameObject.tag == "Enemy" || coll.gameObject.tag == "Laser") && TutorialMode) {  // If player fails show him instruction again dont reset game
 
             GameObject trail1 = transform.FindChild("Trail1").gameObject;

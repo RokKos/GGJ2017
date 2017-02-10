@@ -28,8 +28,32 @@ public class SpawningPowerUps : MonoBehaviour {
             allPowerUps[0] = tPowerUp;
 
             temp.transform.position = tPowerUp.placePowerUp();
-            Debug.Log(temp.transform.position);
         }
 		
 	}
+
+    /// <summary>
+    /// 1 : Shield Power up
+    /// 2 : Explosion Power up
+    /// 3 : Big enemies Power up
+    /// 4 : Mirror click Power up
+    /// </summary>
+    /// <returns></returns>
+
+    private int decisionOfTypePowerUp () {
+        int rand = Random.Range(0, 100);
+        if (rand < 60) {
+            if (rand < 40) {
+                return 1;
+            }
+            return 2;
+
+        } else {
+            if (rand < 75) {
+                return 3;
+            }
+            return 4;
+        }
+
+    }
 }

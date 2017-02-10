@@ -31,12 +31,12 @@ public abstract class BasePowerUp : MonoBehaviour {
     // This will happen for every power up
     private void OnCollisionEnter2D (Collision2D coll) {
         if (coll.gameObject.tag == "Player") {
-            powerUpPickUp();
+            powerUpPickUp(coll.gameObject);
         }
     }
 
     // Function that is diffrend for every power up
-    protected abstract void powerUpPickUp ();
+    protected abstract void powerUpPickUp (GameObject player);
 
     protected abstract void loadImage ();
 
