@@ -245,7 +245,7 @@ public class Movement1 : MonoBehaviour {
                 // Shield destroy enemy and enemy destroy shield
                 //Destroy(coll.gameObject);  --> No detroy rather just hide
                 coll.gameObject.SetActive(false);
-                
+                transform.GetComponent<ShieldPowerUp>().destroyShield(transform.gameObject);
                 //TODO: Animation of shield destroying
             }
 

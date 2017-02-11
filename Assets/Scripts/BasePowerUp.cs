@@ -33,6 +33,9 @@ public abstract class BasePowerUp : MonoBehaviour {
         if (coll.gameObject.tag == "Player") {
             powerUpPickUp(coll.gameObject);
         }
+
+        // Copy script to player
+        coll.gameObject.AddComponent(typeof(BasePowerUp));
     }
 
     // Function that is diffrend for every power up
