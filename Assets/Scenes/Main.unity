@@ -1872,6 +1872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7fe085b2b5a4746a66dadfbd5e98be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allPowerUps: []
   prefabPowerUp: {fileID: 1635362176658040, guid: c73b39e04f22fe9458af7308f02611e6,
     type: 2}
 --- !u!1 &864043204
@@ -3525,7 +3526,7 @@ Transform:
   m_GameObject: {fileID: 1730874461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 704121666}
   m_RootOrder: 2
@@ -4580,6 +4581,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114696924056810864, guid: 72c46932a7c52364abbdfd7f491ee9fd,
+        type: 2}
+      propertyPath: spawningPowerUps
+      value: 
+      objectReference: {fileID: 770314069}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c46932a7c52364abbdfd7f491ee9fd, type: 2}
   m_IsPrefabParent: 0

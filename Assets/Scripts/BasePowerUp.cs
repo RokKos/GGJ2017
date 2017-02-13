@@ -14,13 +14,13 @@ public abstract class BasePowerUp : MonoBehaviour {
 
     // Contructor
     public BasePowerUp (float _timeLasting) {
-        this.timeLasting = _timeLasting;
-        Destroy(gameObject, timeLasting);
+        //this.timeLasting = _timeLasting;
+        //Destroy(gameObject, timeLasting);
 
         // Load diffrent image in diffrent position on screen
-        loadImage();
+        //loadImage();
 
-        Debug.Log("Create");
+        //Debug.Log("Create");
     }
 
     // Destructor
@@ -32,16 +32,15 @@ public abstract class BasePowerUp : MonoBehaviour {
     private void OnCollisionEnter2D (Collision2D coll) {
         if (coll.gameObject.tag == "Player") {
             powerUpPickUp(coll.gameObject);
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
-
-        // Copy script to player
-        coll.gameObject.AddComponent(typeof(BasePowerUp));
     }
 
     // Function that is diffrend for every power up
     protected abstract void powerUpPickUp (GameObject player);
 
-    protected abstract void loadImage ();
+    public abstract void loadImage ();
 
     public Vector3 placePowerUp () {
         float x = 0.0f;

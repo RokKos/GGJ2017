@@ -36,6 +36,7 @@ public class Movement1 : MonoBehaviour {
     [Space(10)][Header("Refernce to sripts")]
     [SerializeField] UIManager uiManager;
     [SerializeField] SpawningEnemies spawningEnemies;
+    [SerializeField] SpawningPowerUps spawningPowerUps;
 
     // Use this for initialization
     void Start () {
@@ -245,7 +246,9 @@ public class Movement1 : MonoBehaviour {
                 // Shield destroy enemy and enemy destroy shield
                 //Destroy(coll.gameObject);  --> No detroy rather just hide
                 coll.gameObject.SetActive(false);
-                transform.GetComponent<ShieldPowerUp>().destroyShield(transform.gameObject);
+                ShieldPowerUp shield = spawningPowerUps.allPowerUps[0] as ShieldPowerUp;
+                shield.destroyShield(this.gameObject);
+
                 //TODO: Animation of shield destroying
             }
 

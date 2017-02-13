@@ -29,8 +29,8 @@ public class ShieldPowerUp : BasePowerUp {
         enableShield(player, true);
     }
 
-    protected override void loadImage () {
-        gameObject.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load("enemy1");
+    public override void loadImage () {
+        gameObject.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load<Sprite>("item-shield");
     }
 
     public IEnumerator glowingShield (GameObject player) {
@@ -59,6 +59,7 @@ public class ShieldPowerUp : BasePowerUp {
     public void destroyShield (GameObject player) {
         StopCoroutine(glowingShield(player));
         enableShield(player, false);
+        Destroy(this);
     }
 
     private void enableShield (GameObject player, bool enable) {

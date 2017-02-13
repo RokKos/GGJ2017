@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class SpawningPowerUps : MonoBehaviour {
 
-    private BasePowerUp[] allPowerUps;
+    public BasePowerUp[] allPowerUps;
     [SerializeField] GameObject prefabPowerUp;
 
 	// Use this for initialization
@@ -28,6 +28,7 @@ public class SpawningPowerUps : MonoBehaviour {
             allPowerUps[0] = tPowerUp;
 
             temp.transform.position = tPowerUp.placePowerUp();
+            temp.GetComponent<ShieldPowerUp>().loadImage();
         }
 		
 	}
