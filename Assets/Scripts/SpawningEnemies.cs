@@ -23,7 +23,7 @@ public class SpawningEnemies : MonoBehaviour {
     private const int MAXENEMIESONSCENE = 1000;
     private float SIZEOFBOX_X = 7.0f;
     private float SIZEOFBOX_Y = 7.0f;
-    private int currNumberOfEnemies = 10;  // Current number enemies in scene
+    public int currNumberOfEnemies = 10;  // Current number enemies in scene
     private int waveNumber = 1;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns
     public float timePassed = 0.0f;

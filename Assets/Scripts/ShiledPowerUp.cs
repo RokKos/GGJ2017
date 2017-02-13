@@ -23,7 +23,6 @@ public class ShieldPowerUp : BasePowerUp {
     }
 
     protected override void powerUpPickUp (GameObject player) {
-        Debug.Log("Piw piw");
         player.GetComponent<Movement1>().playerLifes = 2;  // For now is on 2 maybe later player could have more lives
         StartCoroutine(glowingShield(player));
         enableShield(player, true);

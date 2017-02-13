@@ -12,9 +12,9 @@ public class SpawningPowerUps : MonoBehaviour {
 
     public BasePowerUp[] allPowerUps;
     [SerializeField] GameObject prefabPowerUp;
-
-	// Use this for initialization
-	void Start () {
+    private BasePowerUp tPowerUp;
+    // Use this for initialization
+    void Start () {
         allPowerUps = new BasePowerUp[2];
     }
 	
@@ -24,11 +24,36 @@ public class SpawningPowerUps : MonoBehaviour {
         if (Input.GetKeyDown("space")) {
             GameObject temp = (GameObject)Instantiate(prefabPowerUp, new Vector3(0, 0, 0), Quaternion.identity);
 
-            ShieldPowerUp tPowerUp = temp.AddComponent<ShieldPowerUp>() as ShieldPowerUp;
-            allPowerUps[0] = tPowerUp;
+            // Just because I can leave it unsigned
+            
+            int which = decisionOfTypePowerUp();
+
+            switch (which) {
+                case 1:
+                    tPowerUp = temp.AddComponent<ShieldPowerUp>() as ShieldPowerUp;
+                    allPowerUps[0] = tPowerUp;
+                    break;
+                case 2:
+                    // Temporary on this jsut for testing
+                    tPowerUp = temp.AddComponent<ShieldPowerUp>() as ShieldPowerUp;
+                    allPowerUps[0] = tPowerUp;
+                    break;
+
+                case 3:
+                    tPowerUp = temp.AddComponent<BigEnemiesPowerUp>() as BigEnemiesPowerUp;
+                    allPowerUps[0] = tPowerUp;
+                    break;
+
+                case 4:
+                    // Temporary on this jsut for testing
+                    tPowerUp = temp.AddComponent<BigEnemiesPowerUp>() as BigEnemiesPowerUp;
+                    allPowerUps[0] = tPowerUp;
+                    break;
+            }
+            
 
             temp.transform.position = tPowerUp.placePowerUp();
-            temp.GetComponent<ShieldPowerUp>().loadImage();
+            temp.GetComponent<BasePowerUp>().loadImage();
         }
 		
 	}
