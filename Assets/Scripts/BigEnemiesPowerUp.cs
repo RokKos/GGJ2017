@@ -30,6 +30,10 @@ public class BigEnemiesPowerUp : BasePowerUp {
         gameObject.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load<Sprite>("item-bigenemy");
     }
 
+    protected override void playPickUpSound () {
+        StartCoroutine(pickUpSound(0));
+    }
+
     public IEnumerator makeEnemiesBigAgain (float time) {
         // Getting reference
         SpawningEnemies se = FindObjectOfType<SpawningEnemies>();

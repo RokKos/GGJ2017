@@ -32,6 +32,10 @@ public class ShieldPowerUp : BasePowerUp {
         gameObject.GetComponent<SpriteRenderer>().sprite = (Sprite)Resources.Load<Sprite>("item-shield");
     }
 
+    protected override void playPickUpSound () {
+        StartCoroutine(pickUpSound(1));
+    }
+
     public IEnumerator glowingShield (GameObject player) {
         GameObject sprite = new GameObject();
         /// Find shield
