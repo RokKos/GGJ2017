@@ -11,17 +11,6 @@ using UnityEngine;
 
 public class BigEnemiesPowerUp : BasePowerUp {
 
-    // Contructor
-    public BigEnemiesPowerUp (float _timeLasting) : base(_timeLasting) {
-
-
-    }
-
-    // Destructor
-    ~BigEnemiesPowerUp () {
-
-    }
-
     protected override void powerUpPickUp (GameObject player) {
         StartCoroutine(makeEnemiesBigAgain(10.0f));
     }
@@ -34,7 +23,7 @@ public class BigEnemiesPowerUp : BasePowerUp {
         StartCoroutine(pickUpSound(0));
     }
 
-    public IEnumerator makeEnemiesBigAgain (float time) {
+    public IEnumerator makeEnemiesBigAgain (float time) {       
         // Getting reference
         SpawningEnemies se = FindObjectOfType<SpawningEnemies>();
         GameObject[] allEnemies = se.allEnemies;

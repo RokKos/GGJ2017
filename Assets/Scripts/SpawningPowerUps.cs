@@ -35,7 +35,7 @@ public class SpawningPowerUps : MonoBehaviour {
                     break;
                 case 2:
                     // Temporary on this jsut for testing
-                    tPowerUp = temp.AddComponent<ShieldPowerUp>() as ShieldPowerUp;
+                    tPowerUp = temp.AddComponent<ExplosionPowerUp>() as ExplosionPowerUp;
                     allPowerUps[0] = tPowerUp;
                     break;
 

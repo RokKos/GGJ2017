@@ -25,22 +25,6 @@ public abstract class BasePowerUp : MonoBehaviour {
         clips = (AudioClip[])Resources.LoadAll<AudioClip>("PowerUpSounds/");
     }
 
-    // Contructor
-    public BasePowerUp (float _timeLasting) {
-        //this.timeLasting = _timeLasting;
-        //Destroy(gameObject, timeLasting);
-
-        // Load diffrent image in diffrent position on screen
-        //loadImage();
-
-        //Debug.Log("Create");
-    }
-
-    // Destructor
-    ~BasePowerUp () {
-
-    }
-
     // This will happen for every power up
     private void OnCollisionEnter2D (Collision2D coll) {
         if (coll.gameObject.tag == "Player") {

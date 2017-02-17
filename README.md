@@ -1,4 +1,4 @@
-# Dash Wave (GGJ2017) [![Stories in Ready][Waffle-badge]][Waffle-link]
+# Dash Wave (GGJ2017) [![Stories in Ready][Waffle-badge-ready]][Waffle-link] [![In Progress][Waffle-badge-progress]][Waffle-link]
 This is a game that was made during [Global Game Jam 2017 in Maribor][GGJ2017] and is now worked on as hobby project. You can download game on [Google Play Store][GPLAY].
 
 ### Table of Contents
@@ -56,4 +56,6 @@ his project is licensed under the MIT License - see the [LICENSE](https://github
 [AljazBorko]: https://github.com/Choro11
 [GPLAY]: https://play.google.com/store/apps/details?id=com.AljazRokGGJ2017.DashWave
 [Waffle-link]: https://waffle.io/RokKos/GGJ2017
-[Waffle-badge]: https://badge.waffle.io/RokKos/GGJ2017.png?label=ready&title=Ready
+[Waffle-badge-ready]: https://badge.waffle.io/RokKos/GGJ2017.png?label=ready&title=Ready
+[Waffle-badge-progress]: https://badge.waffle.io/RokKos/GGJ2017.png?label=In%20Progress&title=In%20Progress
+

@@ -21,8 +21,10 @@ public class SpawningEnemies : MonoBehaviour {
     private EnemyBaseClass[] enemiesData;
     private bool[] deadEnemies;  // List of all dead enemies
     private const int MAXENEMIESONSCENE = 1000;
-    private float SIZEOFBOX_X = 7.0f;
-    private float SIZEOFBOX_Y = 7.0f;
+    [HideInInspector]
+    public float SIZEOFBOX_X = 7.0f;
+    [HideInInspector]
+    public float SIZEOFBOX_Y = 7.0f;
     public int currNumberOfEnemies = 10;  // Current number enemies in scene
     private int waveNumber = 1;
     private const int spawnNewEnemyInSeconds = 3;  // When new enemy spawns

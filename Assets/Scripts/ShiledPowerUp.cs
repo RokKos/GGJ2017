@@ -11,17 +11,6 @@ using UnityEngine;
 
 public class ShieldPowerUp : BasePowerUp {
 
-    // Contructor
-    public ShieldPowerUp (float _timeLasting) : base (_timeLasting) {
-
-        
-    }
-
-    // Destructor
-    ~ShieldPowerUp () {
-
-    }
-
     protected override void powerUpPickUp (GameObject player) {
         player.GetComponent<Movement1>().playerLifes = 2;  // For now is on 2 maybe later player could have more lives
         StartCoroutine(glowingShield(player));
