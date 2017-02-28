@@ -11,6 +11,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
+    
+    [Header("UI")]
     [SerializeField] Text passedTimeText;
     [SerializeField] Text scoreEndText;
     [SerializeField] Text highScoreText;
@@ -20,14 +22,19 @@ public class UIManager : MonoBehaviour {
     [SerializeField] GameObject HUD;
     [SerializeField] GameObject endGameMenu;
     [SerializeField] GameObject leaderboardMenu;
+    [Space(5)]
+    [Header("Scripts")]
     [SerializeField] SpawningEnemies spawningEnemies;
     [SerializeField] Movement1 movement;
     [SerializeField] Highscores highScores;
     [SerializeField] GameObject mainCamera;
+    [Space(5)]
+    [Header("Audio")]
     [SerializeField] AudioClip introSound;
     [SerializeField] AudioClip waweClearedSound;
     [SerializeField] AudioClip nearMissSound;
-    private AudioSource audioSource;
+    [SerializeField] AudioSource audioSourceStartEnd;
+    [SerializeField] AudioSource audioSourceEffects;
     private int highscore;
     public int endGameScore;
 
@@ -41,10 +48,12 @@ public class UIManager : MonoBehaviour {
         HUD.SetActive(true);
         endGameMenu.SetActive(false);
         leaderboardMenu.SetActive(false);
-        audioSource = mainCamera.GetComponent<AudioSource>();
-        audioSource.loop = false;
-        audioSource.clip = introSound;
-        audioSource.volume = 0.1f;
+        //audioSourceStartEnd = mainCamera.GetComponent<AudioSource>();
+        audioSourceStartEnd.loop = false;
+        audioSourceStartEnd.clip = introSound;
+        audioSourceStartEnd.volume = 0.1f;
+        audioSourceEffects.loop = false;
+        audioSourceEffects.volume = 0.1f;
         waveText.text = "";
         waveCounterText.text = "Wave 1";
         endGameScore = 0;
@@ -116,26 +125,26 @@ public class UIManager : MonoBehaviour {
     public IEnumerator showWaveCleared (int numberOfWave) {
         waveCounterText.text = "Wave " + (numberOfWave + 1);
         waveText.text = "WAVE " + numberOfWave.ToString() + " CLEARED!";
-        audioSource.volume = 1f;
-        audioSource.clip = waweClearedSound;
-        audioSource.Play();
-        while (audioSource.isPlaying) {
+        audioSourceStartEnd.volume = 1f;
+        audioSourceStartEnd.clip = waweClearedSound;
+        audioSourceStartEnd.Play();
+        while (audioSourceStartEnd.isPlaying) {
             yield return null;
         }
-        audioSource.volume = 0.1f;
+        audioSourceStartEnd.volume = 0.1f;
         waveText.text = "";
         yield return null;
     }
 
     public IEnumerator showNearMiss () {
         waveText.text = "Good DODGE";
-        audioSource.volume = 0.2f;
-        audioSource.clip = nearMissSound;
-        audioSource.Play();
+        audioSourceEffects.volume = 0.2f;
+        audioSourceEffects.clip = nearMissSound;
+        audioSourceEffects.Play();
         for (int i = 0; i < 200; ++i) {
             yield return null;
         }
-        audioSource.volume = 0.1f;
+        audioSourceEffects.volume = 0.1f;
         waveText.text = "";
         yield return null;
     }
