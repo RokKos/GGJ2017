@@ -161,7 +161,7 @@ public class SpawningEnemies : MonoBehaviour {
         float colliderSize = 1f;
         GameObject result;
         EnemyBaseClass temp = new EnemyBaseClass((byte)tip, startPos, endPos);
-        Sprite imageOfEnemy = new Sprite(); 
+        Sprite imageOfEnemy = Sprite.Create(null, new Rect(), Vector2.zero);
         if (tip == 1 || tip == 4) {
             temp = new EnemyBaseClass((byte)tip, startPos, endPos);
             imageOfEnemy = (Sprite)Resources.Load<Sprite>("enemy1");

@@ -46,7 +46,7 @@ public class EnemyShootClass : EnemyCurveClass {
     public void setShooter(Transform transform)
     {
         this.transform = transform;
-        GameObject shooter = transform.FindChild("Shooter").gameObject;
+        GameObject shooter = transform.Find("Shooter").gameObject;
         shoot = shooter.GetComponent<Shoot>();
     }
 
